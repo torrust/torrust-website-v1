@@ -10,12 +10,8 @@
 @import '$lib/scss/_code-highlights.scss';
 @import '$lib/scss/animations.scss';
 
-@import '@fontsource/inter';
-@import '@fontsource/inter/600.css';
-@import '@fontsource/inter/700.css';
-@import '@fontsource/merriweather';
-@import '@fontsource/merriweather/900.css';
-@import '@fontsource/ubuntu-mono';
+@import '@fontsource-variable/roboto-slab';
+@import '@fontsource-variable/roboto-mono';
 
 body {
 	--body-background-color: var(--color--page-background);

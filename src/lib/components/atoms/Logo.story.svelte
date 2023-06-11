@@ -7,11 +7,7 @@
 </script>
 
 <Hst.Story title="Atoms/Logo" layout={{ type: 'grid', width: 400 }}>
-	<Hst.Variant title="Animated">
-		<Logo animated={true} />
-	</Hst.Variant>
-
-	<Hst.Variant title="Static">
-		<Logo animated={false} />
+	<Hst.Variant title="Default">
+		<Logo />
 	</Hst.Variant>
 </Hst.Story>

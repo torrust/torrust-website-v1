@@ -2,7 +2,7 @@
 	import Card from '$lib/components/atoms/Card.svelte';
 	import Tag from '$lib/components/atoms/Tag.svelte';
 	import type { TagType } from '$lib/utils/types';
-	import Image from '../atoms/Image.svelte';
+	import Image from '$lib/components/atoms/Image.svelte';
 
 	export let name: string;
 	export let description: string;

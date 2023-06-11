@@ -1,5 +1,5 @@
 {
-	"name": "sveltekit-static-blog-template",
+	"name": "torrust-website",
 	"version": "1.0.0",
 	"private": true,
 	"scripts": {
@@ -14,10 +14,7 @@
 		"story:build": "histoire build",
 		"story:preview": "histoire preview",
 		"optimize-images": "image-transmutation --run --sourceFolder './build/images' --targetFolder './build/images' --inputFormats 'jpg' --inputFormats 'jpeg' --inputFormats 'png' --outputFormats 'png' --outputFormats 'webp' --outputFormats 'avif'",
-		"postbuild": "npm run optimize-images && svelte-sitemap --domain https://sveltekit-static-blog-template.vercel.app/",
-		"vercel-sitemap": "svelte-sitemap --out-dir .vercel/output/static --domain https://sveltekit-static-blog-template.vercel.app/",
-		"vercel-optimize-images": "image-transmutation --run --sourceFolder '.vercel/output/static/images' --targetFolder '.vercel/output/static/images' --inputFormats 'jpg' --inputFormats 'jpeg' --inputFormats 'png' --outputFormats 'png' --outputFormats 'webp' --outputFormats 'avif'",
-		"vercel-build": "npm run build && npm run vercel-sitemap && npm run vercel-optimize-images"
+		"postbuild": "npm run optimize-images && svelte-sitemap --domain https://torrust.com/"
 	},
 	"devDependencies": {
 		"@histoire/plugin-svelte": "^0.16.1",
@@ -46,8 +43,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@fontsource/inter": "^4.5.15",
-		"@fontsource/merriweather": "^4.5.14",
-		"@fontsource/ubuntu-mono": "^4.5.11"
+		"@fontsource-variable/roboto-mono": "^5.0.4",
+		"@fontsource-variable/roboto-slab": "^5.0.3"
 	}
 }

@@ -1,20 +1,20 @@
 @import '$lib/scss/_mixins.scss';
 
 @mixin base-theme {
-	@include define-color('primary', #6E29E7);
-	@include define-color('primary-shade', #b28cf2);	
-	@include define-color('primary-tint', #f9f6fe);
+	@include define-color('primary', #f26f39);
+	@include define-color('primary-shade', #f8b599);
+	@include define-color('primary-tint', #fff0eb);
 
-	@include define-color('secondary', #ff571a);
-	@include define-color('secondary-shade', #ffa280);
-	@include define-color('secondary-tint', #fff8f5);
+	@include define-color('secondary', #650000);
+	@include define-color('secondary-shade', #c86457);
+	@include define-color('secondary-tint', #fbefe5);
 
 	@include define-color('yellow', #ffd400);
 
-	@include define-color('text', #1c1e26);
+	@include define-color('text', #261e1c);
 	@include define-color('text-shade', #5d5f65);
 	@include define-color('text-inverse', #ffffff);
-	@include define-color('text-inverse-shade', #9eb4b5);
+	@include define-color('text-inverse-shade', #b5a29e);
 
 	@include define-color('page-background', #f4f8fb);
 	@include define-color('post-page-background', #f3fbfc);
@@ -45,13 +45,13 @@
 }
 
 @mixin dark-theme {
-	@include define-color('primary', #9f67ff);
-	@include define-color('primary-shade', #4612A1);	
-	@include define-color('primary-tint', #231934);
+	@include define-color('primary', #f26f39);
+	@include define-color('primary-shade', #783d24);
+	@include define-color('primary-tint', #4a3c38);
 
-	@include define-color('secondary', #ff723f);
-	@include define-color('secondary-shade', #AB3307);
-	@include define-color('secondary-tint', #1b1918);
+	@include define-color('secondary', #fac369);
+	@include define-color('secondary-shade', #734400);
+	@include define-color('secondary-tint', #4e3c20);
 
 	@include define-color('yellow', #ffd400);
 

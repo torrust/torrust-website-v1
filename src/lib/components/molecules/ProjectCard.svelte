@@ -2,44 +2,40 @@
 	import Card from '$lib/components/atoms/Card.svelte';
 	import Tag from '$lib/components/atoms/Tag.svelte';
 	import Image from '$lib/components/atoms/Image.svelte';
+	import GitHubIcon from '$lib/icons/socials/github.svelte';
 
 	export let title: string;
 	export let coverImage: string | undefined = undefined;
-	export let excerpt: string;
-	export let slug: string;
-	export let tags: string[] | undefined;
-	export let readingTime: string | undefined = undefined;
+	export let tags: string[] | undefined = undefined;
+	export let repo: string | undefined = undefined;
 
 	export let showImage = true;
 </script>
 
-<Card
-	href="/{slug}"
-	target="_self"
-	additionalClass="blog-post-card {!showImage || !coverImage ? 'no-image' : ''}"
->
+<Card additionalClass="project-card {!showImage || !coverImage ? 'no-image' : ''}">
 	<div class="image" slot="image">
 		{#if coverImage}
-			<Image src={coverImage} alt="Cover image of this blog post" />
+			<Image src={coverImage} alt="Image representing {title}" />
 		{/if}
 	</div>
 	<div class="content" slot="content">
 		<p class="title">
 			{title}
 		</p>
-		{#if readingTime}
-			<div class="note">{readingTime}</div>
+		{#if repo}
+			<a class="note" href={repo} target="_blank" rel="noopener noreferrer">
+				<GitHubIcon />
+				{repo.replace('https://github.com/', '')}
+			</a>
 		{/if}
-		{#if excerpt}
-			<p class="text">
-				{excerpt}
-			</p>
-		{/if}
+		<div class="text">
+			<slot name="content" />
+		</div>
 	</div>
 	<div class="footer" slot="footer">
 		{#if tags?.length}
 			<div class="tags">
-				{#each tags.slice(0, 2) as tag}
+				{#each tags as tag}
 					<Tag>{tag}</Tag>
 				{/each}
 			</div>
@@ -53,6 +49,7 @@
 		flex-direction: column;
 		gap: 0px;
 		align-items: flex-start;
+		height: 100%;
 	}
 
 	.title {
@@ -60,7 +57,7 @@
 		align-items: center;
 		justify-content: space-between;
 		width: 100%;
-		font-size: 1.2rem;
+		font-size: 1.6rem;
 		font-family: var(--font--title);
 		font-weight: 700;
 	}
@@ -73,25 +70,39 @@
 	}
 
 	.note {
-		font-size: 0.8rem;
+		font-size: 0.9rem;
 		color: rgba(var(--color--text-rgb), 0.8);
+		margin-bottom: 10px;
+		margin-top: 5px;
+
+		&:not(:hover) {
+			text-decoration-color: transparent;
+		}
+
+		:global(svg) {
+			height: 1.2rem;
+			width: 1.2rem;
+			display: inline;
+			vertical-align: middle;
+		}
 	}
 
 	.text {
 		margin-top: 5px;
-		font-size: 0.9rem;
+		font-size: 1rem;
 		text-align: justify;
+		height: 100%;
 	}
 
 	.footer {
 		margin-top: 20px;
 	}
 
-	:global(.blog-post-card .image img) {
+	:global(.project-card .image img) {
 		object-fit: cover;
 	}
 
-	:global(.blog-post-card.no-image > .image) {
+	:global(.project-card.no-image > .image) {
 		display: none;
 	}
 </style>

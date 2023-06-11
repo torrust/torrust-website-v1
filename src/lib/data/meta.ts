@@ -2,20 +2,20 @@
 // So they can be added as suffixes on different pages
 // Via <svelte:head>
 
-export const siteBaseUrl = 'https://sveltekit-static-blog-template.vercel.app/';
+export const siteBaseUrl = 'https://torrust.com/';
 
 export const keywords = [
-	'Svelte',
-	'SvelteKit',
-	'Template',
-	'Blog',
-	'Starter',
-	'Static Site'
+	'Torrust',
+	'Torrent',
+	'Rust',
+	'Torrent Tracker',
+	'Torrent Index',
+	'FOSS'
 ];
 
 export const description =
-	"A light, neat, and easy-to-use SvelteKit template for your next website.";
+	"Torrust is an open source project that aims to provide you with the tools you need to host your own torrent indexes with ease.";
 
-export const title = 'SvelteKit Static Blog Template';
+export const title = 'Torrust';
 
 export const image = `${siteBaseUrl}/images/site-preview.png`;
