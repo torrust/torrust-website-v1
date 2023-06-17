@@ -1,10 +1,30 @@
 <script lang="ts">
+	import { HttpRegex } from '$lib/utils/regex';
+	import ExternalLinkIcon from '$lib/icons/external-link.svelte';
+
 	export let color: 'primary' | 'secondary' = 'primary';
+
+	export let href: string | undefined = undefined;
+	const isExternalLink = !!href && HttpRegex.test(href);
+	export let target: '_self' | '_blank' = isExternalLink ? '_blank' : '_self';
+	export let rel = isExternalLink ? 'noopener noreferrer' : undefined;
+
+	$: tag = href ? 'a' : 'div';
+	$: linkProps = {
+		href,
+		target,
+		rel
+	};
 </script>
 
-<div class="tag {color}">
+<svelte:element this={tag} class="tag {color}" {...linkProps}>
 	<slot />
-</div>
+	{#if isExternalLink}
+		<div class="icon">
+			<ExternalLinkIcon />
+		</div>
+	{/if}
+</svelte:element>
 
 <style lang="scss">
 	.tag {
@@ -26,6 +46,18 @@
 		&.secondary {
 			background-color: var(--color--secondary-tint);
 			color: var(--color--secondary);
+		}
+	}
+
+	.icon {
+		width: 16px;
+		height: 16px;
+	}
+
+	a.tag {
+		text-decoration-thickness: 1px;
+		&:not(:hover) {
+			text-decoration-color: transparent;
 		}
 	}
 </style>
