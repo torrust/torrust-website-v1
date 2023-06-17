@@ -11,11 +11,9 @@
 	</div>
 	<div class="content">
 		<div class="copyright">
-			This template was built by <a
-				href="https://fantinel.dev?utm_source=site-template"
-				target="_blank"
-				rel="noopener noreferrer">Matheus Fantinel</a
-			>.
+			This project was a joint effort by <a href="https://nautilus-cyberneering.de/" target="_blank"
+				>Nautilus Cyberneering GmbH</a
+			>, <a href="https://dutchbits.nl/" target="_blank">Dutch Bits</a> and collaborators.
 		</div>
 		<div class="credits">
 			Powered by <a href="https://kit.svelte.dev/" target="_blank" rel="noopener noreferrer"
@@ -24,7 +22,6 @@
 			<a href="https://iconoir.com/" target="_blank" rel="noopener noreferrer">Iconoir</a>.
 		</div>
 		<div class="socials">
-			<Socials />
 			<RssLink />
 			<ThemeToggle />
 		</div>
