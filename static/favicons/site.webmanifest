@@ -1,6 +1,6 @@
 {
-	"name": "SvelteKit Static Blog Template",
-	"short_name": "SvelteKit Template",
+	"name": "Torrust Website",
+	"short_name": "Torrust Website",
 	"icons": [
 		{
 			"src": "/favicons/android-chrome-192x192.png",
@@ -13,7 +13,7 @@
 			"type": "image/png"
 		}
 	],
-	"theme_color": "#f9f6fe",
-	"background_color": "#f9f6fe",
+	"theme_color": "#ffffff",
+	"background_color": "#ffffff",
 	"display": "standalone"
 }
