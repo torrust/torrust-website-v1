@@ -22,6 +22,7 @@
 			<a href="https://iconoir.com/" target="_blank" rel="noopener noreferrer">Iconoir</a>.
 		</div>
 		<div class="socials">
+			<Socials />
 			<RssLink />
 			<ThemeToggle />
 		</div>

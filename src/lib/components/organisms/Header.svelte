@@ -2,6 +2,7 @@
 	import Logo from '$lib/components/atoms/Logo.svelte';
 	import ThemeToggle from '$lib/components/molecules/ThemeToggle.svelte';
 	import RssLink from '$lib/components/atoms/RssLink.svelte';
+	import Socials from '../molecules/Socials.svelte';
 
 	export let showBackground = false;
 </script>
@@ -13,6 +14,7 @@
 		</a>
 		<div class="links">
 			<a href="/blog">Guide</a>
+			<Socials />
 			<RssLink />
 			<ThemeToggle />
 		</div>
