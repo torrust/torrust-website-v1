@@ -1,7 +1,10 @@
-<script>
+<script lang="ts">
 	import FeaturesIcon from '$lib/icons/features.svelte';
 	import BlogIcon from '$lib/icons/blog.svelte';
 	import Button from '$lib/components/atoms/Button.svelte';
+
+	export let hasFeatures: Boolean;
+	export let hasPosts: Boolean;
 </script>
 
 <section id="hero">
@@ -12,14 +15,18 @@
 		<span class="right">and built with Rust.</span> -->
 	</p>
 	<div class="ctas">
-		<Button href="#features">
-			<FeaturesIcon slot="icon" />
-			Features
-		</Button>
-		<Button color="secondary" href="#recent-posts">
-			<BlogIcon slot="icon" />
-			Get Started
-		</Button>
+		{#if hasFeatures}
+			<Button href="#features">
+				<FeaturesIcon slot="icon" />
+				Features
+			</Button>
+		{/if}
+		{#if hasPosts}
+			<Button color="secondary" href="#recent-posts">
+				<BlogIcon slot="icon" />
+				Get Started
+			</Button>
+		{/if}
 	</div>
 </section>
 

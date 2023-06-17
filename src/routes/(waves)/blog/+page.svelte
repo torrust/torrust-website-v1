@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Button from '$lib/components/atoms/Button.svelte';
 	import BlogPostCard from '$lib/components/molecules/BlogPostCard.svelte';
 	import ContentSection from '$lib/components/organisms/ContentSection.svelte';
 	import type { BlogPost } from '$lib/utils/types';
@@ -11,20 +12,27 @@
 </script>
 
 <div class="container">
-	<ContentSection title="All Blog Posts">
-		<div class="grid">
-			{#each posts as post}
-				<BlogPostCard
-					title={post.title}
-					coverImage={post.coverImage}
-					excerpt={post.excerpt}
-					readingTime={post.readingTime}
-					slug={post.slug}
-					tags={post.tags}
-				/>
-			{/each}
-		</div>
-	</ContentSection>
+	{#if posts && posts.length}
+		<ContentSection title="All Blog Posts">
+			<div class="grid">
+				{#each posts as post}
+					<BlogPostCard
+						title={post.title}
+						coverImage={post.coverImage}
+						excerpt={post.excerpt}
+						readingTime={post.readingTime}
+						slug={post.slug}
+						tags={post.tags}
+					/>
+				{/each}
+			</div>
+		</ContentSection>
+	{:else}
+		<ContentSection title="There's Nothing Here Yet." description="But check back again soon!">
+			<Button href="/">Go Back</Button>
+			<div class="empty-space" />
+		</ContentSection>
+	{/if}
 </div>
 
 <style lang="scss">
@@ -64,5 +72,13 @@
 				grid-column: span 2;
 			}
 		}
+	}
+
+	.empty-space {
+		height: calc(100vh - 700px);
+	}
+
+	:global(.waves-container) {
+		z-index: -1;
 	}
 </style>

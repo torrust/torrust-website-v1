@@ -18,7 +18,7 @@
 		{#if links && links.length}
 			<div class="links">
 				{#each links as link}
-					<Tag href={link.href}>{link.label}</Tag>
+					<Tag color="secondary" href={link.href}>{link.label}</Tag>
 				{/each}
 			</div>
 		{/if}

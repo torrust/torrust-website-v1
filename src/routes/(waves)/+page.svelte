@@ -15,9 +15,9 @@
 </script>
 
 <div class="container">
-	<Hero />
+	<Hero hasFeatures={features && features.length > 0} hasPosts={posts && posts.length > 0} />
 	<AboutTorrust />
-	{#if posts && posts.length > 0}
+	{#if posts && posts.length}
 		<RecentPosts {posts} />
 	{/if}
 	<HowToContribute />
