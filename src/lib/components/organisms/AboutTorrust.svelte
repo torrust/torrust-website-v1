@@ -1,6 +1,5 @@
 <script>
 	import Image from '$lib/components/atoms/Image.svelte';
-	import Card from '../atoms/Card.svelte';
 	import ContentSection from './ContentSection.svelte';
 	import ImageContentSection from './ImageContentSection.svelte';
 	import GitHubIcon from '$lib/icons/socials/github.svelte';

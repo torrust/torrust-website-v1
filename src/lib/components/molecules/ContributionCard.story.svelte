@@ -1,0 +1,32 @@
+<script lang="ts">
+	import '$lib/scss/global.scss';
+	import type { Hst } from '@histoire/plugin-svelte';
+	import ContributionCard from './ContributionCard.svelte';
+
+	export let Hst: Hst;
+</script>
+
+<Hst.Story title="Molecules/Contribution Card">
+	<div style="padding: 12px;">
+		<Hst.Variant title="Default">
+			<ContributionCard
+				title="Bug reports and feature requests"
+				description="You can report any bugs or request features by opening an issue in the appropriate repository:"
+				links={[
+					{
+						href: 'https://github.com/torrust/torrust-tracker/issues',
+						label: 'Torrust Tracker'
+					},
+					{
+						href: 'https://github.com/torrust/torrust-index-backend/issues',
+						label: 'Torrust Index (Backend)'
+					},
+					{
+						href: 'https://github.com/torrust/torrust-index-frontend/issues',
+						label: 'Torrust Index (Frontend)'
+					}
+				]}
+			/>
+		</Hst.Variant>
+	</div>
+</Hst.Story>
