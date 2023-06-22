@@ -1,5 +1,7 @@
 # Torrust Website
 
+[![pages-build-deployment](https://github.com/torrust/torrust-website/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/torrust/torrust-website/actions/workflows/pages/pages-build-deployment) [![Deploy to GitHub Pages](https://github.com/torrust/torrust-website/actions/workflows/deploy.yml/badge.svg)](https://github.com/torrust/torrust-website/actions/workflows/deploy.yml)
+
 This is the website for the Torrust project, containing information about the project, and in the future, some guides and tutorials.
 
 <p align="center">
