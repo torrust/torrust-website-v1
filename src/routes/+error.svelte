@@ -1,4 +1,5 @@
 <script>
+	import { page } from '$app/stores';
 	import Header from '$lib/components/organisms/Header.svelte';
 	import Footer from '$lib/components/organisms/Footer.svelte';
 
@@ -11,7 +12,7 @@
 <main>
 	<div class="error-page">
 		<div class="container">
-			<h1>Oh no!</h1>
+			<h1>Oh no! {$page?.status ?? 'An error'}!</h1>
 			<div class="svg-wrapper">
 				<Error />
 			</div>
