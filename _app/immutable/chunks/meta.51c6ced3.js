@@ -1,0 +1,1 @@
+const t="https://torrust.github.io/torrust-website/",s=["Torrust","Torrent","Rust","Torrent Tracker","Torrent Index","FOSS"],o="Torrust is an open source project that aims to provide you with the tools you need to host your own torrent indexes with ease.",e="Torrust",r=`${t}/images/site-preview.png`;export{o as d,r as i,s as k,t as s,e as t};

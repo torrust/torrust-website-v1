@@ -10,14 +10,14 @@
 	xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
 >
   <channel>
-    <atom:link href="https://torrust.com/rss.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://torrust.github.io/torrust-website//rss.xml" rel="self" type="application/rss+xml" />
     <title>Torrust</title>
-    <link>https://torrust.com</link>
+    <link>https://torrust.github.io/torrust-website/</link>
     <description>Torrust is an open source project that aims to provide you with the tools you need to host your own torrent indexes with ease.</description>
     <image>
-      <url>https://torrust.com/favicons/favicon-32x32.png</url>
+      <url>https://torrust.github.io/torrust-website//favicons/favicon-32x32.png</url>
       <title>Torrust</title>
-      <link>https://torrust.com</link>
+      <link>https://torrust.github.io/torrust-website/</link>
       <width>32</width>
       <height>32</height>
     </image>
