@@ -5,6 +5,5 @@ import { filterPosts, importPosts } from './utils';
 // The folder name is used as the slug, and the file name MUST me +page.md
 // I've left a sample post in there, but with the "hidden" property so it doesn't show up.
 
-
 export const allPosts = importPosts(true);
 export const filteredPosts = filterPosts(allPosts);
