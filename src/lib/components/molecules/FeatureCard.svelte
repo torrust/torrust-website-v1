@@ -10,9 +10,11 @@
 	export let tags: TagType[] | undefined;
 </script>
 
-<Card additionalClass="feature-card">
+<Card additionalClass="feature-card {!image ? 'no-image' : ''}">
 	<div class="image" slot="image">
-		<Image src={image} alt="Picture describing the {name} feature" />
+		{#if image}
+			<Image src={image} alt="Picture describing the {name} feature" />
+		{/if}
 	</div>
 	<div class="content" slot="content">
 		<div class="title">
@@ -63,5 +65,9 @@
 
 	:global(.feature-card .image img) {
 		object-fit: cover;
+	}
+
+	:global(.feature-card.no-image > .image) {
+		display: none;
 	}
 </style>
