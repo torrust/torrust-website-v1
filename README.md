@@ -40,3 +40,5 @@ All posts are Markdown files that are processed with [MDsveX](https://mdsvex.png
 # Hosting
 
 When you run `npm run build`, the website will be compiled into a static site, which means you can host it pretty much anywhere.
+
+You can deploy it manually to GitHub Pages by running `npm run build && npm run deploy`.
