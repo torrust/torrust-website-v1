@@ -9,7 +9,7 @@
 
 <ContentSection
 	id="recent-posts"
-	title="Torrust Guide"
+	title="Torrust Blog"
 	description="Tips on how to get started and use Torrust."
 	align="left"
 >

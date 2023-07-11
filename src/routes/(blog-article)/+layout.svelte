@@ -1,3 +1,7 @@
+---
+date: 2023-07-11T12:28:44.499Z
+updated: 2023-07-11T12:28:45.984Z
+---
 <script lang="ts">
 	import Header from '$lib/components/organisms/Header.svelte';
 	import Footer from '$lib/components/organisms/Footer.svelte';
