@@ -1,12 +1,12 @@
 ---
-title: How Blog Posts Work
-slug: sample-post
+title: How To Contribute to This Site
+slug: how-to-contribute-to-this-site
 coverImage: /images/posts/sample-post.jpg
 date: 2023-04-22T21:55:15.361Z
-excerpt: How to manage existing blog posts and create new ones
+excerpt: How to manage existing blog posts and create new ones on this site.
 tags:
   - Documentation
-hidden: true
+hidden: false
 ---
 
 <script>
@@ -14,6 +14,11 @@ hidden: true
   import CodeBlock from "$lib/components/molecules/CodeBlock.svelte";
   import Image from "$lib/components/atoms/Image.svelte";
 </script>
+
+- [Processing](#processing)
+- [Creating a new post](#creating-a-new-post)
+- [Managing blog posts](#managing-blog-posts)
+- [RSS](#rss)
 
 All blog posts are located inside the `src/routes/(blog-article)` folder. Each folder inside it represents a blog post, and each folder has a `+page.md` file, which is the file that contains the post's content.
 

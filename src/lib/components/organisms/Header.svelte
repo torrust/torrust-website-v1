@@ -13,7 +13,7 @@
 			<Logo />
 		</a>
 		<div class="links">
-			<a href="/blog">Guide</a>
+			<a href="/blog">Blog</a>
 			<Socials />
 			<RssLink />
 			<ThemeToggle />
