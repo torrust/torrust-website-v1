@@ -1,5 +1,5 @@
 ---
-title: How To Contribute to This Site
+title: How To Contribute To This Site
 slug: how-to-contribute-to-this-site
 coverImage: /images/posts/sample-post.jpg
 date: 2023-04-22T21:55:15.361Z
