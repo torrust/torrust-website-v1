@@ -3,8 +3,8 @@
 	import BlogIcon from '$lib/icons/blog.svelte';
 	import Button from '$lib/components/atoms/Button.svelte';
 
-	export let hasFeatures: Boolean;
-	export let hasPosts: Boolean;
+	export let hasFeatures: boolean;
+	export let hasPosts: boolean;
 </script>
 
 <section id="hero">

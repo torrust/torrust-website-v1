@@ -144,22 +144,22 @@ The response should be like this:
 
 ```json
 {
-  "torrents": 0,
-  "seeders": 0,
-  "completed": 0,
-  "leechers": 0,
-  "tcp4_connections_handled": 0,
-  "tcp4_announces_handled": 0,
-  "tcp4_scrapes_handled": 0,
-  "tcp6_connections_handled": 0,
-  "tcp6_announces_handled": 0,
-  "tcp6_scrapes_handled": 0,
-  "udp4_connections_handled": 0,
-  "udp4_announces_handled": 0,
-  "udp4_scrapes_handled": 0,
-  "udp6_connections_handled": 0,
-  "udp6_announces_handled": 0,
-  "udp6_scrapes_handled": 0
+	"torrents": 0,
+	"seeders": 0,
+	"completed": 0,
+	"leechers": 0,
+	"tcp4_connections_handled": 0,
+	"tcp4_announces_handled": 0,
+	"tcp4_scrapes_handled": 0,
+	"tcp6_connections_handled": 0,
+	"tcp6_announces_handled": 0,
+	"tcp6_scrapes_handled": 0,
+	"udp4_connections_handled": 0,
+	"udp4_announces_handled": 0,
+	"udp4_scrapes_handled": 0,
+	"udp6_connections_handled": 0,
+	"udp6_announces_handled": 0,
+	"udp6_scrapes_handled": 0
 }
 ```
 
@@ -292,7 +292,7 @@ We found some tools very useful to develop the Torrust Tracker and Index. We hop
 
 ## Conclusion
 
-As you can see, the Torrust Tracker and Index are very easy to set up. We hope you find this guide useful.You might have problems:
+As you can see, the Torrust Tracker and Index are very easy to set up. We hope you find this guide useful. You might have problems:
 
 - Setting up some of the projects on Windows. [We are working on it](https://github.com/torrust/torrust-tracker/issues/325).
 - Or with some missing system dependencies.

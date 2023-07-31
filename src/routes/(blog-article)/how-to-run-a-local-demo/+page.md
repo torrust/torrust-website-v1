@@ -113,7 +113,7 @@ The application is very easy to use but you can find comprehensive documentation
 
 - [Torrust Index Frontend](https://github.com/torrust/torrust-index-frontend/blob/develop/docs/index.md)
 - [Torrust Index Backend (including the REST API)](https://docs.rs/torrust-index-backend>)
-- [Torrust Tracker](<https://docs.rs/torrust-tracker>)
+- [Torrust Tracker](https://docs.rs/torrust-tracker)
 
 ## Advanced Setup
 
@@ -123,7 +123,7 @@ If you want to change the configuration for the Tracker or the Index Backend, yo
 
 Refer to the documentation of the corresponding application to know more about the configuration options:
 
-- [Torrust Tracker](<https://github.com/torrust/torrust-tracker>)
+- [Torrust Tracker](https://github.com/torrust/torrust-tracker)
 - [Torrust Index Backend](https://github.com/torrust/torrust-index-backend)
 
 ## Conclusion
