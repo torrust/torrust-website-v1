@@ -1,9 +1,9 @@
 <script lang="ts">
 	import '$lib/scss/global.scss';
-	import type { Hst } from '@histoire/plugin-svelte';
+	import type { Hst as HstType } from '@histoire/plugin-svelte';
 	import Card from './Card.svelte';
 
-	export let Hst: Hst;
+	export let Hst: HstType;
 </script>
 
 <Hst.Story title="Atoms/Card" layout={{ type: 'grid', width: 400 }}>

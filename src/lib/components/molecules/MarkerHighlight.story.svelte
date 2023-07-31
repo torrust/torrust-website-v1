@@ -1,11 +1,11 @@
 <script lang="ts">
 	import '$lib/scss/global.scss';
 	import type { ComponentProps } from 'svelte';
-	import type { Hst } from '@histoire/plugin-svelte';
+	import type { Hst as HstType } from '@histoire/plugin-svelte';
 	import MarkerHighlight from './MarkerHighlight.svelte';
 	import type { NoUndefinedField } from '$lib/utils/types';
 
-	export let Hst: Hst;
+	export let Hst: HstType;
 
 	let props: NoUndefinedField<ComponentProps<MarkerHighlight>> = {
 		color: 'primary'

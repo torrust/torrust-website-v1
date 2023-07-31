@@ -1,11 +1,11 @@
 <script lang="ts">
 	import '$lib/scss/global.scss';
-	import type { Hst } from '@histoire/plugin-svelte';
+	import type { Hst as HstType } from '@histoire/plugin-svelte';
 	import ProjectCard from './ProjectCard.svelte';
 	import GitHubIcon from '$lib/icons/socials/github.svelte';
 	import Button from '$lib/components/atoms/Button.svelte';
 
-	export let Hst: Hst;
+	export let Hst: HstType;
 </script>
 
 <Hst.Story title="Molecules/Project Card">

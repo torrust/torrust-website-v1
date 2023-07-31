@@ -1,12 +1,12 @@
 <script lang="ts">
 	import '$lib/scss/global.scss';
 	import type { ComponentProps } from 'svelte';
-	import type { Hst } from '@histoire/plugin-svelte';
+	import type { Hst as HstType } from '@histoire/plugin-svelte';
 	import Sparkles from './Sparkles.svelte';
 	import type { NoUndefinedField } from '$lib/utils/types';
 	import Button from '$lib/components/atoms/Button.svelte';
 
-	export let Hst: Hst;
+	export let Hst: HstType;
 
 	let props: NoUndefinedField<ComponentProps<Sparkles>> = {
 		color: 'default'
