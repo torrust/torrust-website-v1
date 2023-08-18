@@ -52,7 +52,7 @@ For example, if you are using [qBittorrent](https://www.qbittorrent.org/), this 
 
 As you can see there is a "source" field in the "Fields" group of inputs.
 
-As we did not not exactly the purpose of this field, our first reaction was to look for official documentation about that field in [BEPs](https://www.bittorrent.org/beps/bep_0000.html). In the context of BitTorrent, a BEP stands for "BitTorrent Enhancement Proposal." It's analogous to Python's PEP (Python Enhancement Proposal) or Bitcoin's BIP (Bitcoin Improvement Proposal).
+As we did not know exactly the purpose of this field, our first reaction was to look for official documentation about that field in [BEPs](https://www.bittorrent.org/beps/bep_0000.html). In the context of BitTorrent, a BEP stands for "BitTorrent Enhancement Proposal." It's analogous to Python's PEP (Python Enhancement Proposal) or Bitcoin's BIP (Bitcoin Improvement Proposal).
 
 <Callout type="info">
 
@@ -173,7 +173,7 @@ It's out of the scope of this post to provide an exhaustive explanation of the c
 
 BitTorrent clients usually do not allow you to add the same content twice, so cross-seeding is a way to get around this limitation. If you want to add a new tracker to a torrent file that you are already seeding, the client usually adds the new tracker to the tracker list in the previous torrent file. This could be a reason to ban you from some private trackers.
 
-Some private trackers change the list of trackers in the torrent files to prevent cross-seeding. The remove other trackers URLs and they also use the source file to generate a different info-hash. This is a way to force you to download the torrent file from their website and and track you to know if you are seeding the torrent file from another tracker.
+Some private trackers change the list of trackers in the torrent files to prevent cross-seeding. They remove other trackers URLs and they also use the source file to generate a different info-hash. This is a way to force you to download the torrent file from their website and track you to know if you are seeding the torrent file from another tracker.
 
 ## What are the reliable sources for BitTorrent documentation?
 
