@@ -1,7 +1,7 @@
 ---
 title: Introducing the New Sample Torrent Migration Tool
 slug: introducing-the-new-sample-torrent-migration-tool
-coverImage: /images/posts/pexels-david-dibert-7177008.png
+coverImage: /images/posts/pexels-david-dibert-7177008.jpg
 date: 2023-09-04T13:24:27.241Z
 excerpt: Looking to migrate to the Torrust Index? Dive into our Torrents Importer Sample to seamlessly transfer your torrents to Torrust.
 tags:
