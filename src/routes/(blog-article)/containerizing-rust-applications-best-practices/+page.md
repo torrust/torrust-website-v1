@@ -22,13 +22,13 @@ hidden: false
 
 - [Introduction](#introduction)
 - [Requirements](#requirements)
-- [Why We Use Docker](#why-we-use-docker)
+- [We Use Docker (OCI) Containers](#we-use-docker-(oci)-containers)
 - [Basic Dockerized Rust Application](#basic-dockerized-rust-application)
-- [Minimize Docker Image Size With Multi-stage Builds](#minimize-docker-image-size-with-multi-stage-builds)
+- [Use Multi-Stage Builds to Minimize the Image Size](#use-multi-stage-builds-to-minimize-the-image-size)
 - [Image Variants](#image-variants)
 - [Introduction to Docker Layers Cache](#introduction-to-docker-layers-cache)
 - [Caching Cargo Dependencies](#caching-cargo-dependencies)
-  - [Caching Cargo Dependencies With a Custom Solution](#caching-cargo-dependencies-with-a-custom-solution)
+  - [Demonstration of Caching Cargo Dependencies using a Custom Solution](#demonstration-of-caching-cargocdependencies-using-a-custom-solution)
   - [Caching Cargo Dependencies With Cargo Chef](#caching-cargo-dependencies-with-cargo-chef)
 - [Installing Rust Binaries With Cargo Binstall](#installing-rust-binaries-with-cargo-binstall)
 - [Archiving And Reusing Builds With Cargo Nextest](#archiving-and-reusing-builds-with-cargo-nextest)
@@ -47,23 +47,28 @@ BitTorrent, an age-old protocol, is a powerful way to share data over the intern
 In our journey to building robust BitTorrent projects, we've chosen the Rust
 programming language for its memory safety and concurrency features. To streamline
 the development and distribution of our projects, we've also employed Docker and
-Podman. In this post, we'll dive deep into the best practices we've adopted for
+Podman.
+
+In this post, we'll dive deep into the best practices we've adopted for
 dockerizing our Rust applications.
 
-We will explain step by step the [Containerfile](https://github.com/torrust/torrust-tracker/blob/develop/Containerfile)
-file we use in the repositories where we are using Rust. Besides, we are going to
-explain all of the patterns and best practices we have applied.
+Our [Containerfiles](https://docs.docker.com/engine/reference/builder/), _commonly called a `"Dockerfile"`_, are stored in the roots of the our two main rust repositories, for reference:
+- Torrust-Tracker [Containerfile](https://github.com/torrust/torrust-tracker/blob/develop/Containerfile).
+- Torrust-Index [Containerfile](https://github.com/torrust/torrust-index/blob/develop/Containerfile).
 
-You have all the examples in this article in the [Containerizing Rust Apps Examples](https://github.com/torrust/containerizing-rust-apps-examples)
-GitHub repository.
+### Example:
+All of the examples included in this blog post are publicly available in our "[Containerizing Rust Apps Examples](https://github.com/torrust/containerizing-rust-apps-examples)"
+GitHub Repository.
 
-The actual `Containerfile` for the **Tracker** and **Index** services builds images for
+> ___Please Note:___ The actual `Containerfile` for the **Tracker** and **Index** services builds images for
 both `debug` and `release` modes. For learning purposes we are using a simplified
 version here which only builds the `release` mode:
 
 <CodeBlock lang="dockerfile">
 
 ```dockerfile
+# Extracted example of our Containerfile.
+
 ## Base Builder Image
 FROM rust:bookworm as chef
 WORKDIR /tmp
@@ -131,10 +136,9 @@ CMD ["/usr/bin/full-example"]
 </CodeBlock>
 
 The real version in production contains some duplicate stages to build the `debug`
-mode. Those stages are almost identical to the ones in this example. Only some
-flags and names change.
+mode. Those stages are almost identical to the ones in this example and are therefore omitted. Only some flags and names change.
 
-Don't be scared of the example, we will go through all the lines and explain what
+Don't be scared of the example, next we will go through all the lines and explain what
 they do, but before doing that, we will explain some basic concepts and the patterns
 applied one by one.
 
@@ -144,18 +148,14 @@ In order to run some of the examples in this article you will need to install:
 
 - [Docker version 24.0.6, build ed223bc](https://docs.docker.com/get-docker/)
 
-## Why We Use Docker
+## We Use Docker (OCI) Containers
 
-Docker containers are an excellent means of packaging, shipping, and running applications consistently across different environments. They eliminate the age-old problem of "it works on my machine." By using Docker, we ensure that our BitTorrent services can be deployed and run effortlessly, no matter where they're hosted.
+The standardized [Open Container Initiative (OCI)](https://opencontainers.org/) Containers allows Torrust possibility of reliable and cross-platform distribution and deployment of our Software.
 
-These are some of its advantages:
+This allows in turn allows for administrators who may be interested in our software to to quickly and easily test-out our software and see if it suits their needs. It also allows administrators to more easily deploy our software, as most of the web-hosting systems have great support for OCI Containers.
 
-- Reproducible Builds
-- Dependency Management
-- Portability
-- Scalability
-- DevOps Integration
-- Cross-Platform Development
+In addition, our End-to-End testing infrastructure is made easier by using a [docker-compose](https://docs.docker.com/compose/) configuration, that is taking advantage of our docker containers.
+
 
 ## Basic Dockerized Rust Application
 
@@ -165,7 +165,7 @@ The simplest Dockerfile for a Rust application is as follows:
 
 ```dockerfile
 # We start from full base defacto Debian image
-FROM rust:1.73
+FROM rust:latest
 WORKDIR /app
 RUN cargo init
 RUN cargo build --release
@@ -201,7 +201,7 @@ docker-rust-app-basic                            latest          7294f20bb52c   
 We are going to see how to improve
 that and other things like common patters, good practices and other considerations.
 
-## Minimize Docker Image Size With Multi-stage Builds
+## Use Multi-Stage Builds to Minimize the Image Size
 
 A common pattern to build smaller docker images is to use multi-stage Dockerfiles.
 
@@ -214,7 +214,7 @@ needed to run your compiled Rust application.
 
 ```dockerfile
 # This is the first stage. This image is used to compile the Rust application.
-FROM rust:1.73 as builder
+FROM rust:bookworm as builder
 WORKDIR /app
 RUN cargo init
 # Install the package in the current directory
@@ -224,7 +224,6 @@ CMD ["./target/release/app"]
 # This is the production stage.
 # The slim image does not contain the common packages contained in the default tag and only contains the minimal packages needed to run rust.
 FROM debian:bookworm-slim
-RUN apt-get update && apt-get install && rm -rf /var/lib/apt/lists/*
 COPY --from=builder /usr/local/cargo/bin/app /usr/local/bin/app
 CMD ["app"]
 ```
@@ -320,9 +319,9 @@ There are two levels of dependencies:
 - System dependencies. For instance `SQLite`, `curl` and other libraries your application depends on.
 - Rust dependencies. These are the Rust packages that you want to install using cargo. Rust packages are called `crates` and you can find them on <https://crates.io/>
 
-### Caching Cargo Dependencies With A Custom Solution
+### Demonstration of Caching Cargo Dependencies using a Custom Solution
 
-The first approach is to use a custom solution to cache the dependencies.
+First we demonstrate how cargo dependencies caching works but showing a custom solution:
 
 We first create an **empty application configuration** which uses the same dependencies.
 We build the application, downloading and building all the dependencies and creating a docker cache layer.
@@ -333,7 +332,7 @@ when you change the application code.
 <CodeBlock lang="dockerfile">
 
 ```dockerfile
-FROM rust:1.73 as builder
+FROM rust:latest as builder
 
 WORKDIR /app
 
@@ -360,18 +359,17 @@ CMD ["./target/release/custom-dependencies-cache"]
 
 </CodeBlock>
 
-This custom solution is not needed anymore since you can know use [cargo chef](https://github.com/LukeMathWalker/cargo-chef) which is a cargo-subcommand to speed up Rust Docker builds using Docker layer caching.
+Instead of this custom solution, we use and recommend [cargo chef](https://github.com/LukeMathWalker/cargo-chef) which is a cargo-subcommand that specializes in speeding up Rust Docker builds using Docker layer caching.
+
 
 ### Caching Cargo Dependencies With Cargo Chef
 
-There is a cargo command called `cargo chef` which is a cargo-subcommand to speed up Rust Docker builds using Docker layer caching.
-
-Cargo Chef repo: <https://github.com/LukeMathWalker/cargo-chef>
+In this example, we show how to use [cargo chef](https://github.com/LukeMathWalker/cargo-chef), that we prefer to use.
 
 <CodeBlock lang="dockerfile">
 
 ```dockerfile
-FROM rust:1.73 as chef
+FROM rust:latest as chef
 
 WORKDIR /app
 
@@ -402,8 +400,8 @@ CMD ["./target/release/dependencies-cache-with-cargo-chef"]
 
 </CodeBlock>
 
-It does more or less the same as the custom solution. It caches dependencies in a separate layer.
-But with some more [benefits](https://github.com/LukeMathWalker/cargo-chef#benefits-of-cargo-chef).
+While it does more or less the same as the custom solution. It caches dependencies in a separate layer and has some other [benefits](https://github.com/LukeMathWalker/cargo-chef#benefits-of-cargo-chef).
+
 
 ## Installing Rust Binaries With Cargo Binstall
 
@@ -417,7 +415,7 @@ We are using it to install `cargo chef` and `cargo nextest` packages easily.
 
 ```dockerfile
 
-FROM rust:1.73
+FROM rust:latest
 WORKDIR /app
 # Install `cargo binstall`
 RUN curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
@@ -458,7 +456,7 @@ We are using it for two reasons:
 
 ```dockerfile
 ## First stage to install the nextest tool
-FROM rust:1.73 as nextest
+FROM rust:latest as nextest
 RUN cargo install cargo-nextest --locked
 
 ## Second stage to build the application and package it with nextest
@@ -515,7 +513,7 @@ By default docker is installed and runs containers as `root`. If you build this 
 <CodeBlock lang="dockerfile">
 
 ```dockerfile
-FROM rust:1.73
+FROM rust:latest
 WORKDIR /app
 RUN cargo init
 RUN cargo build --release
@@ -554,7 +552,7 @@ There are some ways to avoid running the container as `root`. We will see all of
 <CodeBlock lang="dockerfile">
 
 ```dockerfile
-FROM rust:1.73
+FROM rust:latest
 
 WORKDIR /app
 
@@ -585,7 +583,7 @@ But you can also create a specific user for your application:
 <CodeBlock lang="dockerfile">
 
 ```dockerfile
-FROM rust:1.73
+FROM rust:latest
 
 WORKDIR /app
 
@@ -678,7 +676,7 @@ COPY ./contrib/dev-tools/su-exec/ /usr/local/src/su-exec/
 RUN cc -Wall -Werror -g /usr/local/src/su-exec/su-exec.c -o /usr/local/bin/su-exec; chmod +x /usr/local/bin/su-exec
 
 ## Application
-FROM rust:1.73 as builder
+FROM rust:bookworm as builder
 WORKDIR /app
 RUN cargo init
 RUN cargo build --release
@@ -707,6 +705,8 @@ The `entry.sh` script is always called when you run the container because it's
 defined as an `ENTRYPOINT`. This "middleware" script creates the user if it does
 not exist, and then runs the application using the [su-exec](https://github.com/ncopa/su-exec)
 program to change the user ID it's executed with.
+
+__For those who are interested here is our: [entry script](https://github.com/torrust/torrust-tracker/blob/develop/share/container/entry_script_sh).__
 
 As you can read on the su-exec documentation:
 
@@ -741,77 +741,6 @@ Rust apps can be build in `debug` or `release` mode. The `Containerfile` builds 
 modes and then it runs the tests for both modes. We have removed the `debug` mode
 to keep the example short. But it's almost the same code. For the `release` mode
 the flag `--release` is added to some commands.
-
-This is the full example:
-
-<CodeBlock lang="dockerfile">
-
-```dockerfile
-## Base Builder Image
-FROM rust:bookworm as chef
-WORKDIR /tmp
-RUN curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
-RUN cargo binstall --no-confirm cargo-chef cargo-nextest
-
-## Tester Image
-FROM rust:slim-bookworm as tester
-WORKDIR /tmp
-RUN apt-get update; apt-get install -y curl; apt-get autoclean
-RUN curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
-RUN cargo binstall --no-confirm cargo-nextest
-
-## Su Exe Compile
-FROM docker.io/library/gcc:bookworm as gcc
-COPY ./contrib/dev-tools/su-exec/ /usr/local/src/su-exec/
-RUN cc -Wall -Werror -g /usr/local/src/su-exec/su-exec.c -o /usr/local/bin/su-exec; chmod +x /usr/local/bin/su-exec
-
-## Chef Prepare (look at project and see wat we need)
-FROM chef AS recipe
-WORKDIR /build/src
-COPY . /build/src
-RUN cargo chef prepare --recipe-path /build/recipe.json
-
-## Cook (release)
-FROM chef AS dependencies
-WORKDIR /build/src
-COPY --from=recipe /build/recipe.json /build/recipe.json
-RUN cargo chef cook --tests --benches --examples --workspace --all-targets --all-features --recipe-path /build/recipe.json --release
-RUN cargo nextest archive --tests --benches --examples --workspace --all-targets --all-features --archive-file /build/temp.tar.zst --release  ; rm -f /build/temp.tar.zst
-
-## Build Archive (release)
-FROM dependencies AS build
-WORKDIR /build/src
-COPY . /build/src
-RUN cargo nextest archive --tests --benches --examples --workspace --all-targets --all-features --archive-file /build/full-example.tar.zst --release
-
-# Extract and Test (release)
-FROM tester as test
-WORKDIR /test
-COPY . /test/src
-COPY --from=build \
-  /build/full-example.tar.zst \
-  /test/full-example.tar.zst
-RUN cargo nextest run --workspace-remap /test/src/ --extract-to /test/src/ --no-run --archive-file /test/full-example.tar.zst
-RUN cargo nextest run --workspace-remap /test/src/ --target-dir-remap /test/src/target/ --cargo-metadata /test/src/target/nextest/cargo-metadata.json --binaries-metadata /test/src/target/nextest/binaries-metadata.json
-
-RUN mkdir -p /app/bin/; cp -l /test/src/target/release/full-example /app/bin/full-example
-RUN chown -R root:root /app; chmod -R u=rw,go=r,a+X /app; chmod -R a+x /app/bin
-
-## Runtime
-FROM gcr.io/distroless/cc-debian12:debug as runtime
-RUN ["/busybox/cp", "-sp", "/busybox/sh","/busybox/cat","/busybox/ls","/busybox/env", "/bin/"]
-COPY --from=gcc --chmod=0555 /usr/local/bin/su-exec /bin/su-exec
-ARG USER_ID=1000
-COPY --chmod=0555 ./share/container/entry_script_sh /usr/local/bin/entry.sh
-ENTRYPOINT ["/usr/local/bin/entry.sh"]
-
-## Release Runtime
-FROM runtime as release
-COPY --from=test /app/ /usr/
-CMD ["/usr/bin/full-example"]
-```
-
-</CodeBlock>
 
 We can abstract way the stages:
 
