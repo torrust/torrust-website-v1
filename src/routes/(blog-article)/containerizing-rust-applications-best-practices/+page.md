@@ -52,7 +52,7 @@ Podman.
 In this post, we'll dive deep into the best practices we've adopted for
 dockerizing our Rust applications.
 
-Our [Containerfiles](https://docs.docker.com/engine/reference/builder/), _commonly called a `"Dockerfile"`_, are stored in the roots of the our two main rust repositories, for reference:
+Our [Containerfiles](https://docs.docker.com/engine/reference/builder/), _commonly called a `"Dockerfile"`_, are stored in the roots of our two main rust repositories, for reference:
 - Torrust-Tracker [Containerfile](https://github.com/torrust/torrust-tracker/blob/develop/Containerfile).
 - Torrust-Index [Containerfile](https://github.com/torrust/torrust-index/blob/develop/Containerfile).
 
@@ -150,9 +150,9 @@ In order to run some of the examples in this article you will need to install:
 
 ## We Use Docker (OCI) Containers
 
-The standardized [Open Container Initiative (OCI)](https://opencontainers.org/) Containers allows Torrust possibility of reliable and cross-platform distribution and deployment of our Software.
+The standardized [Open Container Initiative (OCI)](https://opencontainers.org/) allows Torrust the possibility of reliable and cross-platform distribution and deployment of our Software.
 
-This allows in turn allows for administrators who may be interested in our software to to quickly and easily test-out our software and see if it suits their needs. It also allows administrators to more easily deploy our software, as most of the web-hosting systems have great support for OCI Containers.
+This allows for administrators who may be interested in our software to quickly and easily test-out our software and see if it suits their needs. It also allows administrators to more easily deploy our software, as most of the web-hosting systems have great support for OCI Containers.
 
 In addition, our End-to-End testing infrastructure is made easier by using a [docker-compose](https://docs.docker.com/compose/) configuration, that is taking advantage of our docker containers.
 
@@ -248,7 +248,7 @@ As you can see this new image is only 84.7MB. That's a huge improvement!
 
 ## Image Variants
 
-As you can see in our `Containerfile`, the images we are using are the followings:
+As you can see in our `Containerfile`, the images we are using are the following:
 
 ### rust:bookworm
 
@@ -258,7 +258,7 @@ FROM rust:bookworm
 
 At the time of writing this article the latest release is [Debian 12.2](https://www.debian.org/releases/bookworm/).
 It is also (currently) known as stable or by its codename "Bookworm". You will
-see that we use that one because it's the latest one.
+see that we use that one because it is the latest one.
 
 ### rust:slim-bookworm
 
@@ -277,8 +277,8 @@ FROM docker.io/library/gcc:bookworm
 ```
 
 The GCC image is used to compile an small C program which is a simple tool that
-simply executes a program with different privileges. When we start the container
-we run it with a USER ID passed by an environment variable and not with `root` 
+just executes a program with different privileges. When we start the container
+we run it with a USER ID passed by an environment variable and not with `root`
 privileges.
 
 ### cc-debian12:debug
@@ -290,13 +290,13 @@ FROM gcr.io/gcr.io/distroless/cc-debian12:debug
 And finally a "Distroless" container image is used for runtime. [Why should you use distroless images?](https://github.com/GoogleContainerTools/distroless#why-should-i-use-distroless-images).
 
 - They are small.
-- The only have what you need to run your app.
-- It reduces the risk of vulnerabilities.
+- They only have what you need to run your app.
+- They reduce the risk of vulnerabilities.
 
 <Callout type="info">
 
 We use the `:debug` variant of the distroless cc, as it includes the busybox binary,
-giving us a shell; that is needed to run the entry-script. We will explain this later.
+giving us a shell that is needed to run the entry-script. We will explain this later.
 
 </Callout>
 
@@ -533,7 +533,7 @@ docker run --rm -it docker-rust-app-running-with-root whoami
 
 </CodeBlock>
 
-You will see it's executed as `root`.
+You will see it is executed as `root`.
 
 You should not execute containers as `root` because of:
 
@@ -615,7 +615,7 @@ machine and the docker container might have the same user ID but different usern
 </Callout>
 
 If you run that container, `appuser` will have the same permissions as the user `1001`
-in the host system, whatever it's the name of that user in the host machine.
+in the host system, whatever it is the name of that user in the host machine.
 
 ### Use The `docker run --user` Argument
 
@@ -630,7 +630,7 @@ www-data
 
 </CodeBlock>
 
-In this example, even though the image is execute as root by default, it will be
+In this example, even though the image is executed as root by default, it will be
 executed as the `www-data` user.
 
 Notice you can even use a non-existing user in both the host and the docker image.
@@ -644,18 +644,18 @@ I have no name!@895b0f6a3dbb:/app$
 
 </CodeBlock>
 
-All this solutions work but they all have a drawback: you need to know the user
+All these solutions work but they all have a drawback: you need to know the user
 ID at build time (when you build the docker image). You usually want to run the
 container in different environments and sometimes you want to use a different
 user ID for each environment. For example:
 
-- **For development**: If you are using Ubuntu, your user ID is probably `1000`. When
+- __For development__: If you are using Ubuntu, your user ID is probably `1000`. When
 you run the container locally you want to run it using that ID, so that you don't
 have any problems with permissions.
-- **For CI**: The servers you are using for continuous integration (for instance, GitHub runners)
+- __For CI__: The servers you are using for continuous integration (for instance, GitHub runners)
 might use an specif user. You could use some cache folders and maybe you need to
 use the same user ID as the CI server.
-- **For production**: You could create an specific user for your application and use that
+- __For production__: You could create a specific user for your application and use that
 user ID.
 
 With the proposed solutions you would need to rebuild the docker image so that the
@@ -663,8 +663,8 @@ user ID inside the container is the same as the host user ID.
 
 ### Create The User At Runtime
 
-There is al alternative to the previous solutions that make it possible to **run the
-container with different user IDs without rebuilding the image**.
+There is al alternative to the previous solutions that makes it possible to __run the
+container with different user IDs without rebuilding the image__.
 
 <CodeBlock lang="dockerfile">
 
@@ -701,10 +701,10 @@ This is the approach we use in Torrust. You run the docker as `root` but we alwa
 use an entrypoint. That entrypoint creates a new user with an ID provided as an
 environment variable.
 
-The `entry.sh` script is always called when you run the container because it's
+The `entry.sh` script is always called when you run the container because it is
 defined as an `ENTRYPOINT`. This "middleware" script creates the user if it does
 not exist, and then runs the application using the [su-exec](https://github.com/ncopa/su-exec)
-program to change the user ID it's executed with.
+program to change the user ID it is executed with.
 
 __For those who are interested here is our: [entry script](https://github.com/torrust/torrust-tracker/blob/develop/share/container/entry_script_sh).__
 
@@ -729,7 +729,7 @@ The entrypoint also ensures that the application is executed with the correct
 permissions. You cannot run the application as root unless you explicitly set
 the environment variable `USER_ID` to `0`.
 
-If you want to contribute with Torrust we think that we could simplify the Containerfile
+If you want to contribute to Torrust we think that we could simplify the Containerfile
 if the "su-exec" command were available in Rust. Because we could reuse one of the
 Rust docker images we are using for other docker stages.
 
@@ -737,12 +737,12 @@ Rust docker images we are using for other docker stages.
 
 Finally we can explain line by line what the [Torrust Tracker Containerfile](https://github.com/torrust/torrust-tracker/blob/develop/Containerfile) does.
 
-Rust apps can be build in `debug` or `release` mode. The `Containerfile` builds both
+Rust apps can be built in `debug` or `release` mode. The `Containerfile` builds both
 modes and then it runs the tests for both modes. We have removed the `debug` mode
-to keep the example short. But it's almost the same code. For the `release` mode
+to keep the example short. But it is almost the same code. For the `release` mode
 the flag `--release` is added to some commands.
 
-We can abstract way the stages:
+We can abstract away the stages:
 
 <CodeBlock lang="dockerfile">
 
@@ -757,7 +757,7 @@ FROM rust:slim-bookworm as tester
 
 ## Su Exe Compile
 FROM docker.io/library/gcc:bookworm as gcc
-# Compiles the su-exec program which is used at runtime to change the user running the container.
+# Compile the su-exec program which is used at runtime to change the user running the container.
 
 ## Chef Prepare (look at project and see wat we need)
 FROM chef AS recipe
@@ -844,7 +844,7 @@ RUN cc -Wall -Werror -g /usr/local/src/su-exec/su-exec.c -o /usr/local/bin/su-ex
 From this point, we start building the application. First, we build the dependencies
 and we cache them into an independent stage.
 
-The first stage it's only to "build the recipe" which is the name that `cargo chef`
+The first stage is only to "build the recipe" which is the name that `cargo chef`
 gives to the process of collecting all the information needed to build the application
 dependencies.
 
@@ -864,7 +864,7 @@ Then, cargo dependencies are built using using the recipe created in the previou
 `cargo nextest` has a subcommand to generate and archive the artifact of the build.
 We are using it to package and pass the application from one stage to another.
 
-Dependencies are archived but they are not used independently. That line just test
+Dependencies are archived but they are not used independently. That line just tests
 that the dependencies could be archived.
 
 <CodeBlock lang="dockerfile">
@@ -913,7 +913,7 @@ COPY --from=build \
 RUN cargo nextest run --workspace-remap /test/src/ --extract-to /test/src/ --no-run --archive-file /test/full-example.tar.zst
 # We actually run the tests
 RUN cargo nextest run --workspace-remap /test/src/ --target-dir-remap /test/src/target/ --cargo-metadata /test/src/target/nextest/cargo-metadata.json --binaries-metadata /test/src/target/nextest/binaries-metadata.json
-# We copy the application binary to an specified location so we can get it from
+# We copy the application binary to a specified location so we can get it from
 # there in the final runtime stage.
 RUN mkdir -p /app/bin/; cp -l /test/src/target/release/full-example /app/bin/full-example
 # Since we use su-exec. We need to run the container as root.
@@ -925,7 +925,7 @@ RUN chown -R root:root /app; chmod -R u=rw,go=r,a+X /app; chmod -R a+x /app/bin
 Once the application has been built and tested we prepare the runtime. We start
 from a minimum "distroless" image variant. We add an entrypoint to setup the application
 and also to make sure we don't use the `root` user to run it. The entrypoint just
-run the application provided as an argument, in our case, our application in `debug` or
+runs the application provided as an argument, in our case, our application in `debug` or
 `release` mode, depending of which one you want to run.
 
 <CodeBlock lang="dockerfile">
@@ -960,16 +960,16 @@ CMD ["/usr/bin/full-example"]
 
 ## Other Good Practices
 
-- **Minimalism**: We strive to keep our Dockerfiles lean by only including essential components.
-- **Explicit versions**: At least with the minor version number, so you do not get unexpected broken compatibility but you can apply security and bug patches.
-- **Regular Updates**: Periodically updating the base image and dependencies to benefit from security patches and updates.
-- **Health Checks**: Implementing Docker health checks to monitor the state and health of our containerized application.
+- __Minimalism__: We strive to keep our Dockerfiles lean by only including essential components.
+- __Explicit versions__: At least with the minor version number, so you do not get unexpected broken compatibility but you can apply security and bug patches.
+- __Regular Updates__: Periodically updating the base image and dependencies to benefit from security patches and updates.
+- __Health Checks__: Implementing Docker health checks to monitor the state and health of our containerized application.
 
 ## Other Considerations
 
-- Since we are using `su-exec` we need to run the containers as root. We have not 
-check if this configuration work when you setup docker in [Rootless mode](https://docs.docker.com/engine/security/rootless/).
-- Although we mostly mention docker in this article, the `Containerfile` works
+- Since we are using `su-exec` we need to run the containers as root. We have not
+checked if this configuration works when you setup docker in [Rootless mode](https://docs.docker.com/engine/security/rootless/).
+- Also, although we mostly mention docker in this article, the `Containerfile` works
 with other tools to manage containers like [Podman](https://podman.io/).
 
 ## Links
