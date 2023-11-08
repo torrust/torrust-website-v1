@@ -22,13 +22,13 @@ hidden: false
 
 - [Introduction](#introduction)
 - [Requirements](#requirements)
-- [We Use Docker (OCI) Containers](#we-use-docker-(oci)-containers)
+- [We Use Docker (OCI) Containers](#we-use-docker-oci-containers)
 - [Basic Dockerized Rust Application](#basic-dockerized-rust-application)
 - [Use Multi-Stage Builds to Minimize the Image Size](#use-multi-stage-builds-to-minimize-the-image-size)
 - [Image Variants](#image-variants)
 - [Introduction to Docker Layers Cache](#introduction-to-docker-layers-cache)
 - [Caching Cargo Dependencies](#caching-cargo-dependencies)
-  - [Demonstration of Caching Cargo Dependencies using a Custom Solution](#demonstration-of-caching-cargocdependencies-using-a-custom-solution)
+  - [Demonstration of Caching Cargo Dependencies Using a Custom Solution](#demonstration-of-caching-cargo-dependencies-using-a-custom-solution)
   - [Caching Cargo Dependencies With Cargo Chef](#caching-cargo-dependencies-with-cargo-chef)
 - [Installing Rust Binaries With Cargo Binstall](#installing-rust-binaries-with-cargo-binstall)
 - [Archiving And Reusing Builds With Cargo Nextest](#archiving-and-reusing-builds-with-cargo-nextest)
@@ -53,10 +53,12 @@ In this post, we'll dive deep into the best practices we've adopted for
 dockerizing our Rust applications.
 
 Our [Containerfiles](https://docs.docker.com/engine/reference/builder/), _commonly called a `"Dockerfile"`_, are stored in the roots of our two main rust repositories, for reference:
+
 - Torrust-Tracker [Containerfile](https://github.com/torrust/torrust-tracker/blob/develop/Containerfile).
 - Torrust-Index [Containerfile](https://github.com/torrust/torrust-index/blob/develop/Containerfile).
 
-### Example:
+### Example
+
 All of the examples included in this blog post are publicly available in our "[Containerizing Rust Apps Examples](https://github.com/torrust/containerizing-rust-apps-examples)"
 GitHub Repository.
 
@@ -319,7 +321,7 @@ There are two levels of dependencies:
 - System dependencies. For instance `SQLite`, `curl` and other libraries your application depends on.
 - Rust dependencies. These are the Rust packages that you want to install using cargo. Rust packages are called `crates` and you can find them on <https://crates.io/>
 
-### Demonstration of Caching Cargo Dependencies using a Custom Solution
+### Demonstration of Caching Cargo Dependencies Using a Custom Solution
 
 First we demonstrate how cargo dependencies caching works but showing a custom solution:
 
@@ -537,13 +539,13 @@ You will see it is executed as `root`.
 
 You should not execute containers as `root` because of:
 
-1. **The Principle of Least Privilege**: This is a security concept that encourages the minimal user permission level necessary to perform a task. Running containers as root goes against this principle because if a process inside the container can run with root privileges, it can execute any command inside the container, which could be dangerous if the container gets compromised.
+1. __The Principle of Least Privilege__: This is a security concept that encourages the minimal user permission level necessary to perform a task. Running containers as root goes against this principle because if a process inside the container can run with root privileges, it can execute any command inside the container, which could be dangerous if the container gets compromised.
 
-2. **Host System Vulnerability**: Containers are designed to be isolated from the host system. However, there are ways that a container could potentially interact with the host, particularly if there are misconfigurations or vulnerabilities in the container runtime or the host's kernel. A container running as root might be able to exploit such vulnerabilities to gain control over the host system.
+2. __Host System Vulnerability__: Containers are designed to be isolated from the host system. However, there are ways that a container could potentially interact with the host, particularly if there are misconfigurations or vulnerabilities in the container runtime or the host's kernel. A container running as root might be able to exploit such vulnerabilities to gain control over the host system.
 
-3. **Immutable Infrastructure**: Containers are often used as part of an immutable infrastructure, where container images are pre-built and should not change. Running as root makes it easier to make changes to the running container, which can lead to "configuration drift" and unexpected behavior.
+3. __Immutable Infrastructure__: Containers are often used as part of an immutable infrastructure, where container images are pre-built and should not change. Running as root makes it easier to make changes to the running container, which can lead to "configuration drift" and unexpected behavior.
 
-4. **Accidental Damage**: Even if an attacker does not compromise the container, running as root increases the risk of accidental damage by the container's own applications or administrators. For example, a poorly crafted command could delete critical files or disrupt important processes.
+4. __Accidental Damage__: Even if an attacker does not compromise the container, running as root increases the risk of accidental damage by the container's own applications or administrators. For example, a poorly crafted command could delete critical files or disrupt important processes.
 
 There are some ways to avoid running the container as `root`. We will see all of them.
 
