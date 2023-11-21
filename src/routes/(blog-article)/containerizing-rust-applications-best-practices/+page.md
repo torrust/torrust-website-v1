@@ -4,6 +4,8 @@ slug: containerizing-rust-applications-best-practices
 coverImage: /images/posts/rust-crab-carrying-a-shipping-container.jpeg
 date: 2023-11-09T12:08:04.295Z
 excerpt: Torrust services (Tracker and Index)support docker, we want to ensure that contributors understand our containerfile and we also want to share good practices for containerizing Rust applications.
+contributor: Jose Celano
+contributorSlug: jose-celano
 tags:
   - Documentation
   - Docker
@@ -62,11 +64,11 @@ Our [Containerfiles](https://docs.docker.com/engine/reference/builder/), _common
 All of the examples included in this blog post are publicly available in our "[Containerizing Rust Apps Examples](https://github.com/torrust/containerizing-rust-apps-examples)"
 GitHub Repository.
 
-> ___Please Note:___ The actual `Containerfile` for the **Tracker** and **Index** services builds images for
-both `debug` and `release` modes. For learning purposes we are using a simplified
-version here which only builds the `release` mode:
+> **_Please Note:_** The actual `Containerfile` for the **Tracker** and **Index** services builds images for
+> both `debug` and `release` modes. For learning purposes we are using a simplified
+> version here which only builds the `release` mode:
 
-<CodeBlock lang="dockerfile">
+<CodeBlock lang="dockerfile" id='firstCodeBlock'>
 
 ```dockerfile
 # Extracted example of our Containerfile.
@@ -158,12 +160,11 @@ This allows for administrators who may be interested in our software to quickly 
 
 In addition, our End-to-End testing infrastructure is made easier by using a [docker-compose](https://docs.docker.com/compose/) configuration, that is taking advantage of our docker containers.
 
-
 ## Basic Dockerized Rust Application
 
 The simplest Dockerfile for a Rust application is as follows:
 
-<CodeBlock lang="dockerfile">
+<CodeBlock lang="dockerfile" id='secondCodeBlock'>
 
 ```dockerfile
 # We start from full base defacto Debian image
@@ -178,7 +179,7 @@ CMD ["./target/release/app"]
 
 And you can build the image and run it with:
 
-<CodeBlock lang="console">
+<CodeBlock lang="console" id='thirdCodeBlock'>
 
 ```console
 docker build -t docker-rust-app-basic .
@@ -191,7 +192,7 @@ Hello, world!
 
 That creates a docker image which is **1.39 GB**!.
 
-<CodeBlock lang="console">
+<CodeBlock lang="console" id='fourthCodeBlock'>
 
 ```console
 $ docker image ls | grep docker-rust-app-basic
@@ -212,7 +213,7 @@ final binary in a slim operating system. This image does not contain the common
 packages contained in the default tag and only contains the minimal packages
 needed to run your compiled Rust application.
 
-<CodeBlock lang="dockerfile">
+<CodeBlock lang="dockerfile" id='fifthCodeBlock'>
 
 ```dockerfile
 # This is the first stage. This image is used to compile the Rust application.
@@ -234,7 +235,7 @@ CMD ["app"]
 
 The example is very easy and you can build and run the image with:
 
-<CodeBlock lang="console">
+<CodeBlock lang="console" id='sixthCodeBlock'>
 
 ```console
 docker build -t docker-rust-app-multi-stage .
@@ -331,7 +332,7 @@ We build the application, downloading and building all the dependencies and crea
 Then we build the application. With these layers yo do not need to re-build the dependencies
 when you change the application code.
 
-<CodeBlock lang="dockerfile">
+<CodeBlock lang="dockerfile" id='seventhCodeBlock'>
 
 ```dockerfile
 FROM rust:latest as builder
@@ -363,12 +364,11 @@ CMD ["./target/release/custom-dependencies-cache"]
 
 Instead of this custom solution, we use and recommend [cargo chef](https://github.com/LukeMathWalker/cargo-chef) which is a cargo-subcommand that specializes in speeding up Rust Docker builds using Docker layer caching.
 
-
 ### Caching Cargo Dependencies With Cargo Chef
 
 In this example, we show how to use [cargo chef](https://github.com/LukeMathWalker/cargo-chef), that we prefer to use.
 
-<CodeBlock lang="dockerfile">
+<CodeBlock lang="dockerfile" id='eighthCodeBlock'>
 
 ```dockerfile
 FROM rust:latest as chef
@@ -385,7 +385,7 @@ COPY . .
 
 RUN cargo chef prepare --recipe-path recipe.json
 
-FROM chef AS builder 
+FROM chef AS builder
 
 COPY --from=planner /app/recipe.json recipe.json
 
@@ -404,7 +404,6 @@ CMD ["./target/release/dependencies-cache-with-cargo-chef"]
 
 While it does more or less the same as the custom solution. It caches dependencies in a separate layer and has some other [benefits](https://github.com/LukeMathWalker/cargo-chef#benefits-of-cargo-chef).
 
-
 ## Installing Rust Binaries With Cargo Binstall
 
 `cargo binstall` is a cargo subcommand that allows installing Rust binaries as an alternative to building from source (via cargo install) or manually downloading packages.
@@ -413,7 +412,7 @@ Cargo Binstall repo: <https://github.com/cargo-bins/cargo-binstall>.
 
 We are using it to install `cargo chef` and `cargo nextest` packages easily.
 
-<CodeBlock lang="dockerfile">
+<CodeBlock lang="dockerfile" id='ninthCodeBlock'>
 
 ```dockerfile
 
@@ -454,7 +453,7 @@ We are using it for two reasons:
   the build artifacts and then we extract them in the next stage to run the tests.
   Finally we copy the binary to the final "runtime" stage.
 
-<CodeBlock lang="dockerfile">
+<CodeBlock lang="dockerfile" id='tenthCodeBlock'>
 
 ```dockerfile
 ## First stage to install the nextest tool
@@ -483,7 +482,7 @@ COPY --from=builder \
 # We extract the build artifacts from the archive
 RUN cargo nextest run --workspace-remap /test/src/ --extract-to /test/src/ --no-run --archive-file /test/archiving-and-reusing-builds.tar.zst
 # We run the tests. We override the default target-dir to use the application binary,
-# otherwise it would be created in a temporary directory and we wouldn't be able to 
+# otherwise it would be created in a temporary directory and we wouldn't be able to
 # copy it in the next stage.
 RUN cargo nextest run --workspace-remap /test/src/ --target-dir-remap /test/src/target/ --cargo-metadata /test/src/target/nextest/cargo-metadata.json --binaries-metadata /test/src/target/nextest/binaries-metadata.json
 RUN mkdir -p /app/bin/; cp -l /test/src/target/debug/archiving-and-reusing-builds /app/bin/archiving-and-reusing-builds
@@ -492,7 +491,7 @@ CMD ["/app/bin/archiving-and-reusing-builds"]
 ## Fourth stage to run the application in production
 FROM nextest AS runtime
 WORKDIR /app
-# We take the application binary from the tester stage to ensure the binary we 
+# We take the application binary from the tester stage to ensure the binary we
 # use has passed the tests.
 COPY --from=tester /app/bin/archiving-and-reusing-builds /app/
 CMD ["/app/archiving-and-reusing-builds"]
@@ -512,7 +511,7 @@ for more info.
 
 By default docker is installed and runs containers as `root`. If you build this image:
 
-<CodeBlock lang="dockerfile">
+<CodeBlock lang="dockerfile" id='eleventhCodeBlock'>
 
 ```dockerfile
 FROM rust:latest
@@ -539,19 +538,19 @@ You will see it is executed as `root`.
 
 You should not execute containers as `root` because of:
 
-1. __The Principle of Least Privilege__: This is a security concept that encourages the minimal user permission level necessary to perform a task. Running containers as root goes against this principle because if a process inside the container can run with root privileges, it can execute any command inside the container, which could be dangerous if the container gets compromised.
+1. **The Principle of Least Privilege**: This is a security concept that encourages the minimal user permission level necessary to perform a task. Running containers as root goes against this principle because if a process inside the container can run with root privileges, it can execute any command inside the container, which could be dangerous if the container gets compromised.
 
-2. __Host System Vulnerability__: Containers are designed to be isolated from the host system. However, there are ways that a container could potentially interact with the host, particularly if there are misconfigurations or vulnerabilities in the container runtime or the host's kernel. A container running as root might be able to exploit such vulnerabilities to gain control over the host system.
+2. **Host System Vulnerability**: Containers are designed to be isolated from the host system. However, there are ways that a container could potentially interact with the host, particularly if there are misconfigurations or vulnerabilities in the container runtime or the host's kernel. A container running as root might be able to exploit such vulnerabilities to gain control over the host system.
 
-3. __Immutable Infrastructure__: Containers are often used as part of an immutable infrastructure, where container images are pre-built and should not change. Running as root makes it easier to make changes to the running container, which can lead to "configuration drift" and unexpected behavior.
+3. **Immutable Infrastructure**: Containers are often used as part of an immutable infrastructure, where container images are pre-built and should not change. Running as root makes it easier to make changes to the running container, which can lead to "configuration drift" and unexpected behavior.
 
-4. __Accidental Damage__: Even if an attacker does not compromise the container, running as root increases the risk of accidental damage by the container's own applications or administrators. For example, a poorly crafted command could delete critical files or disrupt important processes.
+4. **Accidental Damage**: Even if an attacker does not compromise the container, running as root increases the risk of accidental damage by the container's own applications or administrators. For example, a poorly crafted command could delete critical files or disrupt important processes.
 
 There are some ways to avoid running the container as `root`. We will see all of them.
 
 ### Use the `USER` instruction
 
-<CodeBlock lang="dockerfile">
+<CodeBlock lang="dockerfile" id='thirteenthCodeBlock'>
 
 ```dockerfile
 FROM rust:latest
@@ -582,7 +581,7 @@ www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
 
 But you can also create a specific user for your application:
 
-<CodeBlock lang="dockerfile">
+<CodeBlock lang="dockerfile" id='fifteenthCodeBlock'>
 
 ```dockerfile
 FROM rust:latest
@@ -623,7 +622,7 @@ in the host system, whatever it is the name of that user in the host machine.
 
 You can also overwrite the user running the container with the argument `--user`:
 
-<CodeBlock lang="console">
+<CodeBlock lang="console" id='sixteenthCodeBlock'>
 
 ```console
 docker run --user www-data --rm -it docker-rust-app-running-with-root whoami
@@ -637,11 +636,11 @@ executed as the `www-data` user.
 
 Notice you can even use a non-existing user in both the host and the docker image.
 
-<CodeBlock lang="console">
+<CodeBlock lang="console" id='seventeenthCodeBlock'>
 
 ```console
 $ docker run --user 1001 --rm -it docker-rust-app-running-with-root bash
-I have no name!@895b0f6a3dbb:/app$ 
+I have no name!@895b0f6a3dbb:/app$
 ```
 
 </CodeBlock>
@@ -651,24 +650,24 @@ ID at build time (when you build the docker image). You usually want to run the
 container in different environments and sometimes you want to use a different
 user ID for each environment. For example:
 
-- __For development__: If you are using Ubuntu, your user ID is probably `1000`. When
-you run the container locally you want to run it using that ID, so that you don't
-have any problems with permissions.
-- __For CI__: The servers you are using for continuous integration (for instance, GitHub runners)
-might use an specif user. You could use some cache folders and maybe you need to
-use the same user ID as the CI server.
-- __For production__: You could create a specific user for your application and use that
-user ID.
+- **For development**: If you are using Ubuntu, your user ID is probably `1000`. When
+  you run the container locally you want to run it using that ID, so that you don't
+  have any problems with permissions.
+- **For CI**: The servers you are using for continuous integration (for instance, GitHub runners)
+  might use an specif user. You could use some cache folders and maybe you need to
+  use the same user ID as the CI server.
+- **For production**: You could create a specific user for your application and use that
+  user ID.
 
 With the proposed solutions you would need to rebuild the docker image so that the
 user ID inside the container is the same as the host user ID.
 
 ### Create The User At Runtime
 
-There is al alternative to the previous solutions that makes it possible to __run the
-container with different user IDs without rebuilding the image__.
+There is al alternative to the previous solutions that makes it possible to **run the
+container with different user IDs without rebuilding the image**.
 
-<CodeBlock lang="dockerfile">
+<CodeBlock lang="dockerfile" id='eighteenthCodeBlock'>
 
 ```dockerfile
 
@@ -708,7 +707,7 @@ defined as an `ENTRYPOINT`. This "middleware" script creates the user if it does
 not exist, and then runs the application using the [su-exec](https://github.com/ncopa/su-exec)
 program to change the user ID it is executed with.
 
-__For those who are interested here is our: [entry script](https://github.com/torrust/torrust-tracker/blob/develop/share/container/entry_script_sh).__
+**For those who are interested here is our: [entry script](https://github.com/torrust/torrust-tracker/blob/develop/share/container/entry_script_sh).**
 
 As you can read on the su-exec documentation:
 
@@ -746,7 +745,7 @@ the flag `--release` is added to some commands.
 
 We can abstract away the stages:
 
-<CodeBlock lang="dockerfile">
+<CodeBlock lang="dockerfile" id='nineteenthCodeBlock'>
 
 ```dockerfile
 ## Base Builder Image
@@ -776,7 +775,7 @@ FROM dependencies AS build
 # Extract and Test (release)
 FROM tester as test
 # Extract the application from the archived artifacts and run the tests.
-# And copy the binary to an specified location so it can be used in the `release` 
+# And copy the binary to an specified location so it can be used in the `release`
 # stage.
 
 ## Runtime
@@ -796,7 +795,7 @@ Let's see each stage individually.
 
 First, we have a base builder image where we install basic tools to build the application.
 
-<CodeBlock lang="dockerfile">
+<CodeBlock lang="dockerfile" id='twentiethCodeBlock'>
 
 ```dockerfile
 ## Base Builder Image
@@ -829,10 +828,10 @@ RUN cargo binstall --no-confirm cargo-nextest
 
 </CodeBlock>
 
-The following is another stage used just to compile the small program [su-exec](https://github.com/ncopa/su-exec) that we use to change the user ID when we run the container. The program is written 
+The following is another stage used just to compile the small program [su-exec](https://github.com/ncopa/su-exec) that we use to change the user ID when we run the container. The program is written
 in C code, so we only need a C compiler.
 
-<CodeBlock lang="dockerfile">
+<CodeBlock lang="dockerfile" id='twentySecondCodeBlock'>
 
 ```dockerfile
 ## Su Exe Compile
@@ -850,7 +849,7 @@ The first stage is only to "build the recipe" which is the name that `cargo chef
 gives to the process of collecting all the information needed to build the application
 dependencies.
 
-<CodeBlock lang="dockerfile">
+<CodeBlock lang="dockerfile" id='twentyThirdCodeBlock'>
 
 ```dockerfile
 ## Chef Prepare (look at project and see wat we need)
@@ -869,7 +868,7 @@ We are using it to package and pass the application from one stage to another.
 Dependencies are archived but they are not used independently. That line just tests
 that the dependencies could be archived.
 
-<CodeBlock lang="dockerfile">
+<CodeBlock lang="dockerfile" id='twentyFourthCodeBlock'>
 
 ```dockerfile
 ## Cook (release)
@@ -885,7 +884,7 @@ RUN cargo nextest archive --tests --benches --examples --workspace --all-targets
 In the following stage we build the application. The `cargo nextest archive` command builds
 and archives the application.
 
-<CodeBlock lang="dockerfile">
+<CodeBlock lang="dockerfile" id='twentyFifthCodeBlock'>
 
 ```dockerfile
 ## Build Archive (release)
@@ -900,7 +899,7 @@ RUN cargo nextest archive --tests --benches --examples --workspace --all-targets
 Now, that we have successfully built the application, we can run the tests. We
 extract the application from the archived artifacts and run the tests.
 
-<CodeBlock lang="dockerfile">
+<CodeBlock lang="dockerfile" id='twentySixthCodeBlock'>
 
 ```dockerfile
 ## Extract and Test (release)
@@ -930,7 +929,7 @@ and also to make sure we don't use the `root` user to run it. The entrypoint jus
 runs the application provided as an argument, in our case, our application in `debug` or
 `release` mode, depending of which one you want to run.
 
-<CodeBlock lang="dockerfile">
+<CodeBlock lang="dockerfile" id='twentySeventhCodeBlock'>
 
 ```dockerfile
 ## Runtime
@@ -962,17 +961,17 @@ CMD ["/usr/bin/full-example"]
 
 ## Other Good Practices
 
-- __Minimalism__: We strive to keep our Dockerfiles lean by only including essential components.
-- __Explicit versions__: At least with the minor version number, so you do not get unexpected broken compatibility but you can apply security and bug patches.
-- __Regular Updates__: Periodically updating the base image and dependencies to benefit from security patches and updates.
-- __Health Checks__: Implementing Docker health checks to monitor the state and health of our containerized application.
+- **Minimalism**: We strive to keep our Dockerfiles lean by only including essential components.
+- **Explicit versions**: At least with the minor version number, so you do not get unexpected broken compatibility but you can apply security and bug patches.
+- **Regular Updates**: Periodically updating the base image and dependencies to benefit from security patches and updates.
+- **Health Checks**: Implementing Docker health checks to monitor the state and health of our containerized application.
 
 ## Other Considerations
 
 - Since we are using `su-exec` we need to run the containers as root. We have not
-checked if this configuration works when you setup docker in [Rootless mode](https://docs.docker.com/engine/security/rootless/).
+  checked if this configuration works when you setup docker in [Rootless mode](https://docs.docker.com/engine/security/rootless/).
 - Also, although we mostly mention docker in this article, the `Containerfile` works
-with other tools to manage containers like [Podman](https://podman.io/).
+  with other tools to manage containers like [Podman](https://podman.io/).
 
 ## Links
 

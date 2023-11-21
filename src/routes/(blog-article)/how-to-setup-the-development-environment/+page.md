@@ -4,6 +4,8 @@ slug: how-to-setup-the-development-environment
 coverImage: /images/posts/development-environment.png
 date: 2023-07-11T12:29:04.295Z
 excerpt: If you want to contribute to the Torrust Index, this article explains how to setup a development environment with the latest versions for all services.
+contributor: Jose Celano
+contributorSlug: jose-celano
 tags:
   - Documentation
   - Tutorial
@@ -44,7 +46,7 @@ Setting up the development environment requires to setup the three main services
 
 First at all, we need to clone the repositories of the three services. We will clone them in a temporarily folder so you can follow this guide.
 
-<CodeBlock lang="terminal">
+<CodeBlock lang="terminal" id='firstCodeBlock'>
 
 ```s
 mkdir -p ~/Tmp/torrust
@@ -64,7 +66,7 @@ git clone git@github.com:torrust/torrust-index-frontend.git
 
 If you are using SQLite3 as database driver for the Tracker or the Backend, you will need to install the following dependency:
 
-<CodeBlock lang="terminal">
+<CodeBlock lang="terminal" id='secondCodeBlock'>
 
 ```bash
 sudo apt-get install libsqlite3-dev
@@ -80,7 +82,7 @@ At the time of writing, the Torrust Tracker requires:
 
 You can run the Tracker with the following commands:
 
-<CodeBlock lang="terminal">
+<CodeBlock lang="terminal" id='thirdCodeBlock'>
 
 ```s
 cd torrust-tracker/
@@ -101,7 +103,7 @@ The install script will generate:
 
 After running the Tracker with `cargo run` you should see the following output:
 
-<CodeBlock lang="output">
+<CodeBlock lang="output" id='fourthCodeBlock'>
 
 ```s
     Finished dev [optimized + debuginfo] target(s) in 0.06s
@@ -116,7 +118,7 @@ Loading configuration from config file ./config.toml
 
 By default, only the API is enabled, if you want to enable the HTTP or UDP trackers, you need to change the `enabled` value in the `./config.toml` file.
 
-<CodeBlock lang="toml">
+<CodeBlock lang="toml" id='fifthCodeBlock'>
 
 ```toml
 [[udp_trackers]]
@@ -140,7 +142,7 @@ Notice we have used the default API token, which is <code>MyAccessToken</code>. 
 
 The response should be like this:
 
-<CodeBlock lang="json">
+<CodeBlock lang="json" id='sixthCodeBlock'>
 
 ```json
 {
@@ -175,7 +177,7 @@ At the time of writing, the Backend requires:
 
 To run the tests you will also need to install a command line tool to handle torrent files called [imdl](https://github.com/casey/intermodal). You can install it with the following command:
 
-<CodeBlock lang="terminal">
+<CodeBlock lang="terminal" id='seventhCodeBlock'>
 
 ```bash
 cargo install imdl
@@ -185,7 +187,7 @@ cargo install imdl
 
 You will also need to install a tool for database migrations if you are going to make changes to the database schema. We are using [SQLx](https://github.com/launchbadge/sqlx). You can install it with the following command:
 
-<CodeBlock lang="terminal">
+<CodeBlock lang="terminal" id='eighthCodeBlock'>
 
 ```bash
 cargo install sqlx-cli
@@ -195,7 +197,7 @@ cargo install sqlx-cli
 
 If you are using SQLite3 as database driver, you will need to install the following dependency:
 
-<CodeBlock lang="terminal">
+<CodeBlock lang="terminal" id='ninthCodeBlock'>
 
 ```bash
 sudo apt-get install libsqlite3-dev
@@ -205,7 +207,7 @@ sudo apt-get install libsqlite3-dev
 
 You can run the Tracker Backend with the following commands:
 
-<CodeBlock lang="terminal">
+<CodeBlock lang="terminal" id='tenthCodeBlock'>
 
 ```bash
 cd torrust-index-backend/
@@ -223,7 +225,7 @@ As you can see we are using the environment variable `TORRUST_IDX_BACK_CORS_PERM
 
 After running the Backend with `cargo run` you should see the following output:
 
-<CodeBlock lang="output">
+<CodeBlock lang="output" id='eleventhCodeBlock'>
 
 ```s
 2023-07-11T11:54:17.553899587+01:00 [torrust_index_backend::web::api::server][INFO] Starting API server with net config: 0.0.0.0:3001 ...
@@ -248,7 +250,7 @@ The frontend is a [Nuxt](https://nuxt.com/) application.
 
 You can run the Tracker Frontend with the following commands:
 
-<CodeBlock lang="terminal">
+<CodeBlock lang="terminal" id='twelfthCodeBlock'>
 
 ```bash
 cd torrust-index-frontend/
