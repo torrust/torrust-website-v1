@@ -5,26 +5,16 @@
 
 <Header showBackground />
 
-<div class="contributor-biography">
+<div class="contributors">
 	<h1>Contributors</h1>
 	<slot />
 </div>
 
 <Footer />
 
-<style>
-	.contributor-biography {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		text-align: center;
-		max-width: 700px;
-		margin: 0 auto;
-		margin-top: 2rem;
-		line-height: 1.5;
-	}
-
+<style lang="scss">
 	h1 {
-		margin-bottom: 1rem;
+		margin-block: 1rem;
+		text-align: center;
 	}
 </style>

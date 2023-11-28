@@ -64,14 +64,19 @@
 	.contributors {
 		display: flex;
 		flex-direction: column;
-		gap: 2rem;
-		align-items: center;
+		justify-content: space-between;
+		text-align: center;
+		max-width: 700px;
+		margin: 0 auto;
+		margin-top: 2rem;
+		line-height: 1.5;
 	}
 
 	.contributor {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		margin-bottom: 1rem;
 	}
 
 	.contributor-image {
