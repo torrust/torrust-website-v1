@@ -8,7 +8,8 @@
 	export let title: string;
 	export let coverImage: string | undefined = undefined;
 	export let tags: string[] | undefined = undefined;
-	export let repo: string | undefined = undefined;
+	export let repoURL: string | undefined = undefined;
+	export let repoName: string | undefined = undefined;
 
 	export let showImage = true;
 
@@ -17,9 +18,9 @@
 	export let stars: number | null = null;
 
 	async function getStars() {
-		if (repo) {
+		if (repoName) {
 			try {
-				const response = await fetch(`https://api.github.com/repos/${repo}`);
+				const response = await fetch(`https://api.github.com/repos/${repoName}`);
 				const data = await response.json();
 				if (data.stargazers_count) {
 					stars = data.stargazers_count;
@@ -46,10 +47,10 @@
 		<p class="note">
 			<Star /> GitHub Stars: {stars !== null ? stars : 'Loading...'}
 		</p>
-		{#if repo}
-			<a class="note" href={repo} target="_blank" rel="noopener noreferrer">
+		{#if repoURL}
+			<a class="note" href={repoURL} target="_blank" rel="noopener noreferrer">
 				<GitHubIcon />
-				{repo.replace('https://github.com/', '')}
+				{repoURL.replace('https://github.com/', '')}
 			</a>
 		{/if}
 		<div class="text">

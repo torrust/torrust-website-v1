@@ -23,7 +23,11 @@
 
 <ContentSection id="project-structure" title="Project Structure">
 	<div class="grid">
-		<ProjectCard title="Torrust Tracker" repo="torrust/torrust-tracker">
+		<ProjectCard
+			title="Torrust Tracker"
+			repoURL="https://github.com/torrust/torrust-tracker"
+			repoName="torrust/torrust-tracker"
+		>
 			<div class="project-content" slot="content">
 				<p>
 					Torrust Tracker is a lightweight but incredibly high-performance and feature-rich
@@ -47,7 +51,11 @@
 			</div>
 		</ProjectCard>
 
-		<ProjectCard title="Torrust Index" repo="torrust/torrust-index">
+		<ProjectCard
+			title="Torrust Index"
+			repoURL="https://github.com/torrust/torrust-index"
+			repoName="torrust/torrust-index"
+		>
 			<div class="project-content" slot="content">
 				<p>
 					The Torrust Index is a feature-rich torrent indexing website and API for the Torrust
