@@ -16,6 +16,7 @@
 				tags={post.tags}
 				readingTime={post.readingTime}
 				showImage={false}
+				date={post.date}
 			/>
 		{/each}
 	</div>
