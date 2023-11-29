@@ -1,7 +1,3 @@
----
-date: 2023-07-11T12:28:44.499Z
-updated: 2023-07-11T12:28:45.984Z
----
 <script lang="ts">
 	import Header from '$lib/components/organisms/Header.svelte';
 	import Footer from '$lib/components/organisms/Footer.svelte';
@@ -62,6 +58,11 @@ updated: 2023-07-11T12:28:45.984Z
 					{/if}
 					{#if post.readingTime}
 						<div class="note">{post.readingTime}</div>
+					{/if}
+					{#if post.contributor}
+						<div>
+							<span>By: </span><a href="/{post.contributorSlug}">{post.contributor}</a>
+						</div>
 					{/if}
 					{#if post.tags?.length}
 						<div class="tags">
