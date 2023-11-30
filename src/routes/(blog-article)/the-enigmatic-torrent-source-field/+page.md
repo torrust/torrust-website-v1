@@ -4,6 +4,8 @@ slug: the-enigmatic-torrent-source-field
 coverImage: /images/posts/deprecated-and-outdated-bittorrent-documentation.png
 date: 2023-08-08T13:56:28.769Z
 excerpt: Delving into BitTorrent’s Mysteries. What is the "source" field in the torrent info used for?
+contributor: Jose Celano
+contributorSlug: jose-celano
 tags:
   - BitTorrent
   - Protocol

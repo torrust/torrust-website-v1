@@ -1,13 +1,14 @@
 <script lang="ts">
 	import ContentSection from '$lib/components/organisms/ContentSection.svelte';
 	import ContributionCard from '../molecules/ContributionCard.svelte';
+
+	let contributingDescription = `
+		We welcome contributions from the <a href="/contributors">community</a>!
+		There are many ways in which you can contribute.
+	`;
 </script>
 
-<ContentSection
-	id="contributing"
-	title="How to Contribute"
-	description="We welcome contributions from the community! There are many ways in which you can contribute."
->
+<ContentSection id="contributing" title="How to Contribute" description={contributingDescription}>
 	<div class="wrapper">
 		<div class="grid">
 			<ContributionCard

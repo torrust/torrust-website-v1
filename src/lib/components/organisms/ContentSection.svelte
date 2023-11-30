@@ -17,7 +17,7 @@
 				{/if}
 				{#if description}
 					<p>
-						{description}
+						{@html description}
 					</p>
 				{/if}
 			</div>

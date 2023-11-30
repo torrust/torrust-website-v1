@@ -3,13 +3,33 @@
 	import Tag from '$lib/components/atoms/Tag.svelte';
 	import Image from '$lib/components/atoms/Image.svelte';
 	import GitHubIcon from '$lib/icons/socials/github.svelte';
+	import Star from '$lib/icons/star.svelte';
+	import { onMount } from 'svelte';
 
 	export let title: string;
 	export let coverImage: string | undefined = undefined;
 	export let tags: string[] | undefined = undefined;
-	export let repo: string | undefined = undefined;
+	export let repoURL: string | undefined = undefined;
+	export let repoName: string | undefined = undefined;
 
 	export let showImage = true;
+	export let stars: number | null = null;
+
+	async function getStars() {
+		if (repoName) {
+			try {
+				const response = await fetch(`https://api.github.com/repos/${repoName}`);
+				const data = await response.json();
+				if (data.stargazers_count) {
+					stars = data.stargazers_count;
+				}
+			} catch (error) {
+				console.error('Error fetching GitHub stars:', error);
+			}
+		}
+	}
+
+	onMount(getStars);
 </script>
 
 <Card additionalClass="project-card {!showImage || !coverImage ? 'no-image' : ''}">
@@ -22,12 +42,15 @@
 		<p class="title">
 			{title}
 		</p>
-		{#if repo}
-			<a class="note" href={repo} target="_blank" rel="noopener noreferrer">
+		{#if repoURL}
+			<a class="note" href={repoURL} target="_blank" rel="noopener noreferrer">
 				<GitHubIcon />
-				{repo.replace('https://github.com/', '')}
+				{repoURL.replace('https://github.com/', '')}
 			</a>
 		{/if}
+		<p class="note">
+			<Star /> GitHub Stars: {stars !== null ? stars : ''}
+		</p>
 		<div class="text">
 			<slot name="content" />
 		</div>
@@ -72,8 +95,8 @@
 	.note {
 		font-size: 0.9rem;
 		color: rgba(var(--color--text-rgb), 0.8);
-		margin-bottom: 10px;
-		margin-top: 5px;
+		margin-bottom: 2px;
+		margin-top: 2px;
 
 		&:not(:hover) {
 			text-decoration-color: transparent;

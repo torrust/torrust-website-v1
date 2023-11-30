@@ -35,4 +35,6 @@ export type BlogPost = {
 	readingTime: string;
 	relatedPosts: BlogPost[];
 	coverImage: string | undefined;
+	contributorSlug: string;
+	contributor: string;
 };
