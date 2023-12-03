@@ -15,7 +15,7 @@
 	export let showImage = true;
 	export let stars: number | null = null;
 
-	async function getStars() {
+	async function getStars(repoName: string) {
 		if (repoName) {
 			try {
 				const response = await fetch(`https://api.github.com/repos/${repoName}`);
@@ -29,7 +29,11 @@
 		}
 	}
 
-	onMount(getStars);
+	onMount(() => {
+		if (repoName) {
+			getStars(repoName);
+		}
+	});
 </script>
 
 <Card additionalClass="project-card {!showImage || !coverImage ? 'no-image' : ''}">

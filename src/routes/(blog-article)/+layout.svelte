@@ -2,7 +2,7 @@
 	import Header from '$lib/components/organisms/Header.svelte';
 	import Footer from '$lib/components/organisms/Footer.svelte';
 	import Tag from '$lib/components/atoms/Tag.svelte';
-	import dateformat from 'dateformat';
+	import { formatDate } from '$lib/utils/date';
 
 	import { keywords, siteBaseUrl, title } from '$lib/data/meta';
 	import type { BlogPost } from '$lib/utils/types';
@@ -52,9 +52,9 @@
 			<div class="header">
 				{#if post}
 					<h1>{post.title}</h1>
-					<div class="note">Published on {dateformat(post.date, 'UTC:dd mmmm yyyy')}</div>
+					<div class="note">Published on {formatDate(post.date)}</div>
 					{#if post.updated}
-						<div class="note">Updated on {dateformat(post.updated, 'UTC:dd mmmm yyyy')}</div>
+						<div class="note">Updated on {formatDate(post.updated)}</div>
 					{/if}
 					{#if post.readingTime}
 						<div class="note">{post.readingTime}</div>
