@@ -1,6 +1,6 @@
 import { description, siteBaseUrl, title } from '$lib/data/meta';
 import type { BlogPost } from '$lib/utils/types';
-import dateformat from 'dateformat';
+import { formatDate, formatTime } from '$lib/utils/date';
 import { filterPosts, importPosts } from '$lib/data/blog-posts/utils';
 
 export const prerender = true;
@@ -48,7 +48,7 @@ const xml = (posts: BlogPost[]) => `
           <title>${post.title}</title>
           <description>${post.excerpt}</description>
           <link>${siteBaseUrl}/${post.slug}</link>
-          <pubDate>${dateformat(post.date, 'ddd, dd mmm yyyy HH:MM:ss o')}</pubDate>
+          <pubDate>${formatDate(post.date)} ${formatTime(post.date)}</pubDate>
           ${post.tags ? post.tags.map((tag) => `<category>${tag}</category>`).join('') : ''}
           <content:encoded><![CDATA[
             <div style="margin: 50px 0; font-style: italic;">
