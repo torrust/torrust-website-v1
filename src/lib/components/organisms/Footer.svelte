@@ -12,7 +12,7 @@
 	<div class="content">
 		<div class="copyright">
 			This project was a joint effort by <a href="https://nautilus-cyberneering.de/" target="_blank"
-				>Nautilus Cyberneering GmbH</a
+				>Nautilus Cyberneering SLU</a
 			>, <a href="https://dutchbits.nl/" target="_blank">Dutch Bits</a> and collaborators.
 		</div>
 		<div class="credits">

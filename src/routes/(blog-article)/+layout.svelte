@@ -120,6 +120,7 @@
 		}
 
 		@include for-tablet-landscape-up {
+			--main-column-width: 100ch;
 			padding-right: 30px;
 			padding-left: 30px;
 		}
