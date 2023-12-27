@@ -8,6 +8,7 @@
 	import type { BlogPost } from '$lib/utils/types';
 	import RelatedPosts from '$lib/components/organisms/RelatedPosts.svelte';
 	import Image from '$lib/components/atoms/Image.svelte';
+	import CopyCodeInjector from '$lib/components/atoms/CopyCodeInjector.svelte';
 
 	export let data: { post: BlogPost };
 	$: ({ post } = data);
@@ -22,6 +23,8 @@
 			metaKeywords = post.keywords.concat(metaKeywords);
 		}
 	}
+
+	
 </script>
 
 <svelte:head>
@@ -46,7 +49,6 @@
 
 <div class="article-layout">
 	<Header showBackground />
-
 	<main>
 		<article id="article-content">
 			<div class="header">
@@ -79,7 +81,9 @@
 				</div>
 			{/if}
 			<div class="content">
-				<slot />
+				<CopyCodeInjector>
+					<slot />
+				</CopyCodeInjector>
 			</div>
 		</article>
 
