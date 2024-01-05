@@ -19,6 +19,7 @@
 	},
 	"devDependencies": {
 		"@histoire/plugin-svelte": "^0.16.1",
+		"@iconify/svelte": "^3.1.6",
 		"@sveltejs/adapter-static": "^2.0.1",
 		"@sveltejs/kit": "^1.22.4",
 		"@typescript-eslint/eslint-plugin": "^6.3.0",
