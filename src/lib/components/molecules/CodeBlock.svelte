@@ -7,16 +7,16 @@
 	let showCheckmark: boolean = false;
 
 	async function copyToClipboard() {
-        try {
+       try {
             const codeContent = codeBlockElement.textContent || '';
             await navigator.clipboard.writeText(codeContent);
-			showCheckmark = true
+			      showCheckmark = true
 
-			setTimeout(() => showCheckmark = false, 1000);
-        } catch (err) {
+			      setTimeout(() => showCheckmark = false, 1000);
+       } catch (err) {
             console.error('Failed to copy: ', err);
-        }
-    }
+       }
+  }
 </script>
 
 <div class="code-block" class:full-bleed={fullBleed} bind:this={codeBlockElement}>
