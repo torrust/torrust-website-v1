@@ -1,17 +1,37 @@
 <script lang="ts">
+    import { onMount } from 'svelte';
+
 	export let filename: string;
 	export let lang: string;
 	export let fullBleed: boolean | undefined = undefined;
+	let codeBlockElement;
+
+	onMount(() => {
+        // You can perform additional initializations here if needed
+    });
+
+    async function copyToClipboard() {
+        try {
+            const codeContent = codeBlockElement.textContent || ''; // Get text content
+            await navigator.clipboard.writeText(codeContent);
+            // Add UI feedback here if desired
+        } catch (err) {
+            console.error('Failed to copy: ', err);
+        }
+    }
 </script>
 
-<div class="code-block" class:full-bleed={fullBleed}>
+<div class="code-block" class:full-bleed={fullBleed} bind:this={codeBlockElement}>
 	{#if filename}
 		<div class="filename">{filename}</div>
 	{/if}
 	{#if lang}
 		<div class="lang">{lang}</div>
 	{/if}
-	<slot />
+	<button class="copy-button" on:click={copyToClipboard}>Copy</button>
+	<div class="code-content">
+	    <slot />
+	</div>
 </div>
 
 <style lang="scss">
