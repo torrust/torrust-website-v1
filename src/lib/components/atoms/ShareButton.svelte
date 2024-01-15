@@ -1,24 +1,30 @@
 <script lang="ts">
     import Icon from '@iconify/svelte';
+    import { siteBaseUrl } from '$lib/data/meta';
+
     export let slug: string;
+    export let title: string;
+
+    const encodedSubject = encodeURIComponent("I wanted you to see this blog post");
+    const encodedSlug = encodeURIComponent(slug);
   
     const socialLinks = [
       {
         icon: "devicon:linkedin",
-        href: `http://www.linkedin.com/shareArticle?mini=true&url=https://torrust.com/${slug}`
+        href: `http://www.linkedin.com/shareArticle?mini=true&url=${siteBaseUrl}/${encodedSlug}`
       },
       {
         icon: "devicon:facebook",
-        href: `https://www.facebook.com/sharer.php?u=https://torrust.com/${slug}`
+        href: `https://www.facebook.com/sharer.php?u=${siteBaseUrl}/${encodedSlug}`
       },
       {
         icon: "ri:twitter-x-fill",
-        href: `https://twitter.com/share?url=https://torrust.com/${slug}`,
+        href: `https://twitter.com/share?url=${siteBaseUrl}/${encodedSlug}&text=${title}`,
         color: "#000000"
       },
       {
         icon: "ic:outline-mail",
-        href: `mailto:?subject=I wanted you to see this blog post&body=Check out this blog post https://torrust.com/${slug}`,
+        href: `mailto:?subject=${encodedSubject}&body='${title}' is a really interesting blog post from Torrust. Check it out here: ${siteBaseUrl}/${encodedSlug}`,
         color: "#1877f2"
       }
     ];
