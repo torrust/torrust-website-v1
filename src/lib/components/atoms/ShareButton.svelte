@@ -6,9 +6,9 @@
     export let title: string;
 
     const encodedSubject = encodeURIComponent("I wanted you to see this blog post");
-    const encodedSlug = encodeURIComponent(slug);
     const encodedTitle = encodeURIComponent(title);
-    const encodedBody = encodeURIComponent(" is a really interesting blog post from Torrust. Check it out here: ");
+    const encodedBody = encodeURIComponent(`${title} is a really interesting blog post from Torrust. Check it out here: ${siteBaseUrl}/${slug}`)
+    const encodedSlug = encodeURIComponent(slug);
   
     const socialLinks = [
       {
@@ -26,7 +26,7 @@
       },
       {
         icon: "ic:outline-mail",
-        href: `mailto:?subject=${encodedSubject}&body=${encodedTitle}${encodedBody}${siteBaseUrl}/${encodedSlug}`,
+        href: `mailto:?subject=${encodedSubject}&body=${encodedBody}`,
         color: "#1877f2"
       }
     ];
