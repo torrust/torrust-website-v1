@@ -65,7 +65,7 @@
 							<span>By: </span><a href="/{post.contributorSlug}">{post.contributor}</a>
 						</div>
 					{/if}
-					<ShareButton slug={post.slug} />
+					<ShareButton title={post.title} slug={post.slug} />
 					{#if post.tags?.length}
 						<div class="tags">
 							{#each post.tags as tag}

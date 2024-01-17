@@ -13,6 +13,7 @@ containerfile
 Containerfiles
 Datacenter
 dearmor
+devicon
 Dibert
 Diffie
 distroless
