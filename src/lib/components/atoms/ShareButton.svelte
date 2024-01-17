@@ -9,6 +9,10 @@
     const encodedTitle = encodeURIComponent(title);
     const encodedBody = encodeURIComponent(`${title} is a really interesting blog post from Torrust. Check it out here: ${siteBaseUrl}/${slug}`)
     const encodedSlug = encodeURIComponent(slug);
+
+    const unescapedHref = (href: string) => {
+    	return href;
+    };
   
     const socialLinks = [
       {
@@ -34,7 +38,7 @@
   
 <div class="link-container">
     {#each socialLinks as { icon, href, color }}
-        <a {href} target="_blank" rel="noopener noreferrer">
+        <a href={unescapedHref(href)}  target="_blank" rel="noopener noreferrer">
             <Icon {icon} width="30" height="30" {color} />
         </a>
     {/each}
