@@ -3,6 +3,7 @@
 	import Footer from '$lib/components/organisms/Footer.svelte';
 	import Tag from '$lib/components/atoms/Tag.svelte';
 	import { formatDate } from '$lib/utils/date';
+	import ShareButton from '$lib/components/atoms/ShareButton.svelte';
 
 	import { keywords, siteBaseUrl, title } from '$lib/data/meta';
 	import type { BlogPost } from '$lib/utils/types';
@@ -64,6 +65,7 @@
 							<span>By: </span><a href="/{post.contributorSlug}">{post.contributor}</a>
 						</div>
 					{/if}
+					<ShareButton slug={post.slug} />
 					{#if post.tags?.length}
 						<div class="tags">
 							{#each post.tags as tag}
