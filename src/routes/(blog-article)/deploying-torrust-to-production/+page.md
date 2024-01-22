@@ -17,7 +17,13 @@ hidden: false
   import Callout from "$lib/components/molecules/Callout.svelte";
   import CodeBlock from "$lib/components/molecules/CodeBlock.svelte";
   import Image from "$lib/components/atoms/Image.svelte";
+  import PostBody from "$lib/components/molecules/PostBody.svelte";
+  import PostContainer from "$lib/components/molecules/PostContainer.svelte";
+  import PostTable from "$lib/components/molecules/PostTable.svelte";
 </script>
+
+<PostContainer>
+<PostTable>
 
 ## Table of Contents
 
@@ -46,6 +52,10 @@ hidden: false
 - [Links](links)
 - [Conclusion](#conclusion)
 
+</PostTable>
+
+<PostBody>
+
 ## Introduction
 
 Welcome to our guide on deploying a BitTorrent Index and Tracker. We'll walk you through each step, explaining the process in a user-friendly manner, so you can understand the magic behind hosting a powerful, Rust-based application on the cloud.
@@ -63,7 +73,7 @@ This tutorial is based on the Digital Ocean tutorial:
 
 [How To Secure a Containerized Node.js Application with Nginx, Let's Encrypt, and Docker Compose](https://www.digitalocean.com/community/tutorials/how-to-secure-a-containerized-node-js-application-with-nginx-let-s-encrypt-and-docker-compose).
 
-We have only changed the docker compose configuration and some steps to configure the __Torrust Index and Tracker__ instead of
+We have only changed the docker compose configuration and some steps to configure the **Torrust Index and Tracker** instead of
 the sample node application.
 
 After finishing this tutorial you will have these public services available (with your own domain):
@@ -86,10 +96,10 @@ We will explain how to install the required dependencies in the Ubuntu server.
 
 A Digital Ocean Droplet with a configuration similar to this:
 
-- __Datacenter__: Frankfurt (FRA1).
-- __Image__: Ubuntu 22.04 (LTS) x64.
-- __Droplet Type__: Shared CPU (Basic).
-- __CPU options__: Regular (Disk Type: SSD).
+- **Datacenter**: Frankfurt (FRA1).
+- **Image**: Ubuntu 22.04 (LTS) x64.
+- **Droplet Type**: Shared CPU (Basic).
+- **CPU options**: Regular (Disk Type: SSD).
 
 Resources:
 
@@ -282,10 +292,10 @@ You can execute queries to get the Tracker or Index data connecting with:
 <CodeBlock lang="bash">
 
 ```bash
-$ sqlite3 ./storage/index/lib/database/sqlite3.db 
+$ sqlite3 ./storage/index/lib/database/sqlite3.db
 SQLite version 3.37.2 2022-01-06 13:25:41
 Enter ".help" for usage hints.
-sqlite> 
+sqlite>
 ```
 
 </CodeBlock>
@@ -359,7 +369,7 @@ After cloning the repository you have to run the install script:
 <CodeBlock lang="bash">
 
 ```bash
-$ ./bin/install.sh 
+$ ./bin/install.sh
 Creating compose .env './.env'
 Creating proxy config file: './storage/proxy/etc/nginx-conf/nginx.conf'
 Creating index database: './storage/index/lib/database/sqlite3.db'
@@ -427,7 +437,7 @@ You can generate the secret token with:
 <CodeBlock lang="bash">
 
 ```bash
- gpg --armor --gen-random 1 40 
+ gpg --armor --gen-random 1 40
 jcrmbzlGyeP7z53TUQtXmtltMb5TubsIE9e0DPLnS4Ih29JddQw5JA==
 ```
 
@@ -436,7 +446,7 @@ jcrmbzlGyeP7z53TUQtXmtltMb5TubsIE9e0DPLnS4Ih29JddQw5JA==
 You also need to change the domain, change the Tracker API token and generate a secret token for the authentication in the Index configuration `storage/index/etc/index.toml`:
 
 ```toml
-... 
+...
 
 [tracker]
 url = "udp://tracker.torrust-demo.com:6969"
@@ -557,8 +567,8 @@ server
 
   ssl_certificate /etc/letsencrypt/live/index.torrust-demo.com-0001/fullchain.pem;
   ssl_certificate_key /etc/letsencrypt/live/index.torrust-demo.com-0001/privkey.pem;
-  
-  ssl_buffer_size 8k; 
+
+  ssl_buffer_size 8k;
 
   ssl_dhparam /etc/ssl/certs/dhparam-2048.pem;
 
@@ -715,7 +725,7 @@ We will use crontab to execute a command every day:
 <CodeBlock lang="bash">
 
 ```bash
-sudo crontab -e 
+sudo crontab -e
 ```
 
 </CodeBlock>
@@ -746,7 +756,7 @@ After generating the certificates and renewing them you should have a certbot di
 
 ```bash
 $ sudo tree storage/certbot/
-[sudo] password for torrust: 
+[sudo] password for torrust:
 storage/certbot/
 ├── etc
 │   ├── accounts
@@ -1069,12 +1079,12 @@ We used the health check endpoints for some services like APIs and the HTTP trac
 
 ## Cost
 
-- Basic droplet (1GB/1CPU, 25GB SSD Disk, 1000GB transfer): __$6__ per month.
-- Weekly droplet backup: __$1.20__ per month.
-- Reserved IP: __$5.00__ per month.
+- Basic droplet (1GB/1CPU, 25GB SSD Disk, 1000GB transfer): **$6** per month.
+- Weekly droplet backup: **$1.20** per month.
+- Reserved IP: **$5.00** per month.
 - Domain: depends on your provider.
 
-Total cost: __$12.2__ per month.
+Total cost: **$12.2** per month.
 
 See [Digital Ocean pricing](https://www.digitalocean.com/pricing) for more information.
 
@@ -1158,3 +1168,6 @@ If you have any questions or issues please open an issue in the corresponding re
 - Containerizing Rust Applications Examples: <https://github.com/torrust/containerizing-rust-apps-examples>
 
 We very welcome any contributions to the projects or [this article](https://github.com/torrust/torrust-website/issues).
+
+</PostBody>
+</PostContainer>

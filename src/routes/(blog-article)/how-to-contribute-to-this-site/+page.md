@@ -13,12 +13,24 @@ hidden: false
   import Callout from "$lib/components/molecules/Callout.svelte";
   import CodeBlock from "$lib/components/molecules/CodeBlock.svelte";
   import Image from "$lib/components/atoms/Image.svelte";
+  import PostBody from "$lib/components/molecules/PostBody.svelte";
+  import PostContainer from "$lib/components/molecules/PostContainer.svelte";
+  import PostTable from "$lib/components/molecules/PostTable.svelte";
 </script>
+
+<PostContainer>
+<PostTable>
+
+## Table of Contents
 
 - [Processing](#processing)
 - [Creating a new post](#creating-a-new-post)
 - [Managing blog posts](#managing-blog-posts)
 - [RSS](#rss)
+
+</PostTable>
+
+<PostBody>
 
 All blog posts are located inside the `src/routes/(blog-article)` folder. Each folder inside it represents a blog post, and each folder has a `+page.md` file, which is the file that contains the post's content.
 
@@ -71,3 +83,6 @@ I highly recommend the [Front Matter VS Code extension](https://frontmatter.code
 ## RSS
 
 This template automatically generates a RSS feed of your blog posts. It is generated in the `src/routes/rss.xml/+server.ts` file, and it is available at the `/rss.xml` URL.
+
+</PostBody>
+</PostContainer>

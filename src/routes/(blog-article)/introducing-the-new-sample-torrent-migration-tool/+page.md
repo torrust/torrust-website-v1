@@ -17,6 +17,9 @@ updated: 2023-09-04T13:24:27.241Z
   import Callout from "$lib/components/molecules/Callout.svelte";
   import CodeBlock from "$lib/components/molecules/CodeBlock.svelte";
   import Image from "$lib/components/atoms/Image.svelte";
+  import PostBody from "$lib/components/molecules/PostBody.svelte";
+  import PostContainer from "$lib/components/molecules/PostContainer.svelte";
+  import PostTable from "$lib/components/molecules/PostTable.svelte";
 </script>
 
 Photo by David Dibert: <https://www.pexels.com/photo/a-flock-of-geese-flying-7177008/>.
@@ -25,6 +28,9 @@ Hello, Torrust community!
 
 We're always looking for ways to enhance your experience with Torrust, and today, we're excited to unveil our latest addition: [A sample migration tool written in Rust](https://github.com/torrust/torrents-importer-sample), specifically designed for those looking to seamlessly import torrents from other sources into our [Torrust Index](https://github.com/torrust/torrust-index-backend)!
 
+<PostContainer>
+<PostTable>
+
 ## Table of contents
 
 - [Why this tool?](#why-this-tool)
@@ -32,6 +38,10 @@ We're always looking for ways to enhance your experience with Torrust, and today
 - [Conclusion](#conclusion)
 - [Links](#links)
 - [Acknowledgments](#acknowledgments)
+
+</PostTable>
+
+<PostBody>
 
 ## Why this tool?
 
@@ -129,3 +139,6 @@ For any other questions or issues related to Torrust repositories, please open a
 - Torrust Index Frontend: <https://github.com/torrust/torrust-index-frontend/issues>
 
 We very welcome any contributions to the project!
+
+</PostBody>
+</PostContainer>

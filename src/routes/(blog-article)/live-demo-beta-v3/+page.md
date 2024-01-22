@@ -16,9 +16,29 @@ hidden: false
   import Callout from "$lib/components/molecules/Callout.svelte";
   import CodeBlock from "$lib/components/molecules/CodeBlock.svelte";
   import Image from "$lib/components/atoms/Image.svelte";
+  import PostBody from "$lib/components/molecules/PostBody.svelte";
+  import PostContainer from "$lib/components/molecules/PostContainer.svelte";
+  import PostTable from "$lib/components/molecules/PostTable.svelte";
 </script>
 
-**Hello, Torrent Enthusiasts!**
+<PostContainer>
+<PostTable>
+
+## Table of contents
+
+- [Hello, Torrent Enthusiasts!](#hello-torrent-enthusiasts)
+- [Experience the Beta Demo Today](#experience-the-beta-demo-today)
+- [Your Feedback Makes Us Better](#your-feedback-makes-us-better)
+- [Join the Conversation](#join-the-conversation)
+- [Important Notice: Demo Availability](#important-notice-demo-availability)
+- [A Heartfelt Thank You to Our Contributors](#a-heartfelt-thank-you-to-our-contributors)
+- [Join Us in This Exciting Journey](#join-us-in-this-exciting-journey)
+
+</PostTable>
+
+<PostBody>
+
+## **Hello, Torrent Enthusiasts!**
 
 We're thrilled to announce the beta demo of Bittorrent Torrust Index v3.0.0 is now live! This is a significant milestone for us, and we're eager to share what we've been working on with our vibrant community.
 
@@ -59,3 +79,6 @@ This release wouldn't have been possible without the dedication and hard work of
 ## Join Us in This Exciting Journey
 
 We're just getting started, and there's much more to come. Stay tuned for more updates, and thank you for being a part of this journey. We very welcome any contributions to the projects.
+
+</PostBody>
+</PostContainer>
