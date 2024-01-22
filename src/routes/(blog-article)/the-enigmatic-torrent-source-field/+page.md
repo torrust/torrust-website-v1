@@ -17,9 +17,15 @@ updated: 2023-08-08T13:56:28.769Z
   import Callout from "$lib/components/molecules/Callout.svelte";
   import CodeBlock from "$lib/components/molecules/CodeBlock.svelte";
   import Image from "$lib/components/atoms/Image.svelte";
+  import PostBody from "$lib/components/molecules/PostBody.svelte";
+  import PostContainer from "$lib/components/molecules/PostContainer.svelte";
+  import PostTable from "$lib/components/molecules/PostTable.svelte";
 </script>
 
 The BitTorrent protocol, despite its widespread usage, has often been met with raised eyebrows by the tech community due to its sometimes vague or entirely missing documentation. Today, we'll dive into one such mystery: the "source" field located within the "info" part of torrent files.
+
+<PostContainer>
+<PostTable>
 
 ## Table of contents
 
@@ -31,6 +37,10 @@ The BitTorrent protocol, despite its widespread usage, has often been met with r
 - [Links](#links)
 - [Acknowledgments](#acknowledgments)
 - [Conclusion](#conclusion)
+
+</PostTable>
+
+<PostBody>
 
 <Callout type="info">
 
@@ -219,3 +229,6 @@ For any other questions or issues related to Torrust repositories, please open a
 - Torrust Index Frontend: <https://github.com/torrust/torrust-index-frontend/issues>
 
 We very welcome any contributions to the project!
+
+</PostBody>
+</PostContainer>

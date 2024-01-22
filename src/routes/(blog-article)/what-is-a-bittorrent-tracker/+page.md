@@ -21,15 +21,27 @@ description: Basic explanation of  what a BitTorrent tracker is and the two type
   import Callout from "$lib/components/molecules/Callout.svelte";
   import CodeBlock from "$lib/components/molecules/CodeBlock.svelte";
   import Image from "$lib/components/atoms/Image.svelte";
+  import PostBody from "$lib/components/molecules/PostBody.svelte";
+  import PostContainer from "$lib/components/molecules/PostContainer.svelte";
+  import PostTable from "$lib/components/molecules/PostTable.svelte";
 </script>
 
 Photo by Alex Andrews: <https://www.pexels.com/photo/shallow-focus-photography-of-black-and-silver-compasses-on-top-of-map-1203808/>.
+
+<PostContainer>
+<PostTable>
+
+## Table of Contents
 
 - [Introduction](#introduction)
 - [What is a BitTorrent Tracker](#what-is-a-bittorrent-tracker)
 - [Public trackers](#public-trackers)
 - [Private trackers](#private-trackers)
 - [BitTorrent Index vs BitTorrent Tracker](#bittorrent-index-vs-bittorrent-tracker)
+
+</PostTable>
+
+<PostBody>
 
 ## Introduction
 
@@ -100,3 +112,6 @@ For any other questions or issues related to Torrust repositories, please open a
 - Torrust Index Frontend: <https://github.com/torrust/torrust-index-frontend/issues>
 
 We very welcome any contributions to the project!
+
+</PostBody>
+</PostContainer>

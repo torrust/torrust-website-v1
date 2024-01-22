@@ -19,7 +19,15 @@ hidden: false
   import Callout from "$lib/components/molecules/Callout.svelte";
   import CodeBlock from "$lib/components/molecules/CodeBlock.svelte";
   import Image from "$lib/components/atoms/Image.svelte";
+  import PostBody from "$lib/components/molecules/PostBody.svelte";
+  import PostContainer from "$lib/components/molecules/PostContainer.svelte";
+  import PostTable from "$lib/components/molecules/PostTable.svelte";
 </script>
+
+<PostContainer>
+<PostTable>
+
+## Table of Contents
 
 - [Introduction](#introduction)
 - [Common Dependencies](#common-dependencies)
@@ -29,6 +37,10 @@ hidden: false
 - [Application Setup](#application-setup)
 - [Development tools](#development-tools)
 - [Conclusion](#conclusion)
+
+</PostTable>
+
+<PostBody>
 
 ## Introduction
 
@@ -306,3 +318,6 @@ If you have any questions or issues please open an issue on the corresponding re
 - Torrust Index Frontend: <https://github.com/torrust/torrust-index-frontend/issues>
 
 We very welcome any contributions to the project!
+
+</PostBody>
+</PostContainer>

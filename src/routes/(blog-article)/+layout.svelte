@@ -65,7 +65,7 @@
 							<span>By: </span><a href="/{post.contributorSlug}">{post.contributor}</a>
 						</div>
 					{/if}
-					<ShareButton slug={post.slug} />
+					<ShareButton slug={post.slug} title={post.title} />
 					{#if post.tags?.length}
 						<div class="tags">
 							{#each post.tags as tag}
@@ -122,7 +122,7 @@
 		}
 
 		@include for-tablet-landscape-up {
-			--main-column-width: 100ch;
+			--main-column-width: 170ch;
 			padding-right: 30px;
 			padding-left: 30px;
 		}

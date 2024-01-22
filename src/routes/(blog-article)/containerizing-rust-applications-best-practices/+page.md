@@ -18,7 +18,13 @@ hidden: false
   import Callout from "$lib/components/molecules/Callout.svelte";
   import CodeBlock from "$lib/components/molecules/CodeBlock.svelte";
   import Image from "$lib/components/atoms/Image.svelte";
+  import PostBody from "$lib/components/molecules/PostBody.svelte";
+  import PostContainer from "$lib/components/molecules/PostContainer.svelte";
+  import PostTable from "$lib/components/molecules/PostTable.svelte";
 </script>
+
+<PostContainer>
+<PostTable>
 
 ## Table of Contents
 
@@ -42,6 +48,10 @@ hidden: false
 - [Other Considerations](#other-considerations)
 - [Links](links)
 - [Conclusion](#conclusion)
+
+</PostTable>
+
+<PostBody>
 
 ## Introduction
 
@@ -1048,3 +1058,6 @@ If you have any questions or issues please open an issue on the corresponding re
 - Containerizing Rust Applications Examples: <https://github.com/torrust/containerizing-rust-apps-examples>
 
 We very welcome any contributions to the projects or [this article](https://github.com/torrust/torrust-website/issues).
+
+</PostBody>
+</PostContainer>
