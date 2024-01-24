@@ -34,7 +34,7 @@
     <div class="hover-strap" on:mouseover={() => clearInterval(hoverStrapTimeout)} on:focus>
         <div class="progress-bar" style="width: {progressBarWidth}%"></div>
         <div class="github-div">
-            Watch our <a href="https://github.com/torrust" target="_blank" rel="noopener noreferrer">GitHub repo</a> to stay up to date
+            Watch our <a href="https://github.com/torrust" target="_blank" rel="noopener noreferrer">GitHub repos</a> to stay up to date
         </div>
     </div>
 {/if}
