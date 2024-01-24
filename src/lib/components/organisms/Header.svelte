@@ -2,8 +2,11 @@
 	import Logo from '$lib/components/atoms/Logo.svelte';
 	import ThemeToggle from '$lib/components/molecules/ThemeToggle.svelte';
 	import RssLink from '$lib/components/atoms/RssLink.svelte';
-	import Socials from '../molecules/Socials.svelte';
-	import AnimatedHamburger from '../atoms/AnimatedHamburger.svelte';
+	import Socials from '$lib/components/molecules/Socials.svelte';
+	import AnimatedHamburger from '$lib/components/atoms/AnimatedHamburger.svelte';
+	import Strap from '$lib/components/atoms/Strap.svelte'
+	import {page} from '$app/stores'
+	import {onMount} from 'svelte'
 
 	export let showBackground = false;
 
@@ -16,9 +19,23 @@
 	function closeMenu() {
 		isMenuOpen = false;
 	}
+
+	let showHoverStrap = true
+	let hoverStrapTimeout: any
+
+	function hideHoverStrap(){
+		showHoverStrap = false
+	}
+
+	onMount(() => {
+		hoverStrapTimeout = setTimeout(hideHoverStrap, 10000);
+	})
 </script>
 
 <header class:has-background={showBackground}>
+	{#if $page.url.pathname === '/'}
+		<Strap />
+	{/if}
 	<div class="navbar">
 		<a class="logo" href="/" aria-label="Site logo">
 			<Logo />
@@ -26,9 +43,6 @@
 		<AnimatedHamburger {isMenuOpen} {toggleMenu}>
 			<div class="links-wrapper">
 				<ul class="links">
-					<li>
-						<a href="/blog" on:click={closeMenu}>Blog</a>
-					</li>
 					<li>
 						<button on:click={closeMenu}>
 							<Socials />
