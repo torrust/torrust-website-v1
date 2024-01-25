@@ -2,6 +2,7 @@
 	import FeaturesIcon from '$lib/icons/features.svelte';
 	import BlogIcon from '$lib/icons/blog.svelte';
 	import Button from '$lib/components/atoms/Button.svelte';
+	import Icon from '@iconify/svelte';
 
 	export let hasFeatures: boolean;
 	export let hasPosts: boolean;
@@ -27,6 +28,12 @@
 				Get Started
 			</Button>
 		{/if}
+		<Button href="http://index.torrust-demo.com">
+			<span>
+				<Icon icon="formkit:arrowright" color="white" />
+			</span>
+			Live Demo
+		</Button>
 	</div>
 </section>
 
