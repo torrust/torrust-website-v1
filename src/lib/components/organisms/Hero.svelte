@@ -28,7 +28,7 @@
 				Get Started
 			</Button>
 		{/if}
-		<Button href="http://index.torrust-demo.com">
+		<Button href="https://index.torrust-demo.com">
 			<span>
 				<Icon icon="formkit:arrowright" color="white" />
 			</span>
