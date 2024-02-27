@@ -4,10 +4,9 @@
 
 <div class="socials">
 	<a
-		href="https://github.com/torrust/torrust-website"
+		href="https://github.com/torrust"
 		target="_blank"
 		rel="noopener noreferrer"
-		title="See source code on GitHub"
 	>
 		<GitHubIcon />
 	</a>

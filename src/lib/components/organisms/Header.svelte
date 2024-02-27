@@ -4,9 +4,7 @@
 	import RssLink from '$lib/components/atoms/RssLink.svelte';
 	import Socials from '$lib/components/molecules/Socials.svelte';
 	import AnimatedHamburger from '$lib/components/atoms/AnimatedHamburger.svelte';
-	import Strap from '$lib/components/atoms/Strap.svelte'
-	import {page} from '$app/stores'
-	import {onMount} from 'svelte'
+	import Tooltip from '$lib/components/atoms/Tooltip.svelte';
 
 	export let showBackground = false;
 
@@ -19,23 +17,9 @@
 	function closeMenu() {
 		isMenuOpen = false;
 	}
-
-	let showHoverStrap = true
-	let hoverStrapTimeout: any
-
-	function hideHoverStrap(){
-		showHoverStrap = false
-	}
-
-	onMount(() => {
-		hoverStrapTimeout = setTimeout(hideHoverStrap, 10000);
-	})
 </script>
 
 <header class:has-background={showBackground}>
-	{#if $page.url.pathname === '/'}
-		<Strap />
-	{/if}
 	<div class="navbar">
 		<a class="logo" href="/" aria-label="Site logo">
 			<Logo />
@@ -44,9 +28,11 @@
 			<div class="links-wrapper">
 				<ul class="links">
 					<li>
-						<button on:click={closeMenu}>
-							<Socials />
-						</button>
+						<Tooltip text='Watch our GitHub repos to stay up to date'>
+							<button on:click={closeMenu}>
+								<Socials />
+							</button>
+						</Tooltip>
 					</li>
 					<li>
 						<button on:click={closeMenu}>
