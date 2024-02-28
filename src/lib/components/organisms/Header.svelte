@@ -4,7 +4,7 @@
 	import RssLink from '$lib/components/atoms/RssLink.svelte';
 	import Socials from '$lib/components/molecules/Socials.svelte';
 	import AnimatedHamburger from '$lib/components/atoms/AnimatedHamburger.svelte';
-	import Tooltip from '$lib/components/atoms/Tooltip.svelte';
+	import Strap from '../atoms/Strap.svelte';
 
 	export let showBackground = false;
 
@@ -19,6 +19,7 @@
 	}
 </script>
 
+<Strap />
 <header class:has-background={showBackground}>
 	<div class="navbar">
 		<a class="logo" href="/" aria-label="Site logo">
@@ -28,11 +29,12 @@
 			<div class="links-wrapper">
 				<ul class="links">
 					<li>
-						<Tooltip text='Watch our GitHub repos to stay up to date'>
-							<button on:click={closeMenu}>
-								<Socials />
-							</button>
-						</Tooltip>
+						<a href="/blog">Blog</a>
+					</li>
+					<li>
+						<button on:click={closeMenu}>
+							<Socials />
+						</button>
 					</li>
 					<li>
 						<button on:click={closeMenu}>

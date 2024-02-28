@@ -1,43 +1,13 @@
-<script lang="ts">
-    import {onMount, onDestroy} from 'svelte'
-
-    let showHoverStrap = true
-    let hoverStrapTimeout: any
-    let progressBarWidth = 100
-
-    function hideHoverStrap(){
-        showHoverStrap = false
-    }
-
-    onMount(() => {
-        const duration = 10000
-        const interval = 100
-        let elapsed = 0
-
-        hoverStrapTimeout = setInterval(() => {
-            elapsed += interval
-            progressBarWidth = ((duration - elapsed) / duration) * 100
-
-            if(elapsed >= duration){
-                clearInterval(hoverStrapTimeout)
-                hideHoverStrap()
-            }
-        }, interval)
-    })
-
-    onDestroy(() => {
-        clearInterval(hoverStrapTimeout)
-    })
-</script>
-
-{#if showHoverStrap}
-    <div class="hover-strap" on:mouseover={() => clearInterval(hoverStrapTimeout)} on:focus>
-        <div class="progress-bar" style="width: {progressBarWidth}%"></div>
-        <div class="github-div">
-            Watch our <a href="https://github.com/torrust" target="_blank" rel="noopener noreferrer">GitHub repos</a> to stay up to date
-        </div>
+<div class="hover-strap">
+    <div class="github-div">
+        <p>
+            Stay up to date with Torrust!
+        </p>
+        <a class="link" href="https://github.com/torrust" target="_blank" rel="noopener noreferrer">
+            Watch our GitHub repos
+        </a>
     </div>
-{/if}
+</div>
 
 <style>
     .hover-strap {
@@ -45,28 +15,28 @@
         top: 0;
         left: 0;
         width: 100%;
-        padding: .3rem;
-        background: transparent;
+        padding: .4em;
+        background: var(--color--secondary);
         color: #000;
         text-align: center;
         cursor: pointer;
-        z-index: 1001;
-        overflow: hidden;
-        transition: opacity 0.5s ease-in-out;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        
-    }
-
-    .progress-bar {
-        height: 5px;
-        background: rgba(248, 181, 153, 1);
-        transition: width 100ms linear;
-        border-radius: 10px;
+        color: #fff;
+        font-size: .9rem;
     }
 
     .github-div{
         cursor: default;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .link{
+        border: 2px solid #fff;
+        border-radius: 10px;
+        padding: 3px 6px;
+        background-color: transparent;
+        color: #fff;
     }
 </style>
