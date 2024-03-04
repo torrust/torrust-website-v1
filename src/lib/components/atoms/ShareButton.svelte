@@ -6,7 +6,6 @@
     export let title: string;
 
     const encodedSubject = encodeURIComponent("I wanted you to see this blog post");
-    const encodedTitle = encodeURIComponent(title);
     const encodedBody = encodeURIComponent(`${title} is a really interesting blog post from Torrust. Check it out here: ${siteBaseUrl}/${slug}`)
     const encodedSlug = encodeURIComponent(slug);
 
