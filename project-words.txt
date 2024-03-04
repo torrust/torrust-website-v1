@@ -11,6 +11,7 @@ certbot
 certonly
 containerfile
 Containerfiles
+corepack
 Datacenter
 dearmor
 Dibert
@@ -24,6 +25,7 @@ fullchain
 HEALTHCHECK
 Heiko
 Histoire
+iconify
 imdl
 indistinctively
 infohash
