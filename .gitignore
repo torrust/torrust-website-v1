@@ -10,3 +10,7 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .histoire
 .jampack
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+.pnp.*

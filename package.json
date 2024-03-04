@@ -50,5 +50,6 @@
 	"dependencies": {
 		"@fontsource-variable/roboto-mono": "^5.0.9",
 		"@fontsource-variable/roboto-slab": "^5.0.12"
-	}
+	},
+	"packageManager": "yarn@4.1.0"
 }
