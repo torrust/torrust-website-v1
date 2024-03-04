@@ -1,7 +1,12 @@
 <script lang="ts">
+	interface Style {
+		top: string;
+		left: string;
+	}
+
 	export let color: string;
 	export let size: string;
-	export let style: any;
+	export let style: Style;
 </script>
 
 <div class="wrapper" style="top: {style.top}; left: {style.left};">

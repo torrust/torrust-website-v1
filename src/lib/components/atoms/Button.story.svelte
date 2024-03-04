@@ -1,6 +1,5 @@
 <script lang="ts">
 	import '$lib/scss/global.scss';
-	import type { ComponentProps } from 'svelte';
 	import type { Hst as HstType } from '@histoire/plugin-svelte';
 	import Button from './Button.svelte';
 	import type { NoUndefinedField } from '$lib/utils/types';
@@ -8,13 +7,22 @@
 
 	export let Hst: HstType;
 
-	let props: NoUndefinedField<ComponentProps<Button>> = {
+	let props: NoUndefinedField<{
+		color?: "primary" | "secondary";
+		style?: "solid" | "understated" | "clear";
+		size?: "small" | "medium" | "large";
+		href?: string;
+		additionalClass?: string;
+		target?: "_self" | "_blank";
+		rel?: string;
+	}> = {
 		color: 'primary',
 		style: 'solid',
 		size: 'medium',
 		href: '',
 		target: '_blank',
-		rel: 'noopener noreferrer'
+		rel: 'noopener noreferrer',
+		additionalClass: '',
 	};
 
 	let text = 'This is a Button';
