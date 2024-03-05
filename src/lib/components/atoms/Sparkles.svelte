@@ -26,7 +26,7 @@
 	};
 
 	let sparkles: SparkleType[] = [];
-	let sparklesInterval: NodeJS.Timer;
+	let sparklesInterval: NodeJS.Timeout | undefined;
 
 	onMount(() => {
 		sparklesInterval = setInterval(() => {
@@ -45,13 +45,24 @@
 	});
 
 	onDestroy(() => {
-		clearInterval(sparklesInterval);
+		if (sparklesInterval) {
+			clearInterval(sparklesInterval);
+		}
 	});
 </script>
 
+/// <reference types="svelte" />
+/// <reference types="svelte/internal" />
+
+/// <reference types="svelte" />
+/// <reference types="svelte/types/runtime" />
+
+/// <reference types="svelte" />
+/// <reference types="svelte/types/runtime" />
+
 <div class="sparkle-wrapper">
 	{#each sparkles as sparkle (sparkle.id)}
-		<Sparkle color={sparkle.color} size={sparkle.size} style={sparkle.style} />
+		<Sparkle color={sparkle.color} size={`${sparkle.size}px`} style={sparkle.style} />
 	{/each}
 	<span class="slot-wrapper">
 		<slot />
