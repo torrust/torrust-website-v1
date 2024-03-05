@@ -7,5 +7,5 @@
 </script>
 
 <Hst.Story title="Organisms/Hero" layout={{ type: 'single', iframe: true }}>
-	<Hero />
+	<Hero hasFeatures={true} hasPosts={true} />
 </Hst.Story>

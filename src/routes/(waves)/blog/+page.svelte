@@ -23,6 +23,7 @@
 						readingTime={post.readingTime}
 						slug={post.slug}
 						tags={post.tags}
+						date={post.date}
 					/>
 				{/each}
 			</div>

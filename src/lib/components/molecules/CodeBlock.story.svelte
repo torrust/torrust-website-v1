@@ -9,7 +9,8 @@
 
 	let props: NoUndefinedField<ComponentProps<CodeBlock>> = {
 		filename: '+page.svelte',
-		lang: 'svelte'
+		lang: 'svelte',
+		fullBleed: false
 	};
 </script>
 

@@ -16,6 +16,7 @@
 				excerpt="This is a blog post"
 				tags={['Tag 1', 'Tag 2']}
 				readingTime="5 min read"
+				date=""
 			/>
 		</Hst.Variant>
 
@@ -26,6 +27,7 @@
 				excerpt="This is a blog post"
 				tags={['Tag 1', 'Tag 2']}
 				readingTime="5 min read"
+				date=""
 			/>
 		</Hst.Variant>
 	</div>
