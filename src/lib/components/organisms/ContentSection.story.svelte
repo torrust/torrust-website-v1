@@ -9,6 +9,7 @@
 	export let Hst: HstType;
 
 	let props: NoUndefinedField<ComponentProps<ContentSection>> = {
+		id: '',
 		title: 'Content Section',
 		description: 'This is a section of content that can be used in a bunch of places',
 		align: 'top'
