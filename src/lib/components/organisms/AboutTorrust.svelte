@@ -68,11 +68,11 @@
 				<div class="buttons">
 					<Button href="https://github.com/torrust/torrust-index-backend" color="secondary">
 						<GitHubIcon slot="icon" />
-						index-backend
+						index-gui
 					</Button>
 					<Button href="https://github.com/torrust/torrust-index-frontend" color="primary">
 						<GitHubIcon slot="icon" />
-						index-frontend
+						index
 					</Button>
 				</div>
 			</div>

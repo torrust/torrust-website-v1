@@ -23,6 +23,7 @@
 			>.
 		</div>
 		<div class="socials">
+			<a href="/blog">Blog</a>
 			<Socials />
 			<RssLink />
 			<ThemeToggle />
