@@ -17,10 +17,10 @@
 <div class="container">
 	<Hero hasFeatures={features && features.length > 0} hasPosts={posts && posts.length > 0} />
 	<AboutTorrust />
+	<HowToContribute />
 	{#if posts && posts.length}
 		<RecentPosts {posts} />
 	{/if}
-	<HowToContribute />
 	{#if features && features.length}
 		<Features {features} />
 	{/if}
