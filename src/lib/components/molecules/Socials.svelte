@@ -3,11 +3,7 @@
 </script>
 
 <div class="socials">
-	<a
-		href="https://github.com/torrust"
-		target="_blank"
-		rel="noopener noreferrer"
-	>
+	<a href="https://github.com/torrust" target="_blank" rel="noopener noreferrer">
 		<GitHubIcon />
 	</a>
 </div>

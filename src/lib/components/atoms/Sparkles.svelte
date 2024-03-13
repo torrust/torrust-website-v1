@@ -14,8 +14,8 @@
 				color === 'primary'
 					? 'var(--color--primary)'
 					: color === 'secondary'
-					? 'var(--color--secondary)'
-					: 'var(--color--yellow',
+						? 'var(--color--secondary)'
+						: 'var(--color--yellow',
 			size: random(10, 20),
 			style: {
 				// Pick a random spot in the available space
@@ -26,10 +26,10 @@
 	};
 
 	let sparkles: SparkleType[] = [];
-	let sparklesInterval: NodeJS.Timeout | undefined;
+	let sparklesInterval: number | undefined;
 
 	onMount(() => {
-		sparklesInterval = setInterval(() => {
+		sparklesInterval = window.setInterval(() => {
 			const now = Date.now();
 			// Create a new sparkle
 			const sparkle = generateSparkle();

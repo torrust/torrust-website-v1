@@ -66,13 +66,6 @@
 			flex-direction: column;
 			text-align: center;
 
-			.left {
-				text-align: left;
-			}
-			.right {
-				text-align: right;
-			}
-
 			@include for-phone-only {
 				display: none;
 			}

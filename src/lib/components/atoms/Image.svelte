@@ -14,10 +14,11 @@
 		if (dev) return;
 
 		let srcset = '';
+		const fileExtension = src.split('.').pop() || '';
 
 		if (widths) {
 			for (let i = 0; i < widths.length; i++) {
-				srcset += `${fileName}-${widths[i]}.${formats[0]} ${widths[i]}w`;
+				srcset += `${fileName}-${widths[i]}.${fileExtension} ${widths[i]}w`;
 
 				if (i < widths.length - 1) {
 					srcset += ', ';
@@ -25,7 +26,7 @@
 			}
 		} else {
 			for (let i = 0; i < formats.length; i++) {
-				srcset += `${fileName}.${formats[i]}`;
+				srcset += `${fileName}.${fileExtension}`;
 
 				if (i < formats.length - 1) {
 					srcset += ', ';
@@ -37,7 +38,14 @@
 	}
 </script>
 
-<img srcset={buildSrcset()} {src} {alt} loading="lazy" decoding="async" class:full-bleed={fullBleed} />
+<img
+	srcset={buildSrcset()}
+	{src}
+	{alt}
+	loading="lazy"
+	decoding="async"
+	class:full-bleed={fullBleed}
+/>
 
 <style lang="scss">
 	img {
