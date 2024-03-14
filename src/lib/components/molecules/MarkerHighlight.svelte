@@ -17,8 +17,14 @@
 		background-image: linear-gradient(to bottom right, transparent 50%, var(--mark-color) 50%),
 			linear-gradient(var(--mark-color), var(--mark-color)),
 			linear-gradient(to top left, transparent 50%, var(--mark-color) 50%);
-		background-size: 0.25em 1em, calc(100% - 0.25em * 2 + 1px) 1em, 0.25em 1em;
-		background-position: left center, center, right center;
+		background-size:
+			0.25em 1em,
+			calc(100% - 0.25em * 2 + 1px) 1em,
+			0.25em 1em;
+		background-position:
+			left center,
+			center,
+			right center;
 		background-repeat: no-repeat;
 		color: inherit;
 		-webkit-box-decoration-break: clone;

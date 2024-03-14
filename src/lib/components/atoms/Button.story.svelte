@@ -8,12 +8,12 @@
 	export let Hst: HstType;
 
 	let props: NoUndefinedField<{
-		color?: "primary" | "secondary";
-		style?: "solid" | "understated" | "clear";
-		size?: "small" | "medium" | "large";
+		color?: 'primary' | 'secondary';
+		style?: 'solid' | 'understated' | 'clear';
+		size?: 'small' | 'medium' | 'large';
 		href?: string;
 		additionalClass?: string;
-		target?: "_self" | "_blank";
+		target?: '_self' | '_blank';
 		rel?: string;
 	}> = {
 		color: 'primary',
@@ -22,7 +22,7 @@
 		href: '',
 		target: '_blank',
 		rel: 'noopener noreferrer',
-		additionalClass: '',
+		additionalClass: ''
 	};
 
 	let text = 'This is a Button';

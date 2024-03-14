@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Icon from '@iconify/svelte'
+	import Icon from '@iconify/svelte';
 	export let filename: string;
 	export let lang: string;
 	export let fullBleed: boolean | undefined = undefined;
@@ -7,16 +7,16 @@
 	let showCheckmark: boolean = false;
 
 	async function copyToClipboard() {
-       try {
-            const codeContent = codeBlockElement.textContent || '';
-            await navigator.clipboard.writeText(codeContent);
-			      showCheckmark = true
+		try {
+			const codeContent = codeBlockElement.querySelector('.code-content')?.textContent || '';
+			await navigator.clipboard.writeText(codeContent);
+			showCheckmark = true;
 
-			      setTimeout(() => showCheckmark = false, 1000);
-       } catch (err) {
-            console.error('Failed to copy: ', err);
-       }
-  }
+			setTimeout(() => (showCheckmark = false), 1000);
+		} catch (err) {
+			console.error('Failed to copy: ', err);
+		}
+	}
 </script>
 
 <div class="code-block" class:full-bleed={fullBleed} bind:this={codeBlockElement}>
@@ -31,13 +31,13 @@
 		on:click={copyToClipboard}
 	>
 		{#if showCheckmark}
-			<Icon icon='charm:tick' color='#6cdb2e' />
+			<Icon icon="charm:tick" color="#6cdb2e" />
 		{:else}
-			<Icon icon='ion:copy-outline' color='#FFFFFF' />
+			<Icon icon="ion:copy-outline" color="#FFFFFF" />
 		{/if}
 	</button>
 	<div class="code-content">
-	    <slot />
+		<slot />
 	</div>
 </div>
 

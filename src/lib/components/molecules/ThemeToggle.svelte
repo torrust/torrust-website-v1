@@ -31,7 +31,9 @@
 			<rect x="0" y="0" width="100%" height="100%" fill="white" />
 			<circle cx="40" cy="8" r="11" fill="black" />
 		</mask>
-		<circle id="sun" cx="12" cy="12" r="11" mask="url(#moon)" />
+		<g id="sun">
+			<circle cx="12" cy="12" r="11" mask="url(#moon)" />
+		</g>
 		<g id="sun-beams">
 			<line x1="12" y1="1" x2="12" y2="3" />
 			<line x1="12" y1="21" x2="12" y2="23" />
@@ -44,7 +46,7 @@
 		</g>
 	</svg>
 
-	<span class="label">Auto</span>
+	<span class="label"><span></span>Auto</span>
 </button>
 
 <style lang="scss">
@@ -62,6 +64,10 @@
 		&:hover {
 			.label {
 				color: var(--color--primary);
+				fill: var(--color--primary);
+				> span {
+					filter: drop-shadow(0px 0px 3px var(--color--primary));
+				}
 			}
 
 			#moon,

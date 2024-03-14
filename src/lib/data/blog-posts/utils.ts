@@ -10,6 +10,12 @@ import readingTime from 'reading-time/lib/reading-time';
 import striptags from 'striptags';
 import type { BlogPost } from '$lib/utils/types';
 
+// Define an interface for the imported modules
+interface ImportedModule {
+	metadata: BlogPost;
+	default: { render: () => { html: string } };
+}
+
 export const importPosts = (render = false) => {
 	const blogImports = import.meta.glob('$routes/*/*/*.md', { eager: true });
 	const innerImports = import.meta.glob('$routes/*/*/*/*.md', { eager: true });
@@ -18,7 +24,7 @@ export const importPosts = (render = false) => {
 
 	const posts: BlogPost[] = [];
 	for (const path in imports) {
-		const post = imports[path] as any;
+		const post = imports[path] as ImportedModule;
 		if (post) {
 			posts.push({
 				...post.metadata,
@@ -37,8 +43,8 @@ export const filterPosts = (posts: BlogPost[]) => {
 			new Date(a.date).getTime() > new Date(b.date).getTime()
 				? -1
 				: new Date(a.date).getTime() < new Date(b.date).getTime()
-				? 1
-				: 0
+					? 1
+					: 0
 		)
 		.map((post) => {
 			const readingTimeResult = post.html ? readingTime(striptags(post.html) || '') : undefined;
