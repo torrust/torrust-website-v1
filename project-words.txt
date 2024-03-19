@@ -9,9 +9,11 @@ buildtime
 Callout
 certbot
 certonly
+Chihaya
 containerfile
 Containerfiles
 corepack
+cpus
 Datacenter
 dearmor
 Dibert
@@ -34,6 +36,7 @@ Juggery
 keyrings
 Kimbatt
 letsencrypt
+libhwloc
 libtorrent
 libz
 mailcatcher
@@ -42,6 +45,7 @@ Metainfo
 nojekyll
 nologin
 Nuxt
+opentracker
 passcode
 pexels
 postbuild
@@ -49,6 +53,7 @@ println
 privkey
 problably
 proto
+Radeon
 Raina
 realpath
 regr
@@ -56,15 +61,18 @@ rehype
 roboto
 runtimes
 rustc
+Ryzen
 Seeberger
 signup
 Stackoverflow
 striptags
+struct
 tlsv
 torrenting
 Tzou
 usermod
 Verstappen
+webp
 webroot
 Werror
 WORKDIR
