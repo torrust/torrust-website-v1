@@ -88,31 +88,31 @@ Basically a tracker is just a shared data structure between all the BitTorrent p
 
 ```json
 {
-  "info_hash": "090c6d4fb3a03191c4ef1fda6236ef0efb2d5c10",
-  "seeders": 1,
-  "completed": 1,
-  "leechers": 0,
-  "peers": [
-    {
-      "peer_id": {
-        "id": "0x2d71423030303030303030303030303030303031",
-        "client": null
-      },
-      "peer_addr": "0.0.0.0:17548",
-      "updated": 1709916034742,
-      "updated_milliseconds_ago": 1709916034742,
-      "uploaded": 0,
-      "downloaded": 0,
-      "left": 0,
-      "event": "Completed"
-    }
-  ]
+	"info_hash": "090c6d4fb3a03191c4ef1fda6236ef0efb2d5c10",
+	"seeders": 1,
+	"completed": 1,
+	"leechers": 0,
+	"peers": [
+		{
+			"peer_id": {
+				"id": "0x2d71423030303030303030303030303030303031",
+				"client": null
+			},
+			"peer_addr": "0.0.0.0:17548",
+			"updated": 1709916034742,
+			"updated_milliseconds_ago": 1709916034742,
+			"uploaded": 0,
+			"downloaded": 0,
+			"left": 0,
+			"event": "Completed"
+		}
+	]
 }
 ```
 
 </CodeBlock>
 
-There are many ways to keep this information in memory. The access to this data is actually a bottleneck. Eventually all requests hit this structure. The problem is all `announce` requests need to update this structure. Due to Rust owning rules, only the owner can write  into this struct. We have been trying different implementations to minimize contention. There is a trait for the torrent "Repository". You can benchmark the different repository implementations by running the following command:
+There are many ways to keep this information in memory. The access to this data is actually a bottleneck. Eventually all requests hit this structure. The problem is all `announce` requests need to update this structure. Due to Rust owning rules, only the owner can write into this struct. We have been trying different implementations to minimize contention. There is a trait for the torrent "Repository". You can benchmark the different repository implementations by running the following command:
 
 <CodeBlock lang="terminal">
 
