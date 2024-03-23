@@ -38,7 +38,7 @@ hidden: false
   - [Running The Bencher](#running-the-bencher)
   - [Bencher Results](#bencher-results)
 - [Conclusion](#conclusion)
-- [Links](links)
+- [Links](#links)
 
 </PostTable>
 
