@@ -4,6 +4,7 @@
 import Prism from 'prismjs';
 // Here we assign it to a variable so the import above
 // is not removed automatically on build
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ifYouRemoveMeTheBuildFails = Prism;
 import 'prism-svelte';
 import readingTime from 'reading-time/lib/reading-time';
