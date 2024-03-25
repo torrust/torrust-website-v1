@@ -3,6 +3,7 @@ title: What is a BitTorrent tracker and types of trackers
 slug: what-is-a-bittorrent-tracker
 coverImage: /images/posts/tracker.jpg
 date: 2023-10-05T13:42:25.671Z
+updated:
 excerpt: Basic explanation of what a BitTorrent tracker is and the two types of trackers, public and private.
 tags:
   - Torrent

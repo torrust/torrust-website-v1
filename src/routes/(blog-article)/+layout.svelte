@@ -53,33 +53,37 @@
 			<div class="header">
 				{#if post}
 					<h1>{post.title}</h1>
-					<div class="note">Published on {formatDate(post.date)}</div>
-					{#if post.updated}
-						<div class="note">Updated on {formatDate(post.updated)}</div>
-					{/if}
-					{#if post.readingTime}
-						<div class="note">{post.readingTime}</div>
-					{/if}
-					{#if post.contributor}
-						<div>
-							<span>By: </span><a href="/{post.contributorSlug}">{post.contributor}</a>
+					<div class="article-content-flex">
+						<div class="article-content-text">
+							<div class="note">Published on {formatDate(post.date)}</div>
+							{#if post.updated}
+								<div class="note">Updated on {formatDate(post.updated)}</div>
+							{/if}
+							{#if post.readingTime}
+								<div class="note">{post.readingTime}</div>
+							{/if}
+							{#if post.contributor}
+								<div>
+									<span>By: </span><a href="/{post.contributorSlug}">{post.contributor}</a>
+								</div>
+							{/if}
+							<ShareButton slug={post.slug} title={post.title} />
+							{#if post.tags?.length}
+								<div class="tags">
+									{#each post.tags as tag}
+										<Tag>{tag}</Tag>
+									{/each}
+								</div>
+							{/if}
 						</div>
-					{/if}
-					<ShareButton slug={post.slug} title={post.title} />
-					{#if post.tags?.length}
-						<div class="tags">
-							{#each post.tags as tag}
-								<Tag>{tag}</Tag>
-							{/each}
-						</div>
-					{/if}
+						{#if post && post.coverImage}
+							<div class="cover-image">
+								<Image src={post.coverImage} alt={post.title} />
+							</div>
+						{/if}
+					</div>
 				{/if}
 			</div>
-			{#if post && post.coverImage}
-				<div class="cover-image">
-					<Image src={post.coverImage} alt={post.title} />
-				</div>
-			{/if}
 			<div class="content">
 				<slot />
 			</div>
@@ -110,6 +114,16 @@
 		padding-bottom: 80px;
 		padding-right: 15px;
 		padding-left: 15px;
+
+		.article-content-text {
+			display: flex;
+			flex-direction: column;
+			gap: 0.5rem;
+		}
+
+		.cover-image {
+			padding-top: 1.5rem;
+		}
 
 		@include for-iphone-se {
 			padding-left: 0;

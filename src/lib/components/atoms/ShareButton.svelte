@@ -48,6 +48,7 @@
 <style lang="scss">
 	.link-container {
 		display: flex;
+		justify-content: center;
 		gap: 1rem;
 	}
 </style>

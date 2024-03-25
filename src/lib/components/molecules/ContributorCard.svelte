@@ -2,7 +2,6 @@
 	import Email from '$lib/icons/socials/email.svelte';
 	import Github from '$lib/icons/socials/github.svelte';
 	import Linkedin from '$lib/icons/socials/linkedin.svelte';
-	import Button from '$lib/components/atoms/Button.svelte';
 
 	export let name: string;
 	export let position: string | undefined = undefined;
@@ -43,9 +42,6 @@
 			<p>{@html para.para}</p>
 		{/each}
 	</div>
-	<Button>
-		<a href="/contributors" class="contributor-link">Return to Contributors</a>
-	</Button>
 </div>
 
 <style lang="scss">
@@ -122,10 +118,5 @@
 		font-size: 1rem;
 		text-align: justify;
 		margin: 1rem 0;
-	}
-
-	.contributor-link {
-		font-weight: bolder;
-		color: #fff;
 	}
 </style>
