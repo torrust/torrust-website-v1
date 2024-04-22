@@ -117,7 +117,6 @@ cargo run
 
 </CodeBlock>
 
-
 <Callout type="info">
   You do not need to change the default values for development.
 </Callout>
@@ -263,8 +262,6 @@ You should be able to load the API entrypoint on <http://0.0.0.0:3001/>
 For more details about the Torrust Index Backend, check the [Index Backend documentation](https://docs.rs/torrust-index-backend/).
 
 ## Set Up the Torrust Frontend
-
-
 
 At the time of writing, the Frontend requires:
 
