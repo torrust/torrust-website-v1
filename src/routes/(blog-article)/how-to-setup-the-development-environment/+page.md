@@ -2,7 +2,7 @@
 title: How To Setup The Dev Env
 slug: how-to-setup-the-development-environment
 coverImage: /images/posts/development-environment.png
-date: 2023-07-11T12:29:04.295Z
+date: 2024-04-18T12:29:04.295Z
 excerpt: If you want to contribute to the Torrust Index, this article explains how to setup a development environment with the latest versions for all services.
 contributor: Jose Celano
 contributorSlug: jose-celano
@@ -56,16 +56,13 @@ You do not need to setup all services to contribute to the Torrust Index, but in
 
 Setting up the development environment requires to setup the three main services.
 
-First at all, we need to clone the repositories of the three services. We will clone them in a temporarily folder so you can follow this guide.
+First at all, we need to create the Tmp and torrust folders where we will store the repositories of our services.
 
 <CodeBlock lang="terminal">
 
-```s
+```bash
 mkdir -p ~/Tmp/torrust
 cd ~/Tmp/torrust
-git clone git@github.com:torrust/torrust-tracker.git
-git clone git@github.com:torrust/torrust-index-backend.git
-git clone git@github.com:torrust/torrust-index-frontend.git
 ```
 
 </CodeBlock>
@@ -86,28 +83,39 @@ sudo apt-get install libsqlite3-dev
 
 </CodeBlock>
 
+  <!-- Colocarle la razon de su uso migracion de datos -->
+
 ## Set Up the Torrust Tracker
 
 At the time of writing, the Torrust Tracker requires:
 
-- rustc 1.72.0-nightly (839e9a6e1 2023-07-02)
+- rustc 1.77.1-nightly (839e9a6e1 2024-03-26)
+
+Now , we will create the tracker service and inside it we will create the folders where the databases will be located:
+
+<CodeBlock lang="terminal">
+
+```bash
+  git clone https://github.com/torrust/torrust-tracker.git \
+  && cd torrust-tracker \
+  && cargo build --release \
+  && mkdir -p ./storage/tracker/lib/database \
+  && mkdir -p ./storage/tracker/lib/tls
+```
+
+</CodeBlock>
+
+<!-- When executing the code it may not work for you , but it can be solved as easy as putting a \ at the end of each command. -->
 
 You can run the Tracker with the following commands:
 
 <CodeBlock lang="terminal">
 
-```s
-cd torrust-tracker/
-./bin/install.sh
+```bash
 cargo run
 ```
 
 </CodeBlock>
-
-The install script will generate:
-
-- A `./config.toml` file with the default values.
-- An empty `./storage/database/data.db` SQLite file for the database.
 
 <Callout type="info">
   You do not need to change the default values for development.
@@ -128,7 +136,7 @@ Loading configuration from config file ./config.toml
 
 </CodeBlock>
 
-By default, only the API is enabled, if you want to enable the HTTP or UDP trackers, you need to change the `enabled` value in the `./config.toml` file.
+<!-- By default, only the API is enabled, if you want to enable the HTTP or UDP trackers, you need to change the `enabled` value in the `./config.toml` file.
 
 <CodeBlock lang="toml">
 
@@ -140,7 +148,7 @@ enabled = true
 enabled = true
 ```
 
-</CodeBlock>
+</CodeBlock> -->
 
 <Callout type="info">
   Every time you change the configuration you need to restart the service.
@@ -185,7 +193,7 @@ For more details about the Torrust Tracker, check the [Tracker documentation](ht
 
 At the time of writing, the Backend requires:
 
-- rustc 1.72.0-nightly (839e9a6e1 2023-07-02)
+- rustc 1.77.1-nightly (839e9a6e1 2024-03-26)
 
 To run the tests you will also need to install a command line tool to handle torrent files called [imdl](https://github.com/casey/intermodal). You can install it with the following command:
 
@@ -207,12 +215,15 @@ cargo install sqlx-cli
 
 </CodeBlock>
 
-If you are using SQLite3 as database driver, you will need to install the following dependency:
+We will now put the torrust-backend repository, cloning it and saving it in the torrust folder:
 
 <CodeBlock lang="terminal">
 
 ```bash
-sudo apt-get install libsqlite3-dev
+  git clone https://github.com/torrust/torrust-index.git \
+  cd torrust-index \
+  && cargo build --release \
+  && mkdir -p ./storage/database
 ```
 
 </CodeBlock>
@@ -222,9 +233,7 @@ You can run the Tracker Backend with the following commands:
 <CodeBlock lang="terminal">
 
 ```bash
-cd torrust-index-backend/
-./bin/install.sh
-TORRUST_IDX_BACK_CORS_PERMISSIVE=true cargo run
+TORRUST_INDEX_API_CORS_PERMISSIVE=true cargo run
 ```
 
 </CodeBlock>
@@ -232,7 +241,7 @@ TORRUST_IDX_BACK_CORS_PERMISSIVE=true cargo run
 As you can see we are using the environment variable `TORRUST_IDX_BACK_CORS_PERMISSIVE` to enable a permissive CORS policy. The default port for the Backend is `3001` and for the web server serving the frontend application is `3000`. Since they are different ports, we need to tell the backend to allow request from a different port so that the frontend can make request to the API. To know more about CORS, check the [Mozilla CORS documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
 
 <Callout type="info">
-  The <code>install.sh</code> script will generate a SQLite database for the Tracker, but we are not going to use it. That one is only used if you want to run the tracker with docker. For example when you are working on features that only involves the Index and do not require changes in the Tracker. In this case, we are running the Tracker directly on its own folder. That could be useful if you want to debug requests to the Tracker.
+  The <code>install.sh</code> script will generate a SQLite database for the      Tracker, but we are not going to use it. That one is only used if you want to run the tracker with docker. For example when you are working on features that only involves the Index and do not require changes in the Tracker. In this case, we are running the Tracker directly on its own folder. That could be useful if you want to debug requests to the Tracker.
 </Callout>
 
 After running the Backend with `cargo run` you should see the following output:
@@ -256,17 +265,28 @@ For more details about the Torrust Index Backend, check the [Index Backend docum
 
 At the time of writing, the Frontend requires:
 
-- Node: `^19.0.0`
+- Node: `^21.7.3`
 
 The frontend is a [Nuxt](https://nuxt.com/) application.
+
+The last repository we need to upload is the torrust-index-gui repository . Remember to install Node.js and we need to be in the torrust folder to clone the repository.
+
+<CodeBlock lang="terminal">
+
+```bash
+  git clone https://github.com/torrust/torrust-index-gui.git
+
+  npm install
+```
+
+</CodeBlock>
 
 You can run the Tracker Frontend with the following commands:
 
 <CodeBlock lang="terminal">
 
 ```bash
-cd torrust-index-frontend/
-./bin/install.sh
+cd torrust-index-gui/
 npm run dev
 ```
 
