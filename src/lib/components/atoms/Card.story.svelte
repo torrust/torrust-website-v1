@@ -6,16 +6,16 @@
 	export let Hst: HstType;
 </script>
 
-<Hst.Story title="Atoms/Card" layout={{ type: 'grid', width: 400 }}>
+<svelte:component this={Hst.Story} title="Atoms/Card" layout={{ type: 'grid', width: 400 }}>
 	<div style="padding: 10px;">
-		<Hst.Variant title="Default">
+		<svelte:component this={Hst.Variant} title="Default">
 			<Card>
 				<div slot="content">Card Content</div>
 				<div slot="footer">Footer</div>
 			</Card>
-		</Hst.Variant>
+		</svelte:component>
 
-		<Hst.Variant title="With Image">
+		<svelte:component this={Hst.Variant} title="With Image">
 			<Card>
 				<img slot="image" src="https://placedog.net/500" alt="A cute dog" />
 				<div slot="content">
@@ -23,14 +23,14 @@
 					depending on how wide it is.
 				</div>
 			</Card>
-		</Hst.Variant>
+		</svelte:component>
 
-		<Hst.Variant title="With Link">
+		<svelte:component this={Hst.Variant} title="With Link">
 			<Card href="#">
 				<img slot="image" src="https://placedog.net/500" alt="A cute dog" />
 				<div slot="content">Card Content</div>
 				<div slot="footer">Footer</div>
 			</Card>
-		</Hst.Variant>
+		</svelte:component>
 	</div>
-</Hst.Story>
+</svelte:component>

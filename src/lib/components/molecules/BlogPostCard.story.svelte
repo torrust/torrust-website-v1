@@ -6,9 +6,13 @@
 	export let Hst: HstType;
 </script>
 
-<Hst.Story title="Molecules/Blog Post Card" layout={{ type: 'grid', width: 400 }}>
+<svelte:component
+	this={Hst.Story}
+	title="Molecules/Blog Post Card"
+	layout={{ type: 'grid', width: 400 }}
+>
 	<div style="padding: 12px;">
-		<Hst.Variant title="Default">
+		<svelte:component this={Hst.Variant} title="Default">
 			<BlogPostCard
 				slug="blog-post"
 				title="Blog Post"
@@ -18,9 +22,9 @@
 				readingTime="5 min read"
 				date=""
 			/>
-		</Hst.Variant>
+		</svelte:component>
 
-		<Hst.Variant title="No Image">
+		<svelte:component this={Hst.Variant} title="No Image">
 			<BlogPostCard
 				slug="blog-post"
 				title="Blog Post"
@@ -29,6 +33,6 @@
 				readingTime="5 min read"
 				date=""
 			/>
-		</Hst.Variant>
+		</svelte:component>
 	</div>
-</Hst.Story>
+</svelte:component>

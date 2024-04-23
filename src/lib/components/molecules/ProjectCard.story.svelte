@@ -8,9 +8,9 @@
 	export let Hst: HstType;
 </script>
 
-<Hst.Story title="Molecules/Project Card">
+<svelte:component this={Hst.Story} title="Molecules/Project Card">
 	<div style="padding: 12px;">
-		<Hst.Variant title="Default">
+		<svelte:component this={Hst.Variant} title="Default">
 			<ProjectCard title="Torrust Tracker" repoURL="https://github.com/torrust/torrust-tracker">
 				<div class="project-content" slot="content">
 					<p>
@@ -34,6 +34,6 @@
 					</div>
 				</div>
 			</ProjectCard>
-		</Hst.Variant>
+		</svelte:component>
 	</div>
-</Hst.Story>
+</svelte:component>

@@ -6,8 +6,12 @@
 	export let Hst: HstType;
 </script>
 
-<Hst.Story title="Organisms/Image Content Section" layout={{ type: 'single', iframe: true }}>
-	<Hst.Variant title="Default">
+<svelte:component
+	this={Hst.Story}
+	title="Organisms/Image Content Section"
+	layout={{ type: 'single', iframe: true }}
+>
+	<svelte:component this={Hst.Variant} title="Default">
 		<ImageContentSection>
 			<h2>Image Content Section</h2>
 			<p>
@@ -18,9 +22,9 @@
 				<img src="https://placedog.net/500" alt="A cute dog" />
 			</div>
 		</ImageContentSection>
-	</Hst.Variant>
+	</svelte:component>
 
-	<Hst.Variant title="Image Before Content">
+	<svelte:component this={Hst.Variant} title="Image Before Content">
 		<ImageContentSection imagePosition="before">
 			<h2>Image Content Section</h2>
 			<p>
@@ -31,5 +35,5 @@
 				<img src="https://placedog.net/500" alt="A cute dog" />
 			</div>
 		</ImageContentSection>
-	</Hst.Variant>
-</Hst.Story>
+	</svelte:component>
+</svelte:component>

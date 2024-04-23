@@ -6,12 +6,16 @@
 	export let Hst: HstType;
 </script>
 
-<Hst.Story title="Organisms/Header" layout={{ type: 'single', iframe: true }}>
-	<Hst.Variant title="Transparent Background">
+<svelte:component
+	this={Hst.Story}
+	title="Organisms/Header"
+	layout={{ type: 'single', iframe: true }}
+>
+	<svelte:component this={Hst.Variant} title="Transparent Background">
 		<Header />
-	</Hst.Variant>
+	</svelte:component>
 
-	<Hst.Variant title="With Background">
+	<svelte:component this={Hst.Variant} title="With Background">
 		<Header showBackground />
-	</Hst.Variant>
-</Hst.Story>
+	</svelte:component>
+</svelte:component>

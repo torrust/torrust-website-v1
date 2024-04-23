@@ -6,9 +6,9 @@
 	export let Hst: HstType;
 </script>
 
-<Hst.Story title="Molecules/Contribution Card">
+<svelte:component this={Hst.Story} title="Molecules/Contribution Card">
 	<div style="padding: 12px;">
-		<Hst.Variant title="Default">
+		<svelte:component this={Hst.Variant} title="Default">
 			<ContributionCard
 				title="Bug reports and feature requests"
 				description="You can report any bugs or request features by opening an issue in the appropriate repository:"
@@ -27,6 +27,6 @@
 					}
 				]}
 			/>
-		</Hst.Variant>
+		</svelte:component>
 	</div>
-</Hst.Story>
+</svelte:component>

@@ -16,31 +16,35 @@
 	};
 </script>
 
-<Hst.Story title="Organisms/Content Section" layout={{ type: 'single', iframe: true }}>
-	<Hst.Variant title="Top Aligned">
+<svelte:component
+	this={Hst.Story}
+	title="Organisms/Content Section"
+	layout={{ type: 'single', iframe: true }}
+>
+	<svelte:component this={Hst.Variant} title="Top Aligned">
 		<ContentSection {...props}>
 			<div slot="button">
 				<Button>Button</Button>
 			</div>
 			<pre>Content</pre>
 		</ContentSection>
-	</Hst.Variant>
+	</svelte:component>
 
-	<Hst.Variant title="Left Aligned">
+	<svelte:component this={Hst.Variant} title="Left Aligned">
 		<ContentSection {...props} align="left">
 			<div slot="button">
 				<Button>Button</Button>
 			</div>
 			<pre>Content</pre>
 		</ContentSection>
-	</Hst.Variant>
+	</svelte:component>
 
-	<Hst.Variant title="Right Aligned">
+	<svelte:component this={Hst.Variant} title="Right Aligned">
 		<ContentSection {...props} align="right">
 			<div slot="button">
 				<Button>Button</Button>
 			</div>
 			<pre>Content</pre>
 		</ContentSection>
-	</Hst.Variant>
-</Hst.Story>
+	</svelte:component>
+</svelte:component>

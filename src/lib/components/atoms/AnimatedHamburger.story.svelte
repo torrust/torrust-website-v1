@@ -3,7 +3,7 @@
 	import type { Hst as HstType } from '@histoire/plugin-svelte';
 	import { writable } from 'svelte/store';
 
-	let Hst: HstType;
+	export let Hst: HstType;
 	let isMenuOpen = writable(false);
 
 	const toggleMenu = () => {
@@ -11,7 +11,11 @@
 	};
 </script>
 
-<Hst.Story title="Atoms/AnimatedHamburger" layout={{ type: 'grid', width: 400 }}>
+<svelte:component
+	this={Hst.Story}
+	title="Atoms/AnimatedHamburger"
+	layout={{ type: 'grid', width: 400 }}
+>
 	<svelte:fragment slot="controls">
 		<label>
 			<input type="checkbox" bind:checked={$isMenuOpen} /> isMenuOpen
@@ -19,8 +23,8 @@
 	</svelte:fragment>
 
 	<div style="padding: 12px;">
-		<Hst.Variant title="Default">
+		<svelte:component this={Hst.Variant} title="Default">
 			<AnimatedHamburger isMenuOpen={$isMenuOpen} {toggleMenu} />
-		</Hst.Variant>
+		</svelte:component>
 	</div>
-</Hst.Story>
+</svelte:component>

@@ -6,6 +6,10 @@
 	export let Hst: HstType;
 </script>
 
-<Hst.Story title="Molecules/Socials" layout={{ type: 'single', iframe: true }}>
+<svelte:component
+	this={Hst.Story}
+	title="Molecules/Socials"
+	layout={{ type: 'single', iframe: true }}
+>
 	<Socials />
-</Hst.Story>
+</svelte:component>

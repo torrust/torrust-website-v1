@@ -12,13 +12,18 @@
 	};
 </script>
 
-<Hst.Story title="Molecules/Marker Highlight">
+<svelte:component this={Hst.Story} title="Molecules/Marker Highlight">
 	<svelte:fragment slot="controls">
-		<Hst.Select bind:value={props.color} title="color" options={['primary', 'secondary']} />
+		<svelte:component
+			this={Hst.Select}
+			bind:value={props.color}
+			title="color"
+			options={['primary', 'secondary']}
+		/>
 	</svelte:fragment>
 
 	<div style="padding: 12px;">
-		<Hst.Variant title="Default">
+		<svelte:component this={Hst.Variant} title="Default">
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sapien mi, euismod eu ipsum
 			eget, faucibus maximus erat. Integer nisl tellus, interdum sit amet nunc vel, ullamcorper
 			suscipit odio. <MarkerHighlight {...props}
@@ -28,6 +33,6 @@
 			> Ut nec odio placerat, aliquam elit vitae, volutpat eros. Duis vel sem purus. Donec gravida a
 			lectus vel sagittis. Morbi vel porttitor erat. Vestibulum ante ipsum primis in faucibus orci luctus
 			et ultrices posuere cubilia curae;
-		</Hst.Variant>
+		</svelte:component>
 	</div>
-</Hst.Story>
+</svelte:component>

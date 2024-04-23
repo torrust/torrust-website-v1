@@ -12,9 +12,10 @@
 	};
 </script>
 
-<Hst.Story title="Molecules/Callout">
+<svelte:component this={Hst.Story} title="Molecules/Callout">
 	<svelte:fragment slot="controls">
-		<Hst.Select
+		<svelte:component
+			this={Hst.Select}
 			bind:value={props.type}
 			title="color"
 			options={['info', 'warning', 'error', 'success']}
@@ -22,12 +23,12 @@
 	</svelte:fragment>
 
 	<div style="padding: 12px;">
-		<Hst.Variant title="Default">
+		<svelte:component this={Hst.Variant} title="Default">
 			<Callout {...props}>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sapien mi, euismod eu
 				ipsum eget, faucibus maximus erat. Integer nisl tellus, interdum sit amet nunc vel,
 				ullamcorper suscipit odio.
 			</Callout>
-		</Hst.Variant>
+		</svelte:component>
 	</div>
-</Hst.Story>
+</svelte:component>
