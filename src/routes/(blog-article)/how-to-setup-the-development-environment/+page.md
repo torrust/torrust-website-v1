@@ -2,7 +2,7 @@
 title: How To Setup The Dev Env
 slug: how-to-setup-the-development-environment
 coverImage: /images/posts/development-environment.png
-date: 2024-04-18T12:29:04.295Z
+date: 2023-07-11T12:29:04.295Z
 excerpt: If you want to contribute to the Torrust Index, this article explains how to setup a development environment with the latest versions for all services.
 contributor: Jose Celano
 contributorSlug: jose-celano
@@ -56,7 +56,7 @@ You do not need to setup all services to contribute to the Torrust Index, but in
 
 Setting up the development environment requires to setup the three main services.
 
-First at all, we need to create the Tmp and torrust folders where we will store the repositories of our services.
+First, we need to create the folder (in this example, a temp folder) where we will store the repositories of our services.
 
 <CodeBlock lang="terminal">
 
@@ -87,11 +87,11 @@ sudo apt-get install libsqlite3-dev
 
 ## Set Up the Torrust Tracker
 
-At the time of writing, the Torrust Tracker requires:
+At the time of writing, the Torrust Tracker requires (was tested with this version of rust):
 
-- rustc 1.77.1-nightly (839e9a6e1 2024-03-26)
+- rustc 1.72.0-nightly (839e9a6e1 2023-07-02)
 
-Now , we will create the tracker service and inside it we will create the folders where the databases will be located:
+Now, we will build the tracker and create the storage folders where persistent data like databases will be stored:
 
 <CodeBlock lang="terminal">
 
@@ -105,7 +105,7 @@ Now , we will create the tracker service and inside it we will create the folder
 
 </CodeBlock>
 
-<!-- When executing the code it may not work for you , but it can be solved as easy as putting a \ at the end of each command. -->
+When executing the code it may not work for you , but it can be solved as easy as putting a \ at the end of each command.
 
 You can run the Tracker with the following commands:
 
@@ -126,39 +126,104 @@ After running the Tracker with `cargo run` you should see the following output:
 <CodeBlock lang="output">
 
 ```s
-    Finished dev [optimized + debuginfo] target(s) in 0.06s
+       Finished `dev` profile [optimized + debuginfo] target(s) in 0.10s
      Running `target/debug/torrust-tracker`
-Loading configuration from config file ./config.toml
-2023-07-11T11:35:30.413903013+01:00 [torrust_tracker::bootstrap::logging][INFO] logging initialized.
-2023-07-11T11:35:30.414496649+01:00 [torrust_tracker::bootstrap::jobs::tracker_apis][INFO] Starting Torrust APIs server on: http://127.0.0.1:1212
-2023-07-11T11:35:30.414590999+01:00 [torrust_tracker::bootstrap::jobs::tracker_apis][INFO] Torrust APIs server started
+Loading default configuration file: `./share/default/config/tracker.development.sqlite3.toml` ...
+2024-04-22T16:24:23.241961292+01:00 [torrust_tracker::bootstrap::logging][INFO] logging initialized.
+2024-04-22T16:24:23.242613018+01:00 [UDP TRACKER][INFO] Starting on: udp://0.0.0.0:6969
+2024-04-22T16:24:23.242649758+01:00 [torrust_tracker::bootstrap::jobs][INFO] TLS not enabled
+2024-04-22T16:24:23.242670038+01:00 [HTTP TRACKER][INFO] Starting on: http://0.0.0.0:7070
+2024-04-22T16:24:23.242744307+01:00 [HTTP TRACKER][INFO] Started on: http://0.0.0.0:7070
+2024-04-22T16:24:23.242753177+01:00 [torrust_tracker::bootstrap::jobs][INFO] TLS not enabled
+2024-04-22T16:24:23.242834227+01:00 [API][INFO] Starting on http://127.0.0.1:1212
+2024-04-22T16:24:23.242848277+01:00 [API][INFO] Started on http://127.0.0.1:1212
+2024-04-22T16:24:23.242864747+01:00 [HEALTH CHECK API][INFO] Starting on: http://127.0.0.1:1313
+2024-04-22T16:24:23.242897537+01:00 [HEALTH CHECK API][INFO] Started on: http://127.0.0.1:1313
 ```
 
 </CodeBlock>
 
-<!-- By default, only the API is enabled, if you want to enable the HTTP or UDP trackers, you need to change the `enabled` value in the `./config.toml` file.
-
-<CodeBlock lang="toml">
-
-```toml
-[[udp_trackers]]
-enabled = true
-
-[[http_trackers]]
-enabled = true
-```
-
-</CodeBlock> -->
 
 <Callout type="info">
   Every time you change the configuration you need to restart the service.
 </Callout>
 
-Once the Tracker is running, you can test it trying to load an URL from the API. For example, you can try to get the Tracker statistics from the following URL:
+By default, if you don't specify any Config.toml file, the application will use this:
 
-<http://127.0.0.1:1212/api/v1/stats?token=MyAccessToken>
+<CodeBlock >
 
-Notice we have used the default API token, which is <code>MyAccessToken</code>. You can change it in the <code>./config.toml</code> file.
+```s
+
+Loading default configuration file: `./share/default/config/tracker.development.sqlite3.toml` ...
+
+```
+</CodeBlock >
+
+You can't change that file because it's a template included in the repo. If you want to set your custom configuration, you can either:
+
+- 1.- Use a different path for the config file.
+- 2.- Inyect the configuration with an env var.
+
+## Custom config file
+
+First, copy the template file to the storage folder:
+
+<CodeBlock lang="terminal">
+
+```bash
+cp share/default/config/tracker.development.sqlite3.toml storage/tracker/etc/tracker.toml
+```
+
+</CodeBlock>
+
+Then, you can change any value and finally run the tracker with:
+
+<CodeBlock lang="terminal">
+
+```bash
+TORRUST_TRACKER_PATH_CONFIG="./storage/tracker/etc/tracker.toml" cargo run
+```
+
+</CodeBlock>
+
+That would give you this outout:
+
+<CodeBlock lang="output">
+
+```s
+TORRUST_TRACKER_PATH_CONFIG="./storage/tracker/etc/tracker.toml" cargo run
+    Finished `dev` profile [optimized + debuginfo] target(s) in 0.09s
+     Running `target/debug/torrust-tracker`
+Loading configuration file: `./storage/tracker/etc/tracker.toml` ...
+2024-04-22T16:32:57.035457075+01:00 [torrust_tracker::bootstrap::logging][INFO] logging initialized.
+2024-04-22T16:32:57.036048971+01:00 [UDP TRACKER][INFO] Starting on: udp://0.0.0.0:6969
+2024-04-22T16:32:57.036079671+01:00 [torrust_tracker::bootstrap::jobs][INFO] TLS not enabled
+2024-04-22T16:32:57.036117731+01:00 [HTTP TRACKER][INFO] Starting on: http://0.0.0.0:7070
+2024-04-22T16:32:57.036209310+01:00 [HTTP TRACKER][INFO] Started on: http://0.0.0.0:7070
+2024-04-22T16:32:57.036218550+01:00 [torrust_tracker::bootstrap::jobs][INFO] TLS not enabled
+2024-04-22T16:32:57.036280190+01:00 [API][INFO] Starting on http://127.0.0.1:1212
+2024-04-22T16:32:57.036283750+01:00 [API][INFO] Started on http://127.0.0.1:1212
+2024-04-22T16:32:57.036301960+01:00 [HEALTH CHECK API][INFO] Starting on: http://127.0.0.1:1313
+2024-04-22T16:32:57.036385919+01:00 [HEALTH CHECK API][INFO] Started on: http://127.0.0.1:1313
+
+```
+
+</CodeBlock>
+
+## Inyect the configuration with an env var
+
+You can also inject the configuration with:
+
+<CodeBlock lang="terminal">
+
+```bash
+TORRUST_TRACKER_CONFIG=`cat share/default/config/tracker.development.sqlite3.toml` cargo run
+```
+
+</CodeBlock>
+
+
+NOTICE: we load the whole file into the env var. This is not useful for development, but it's a different way to inject the configuration. It's used when running the tracker with docker.
 
 The response should be like this:
 
@@ -220,9 +285,9 @@ We will now put the torrust-backend repository, cloning it and saving it in the 
 <CodeBlock lang="terminal">
 
 ```bash
-  git clone https://github.com/torrust/torrust-index.git \
-  cd torrust-index \
-  && cargo build --release \
+  git clone https://github.com/torrust/torrust-index.git \\
+  cd torrust-index \\
+  && cargo build --release \\
   && mkdir -p ./storage/database
 ```
 
@@ -240,9 +305,6 @@ TORRUST_INDEX_API_CORS_PERMISSIVE=true cargo run
 
 As you can see we are using the environment variable `TORRUST_IDX_BACK_CORS_PERMISSIVE` to enable a permissive CORS policy. The default port for the Backend is `3001` and for the web server serving the frontend application is `3000`. Since they are different ports, we need to tell the backend to allow request from a different port so that the frontend can make request to the API. To know more about CORS, check the [Mozilla CORS documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
 
-<Callout type="info">
-  The <code>install.sh</code> script will generate a SQLite database for the      Tracker, but we are not going to use it. That one is only used if you want to run the tracker with docker. For example when you are working on features that only involves the Index and do not require changes in the Tracker. In this case, we are running the Tracker directly on its own folder. That could be useful if you want to debug requests to the Tracker.
-</Callout>
 
 After running the Backend with `cargo run` you should see the following output:
 
@@ -274,23 +336,15 @@ The last repository we need to upload is the torrust-index-gui repository . Reme
 <CodeBlock lang="terminal">
 
 ```bash
-  git clone https://github.com/torrust/torrust-index-gui.git
-
-  npm install
+git clone https://github.com/torrust/torrust-index-gui.git \
+cd torrust-index-gui.git \
+npm install \
+npm run dev \
 ```
 
 </CodeBlock>
 
-You can run the Tracker Frontend with the following commands:
 
-<CodeBlock lang="terminal">
-
-```bash
-cd torrust-index-gui/
-npm run dev
-```
-
-</CodeBlock>
 
 You should see the following output:
 
