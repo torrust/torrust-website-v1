@@ -18,6 +18,7 @@ corepack
 cpus
 Datacenter
 dearmor
+debuginfo
 Dibert
 Diffie
 distroless
@@ -44,6 +45,7 @@ keyrings
 Kimbatt
 letsencrypt
 libhwloc
+libsqlite
 libtorrent
 libz
 mailcatcher
