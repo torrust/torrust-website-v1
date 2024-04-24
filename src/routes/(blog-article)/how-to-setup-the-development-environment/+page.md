@@ -3,6 +3,7 @@ title: How To Setup The Dev Env
 slug: how-to-setup-the-development-environment
 coverImage: /images/posts/development-environment.png
 date: 2023-07-11T12:29:04.295Z
+updated:
 excerpt: If you want to contribute to the Torrust Index, this article explains how to setup a development environment with the latest versions for all services.
 contributor: Jose Celano
 contributorSlug: jose-celano
