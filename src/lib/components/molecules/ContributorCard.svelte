@@ -40,6 +40,7 @@
 	</div>
 	<div>
 		{#each paras as para}
+			<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 			<p>{@html para.para}</p>
 		{/each}
 	</div>
