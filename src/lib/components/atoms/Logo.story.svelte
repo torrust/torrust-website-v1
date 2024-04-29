@@ -6,8 +6,8 @@
 	export let Hst: HstType;
 </script>
 
-<Hst.Story title="Atoms/Logo" layout={{ type: 'grid', width: 400 }}>
-	<Hst.Variant title="Default">
+<svelte:component this={Hst.Story} title="Atoms/Logo" layout={{ type: 'grid', width: 400 }}>
+	<svelte:component this={Hst.Variant} title="Default">
 		<Logo />
-	</Hst.Variant>
-</Hst.Story>
+	</svelte:component>
+</svelte:component>

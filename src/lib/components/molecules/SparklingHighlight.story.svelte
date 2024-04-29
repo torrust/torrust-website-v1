@@ -15,15 +15,17 @@
 	let text = 'Sparkling Text';
 </script>
 
-<Hst.Story title="Molecules/Sparkling Highlight">
+<svelte:component this={Hst.Story} title="Molecules/Sparkling Highlight">
 	<svelte:fragment slot="controls">
-		<Hst.Text bind:value={text} title="Text" />
-		<Hst.Select
+		<svelte:component this={Hst.Text} bind:value={text} title="Text" />
+		<svelte:component
+			this={Hst.Select}
 			bind:value={props.color}
 			title="color"
 			options={['default', 'primary', 'secondary']}
 		/>
-		<Hst.Select
+		<svelte:component
+			this={Hst.Select}
 			bind:value={props.sparkleColor}
 			title="sparkle color"
 			options={['default', 'primary', 'secondary']}
@@ -31,10 +33,10 @@
 	</svelte:fragment>
 
 	<div style="padding: 12px;">
-		<Hst.Variant title="Default">
+		<svelte:component this={Hst.Variant} title="Default">
 			<SparklingHighlight {...props}>
 				{text}
 			</SparklingHighlight>
-		</Hst.Variant>
+		</svelte:component>
 	</div>
-</Hst.Story>
+</svelte:component>

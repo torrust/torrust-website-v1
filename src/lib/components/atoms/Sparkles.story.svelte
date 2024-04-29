@@ -13,9 +13,10 @@
 	};
 </script>
 
-<Hst.Story title="Atoms/Sparkles">
+<svelte:component this={Hst.Story} title="Atoms/Sparkles">
 	<svelte:fragment slot="controls">
-		<Hst.Select
+		<svelte:component
+			this={Hst.Select}
 			bind:value={props.color}
 			title="color"
 			options={['default', 'primary', 'secondary']}
@@ -23,10 +24,10 @@
 	</svelte:fragment>
 
 	<div style="padding: 12px;">
-		<Hst.Variant title="Default">
+		<svelte:component this={Hst.Variant} title="Default">
 			<Sparkles {...props}>
 				<Button>Sparkles can be added anywhere</Button>
 			</Sparkles>
-		</Hst.Variant>
+		</svelte:component>
 	</div>
-</Hst.Story>
+</svelte:component>
