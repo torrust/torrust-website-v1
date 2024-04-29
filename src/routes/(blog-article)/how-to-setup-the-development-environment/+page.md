@@ -3,6 +3,7 @@ title: How To Setup The Dev Env
 slug: how-to-setup-the-development-environment
 coverImage: /images/posts/development-environment.png
 date: 2023-07-11T12:29:04.295Z
+updated: 2024-04-24T12:32:00.783Z
 excerpt: If you want to contribute to the Torrust Index, this article explains how to setup a development environment with the latest versions for all services.
 contributor: Jose Celano
 contributorSlug: jose-celano
@@ -32,8 +33,8 @@ hidden: false
 - [Introduction](#introduction)
 - [Common Dependencies](#common-dependencies)
 - [Set Up the Torrust Tracker](#set-up-the-torrust-tracker)
-- [Set Up the Torrust Backend](#set-up-the-torrust-backend)
-- [Set Up the Torrust Frontend](#set-up-the-torrust-frontend)
+- [Set Up the Torrust Index](#set-up-the-torrust-index)
+- [Set Up the Torrust Index GUI](#set-up-the-torrust-index-gui)
 - [Application Setup](#application-setup)
 - [Development tools](#development-tools)
 - [Conclusion](#conclusion)
@@ -47,8 +48,8 @@ hidden: false
 Before explaining how to setup the development environment, it's important to understand how the Torrust Index works. The Torrust Index is composed of multiple services, each one with its own codebase and repository. The services are:
 
 - A [BitTorrent Tracker](https://github.com/torrust/torrust-tracker), which is responsible for tracking the torrents and providing the peers to the clients.
-- The [Backend](https://github.com/torrust/torrust-index-backend), which is a REST API that provides the data to the frontend.
-- And the [Frontend](https://github.com/torrust/torrust-index-frontend), which is a webapp that displays the data to the user.
+- The [Index](https://github.com/torrust/torrust-index), which is a REST API that provides the data to the frontend.
+- And the [Index GUI](https://github.com/torrust/torrust-index-gui), which is a webapp that displays the data to the user.
 
 <Image src="/images/posts/torrust-architecture.png" alt="Torrust Architecture" />
 
@@ -56,16 +57,13 @@ You do not need to setup all services to contribute to the Torrust Index, but in
 
 Setting up the development environment requires to setup the three main services.
 
-First at all, we need to clone the repositories of the three services. We will clone them in a temporarily folder so you can follow this guide.
+First, we need to create the folder (in this example, a temp folder) where we will store the repositories of our services.
 
 <CodeBlock lang="terminal">
 
-```s
+```bash
 mkdir -p ~/Tmp/torrust
 cd ~/Tmp/torrust
-git clone git@github.com:torrust/torrust-tracker.git
-git clone git@github.com:torrust/torrust-index-backend.git
-git clone git@github.com:torrust/torrust-index-frontend.git
 ```
 
 </CodeBlock>
@@ -88,29 +86,46 @@ sudo apt-get install libsqlite3-dev
 
 ## Set Up the Torrust Tracker
 
-At the time of writing, the Torrust Tracker requires:
+This tutorial is tested with this Rust version:
 
 - rustc 1.72.0-nightly (839e9a6e1 2023-07-02)
 
-You can run the Tracker with the following commands:
+Since we are using the openssl crate with the [vendored](https://docs.rs/openssl/latest/openssl/#vendored) feature, enabled, you will need to install the following dependencies:
 
 <CodeBlock lang="terminal">
 
-```s
-cd torrust-tracker/
-./bin/install.sh
+```bash
+sudo apt-get install pkg-config libssl-dev make
+```
+
+</CodeBlock>
+
+Now, we will build the tracker and create the storage folders where persistent data like databases will be stored:
+
+<CodeBlock lang="terminal">
+
+```terminal
+git clone https://github.com/torrust/torrust-tracker.git \\ 
+  && cd torrust-tracker \\
+  && cargo build --release \\
+  && mkdir -p ./storage/tracker/lib/database \\
+  && mkdir -p ./storage/tracker/lib/tls
+```
+
+</CodeBlock>
+
+You can run the Tracker with the following command:
+
+<CodeBlock lang="terminal">
+
+```bash
 cargo run
 ```
 
 </CodeBlock>
 
-The install script will generate:
-
-- A `./config.toml` file with the default values.
-- An empty `./storage/database/data.db` SQLite file for the database.
-
 <Callout type="info">
-  You do not need to change the default values for development.
+  NOTICE: You do not need to change the default values for development.
 </Callout>
 
 After running the Tracker with `cargo run` you should see the following output:
@@ -118,39 +133,103 @@ After running the Tracker with `cargo run` you should see the following output:
 <CodeBlock lang="output">
 
 ```s
-    Finished dev [optimized + debuginfo] target(s) in 0.06s
+       Finished `dev` profile [optimized + debuginfo] target(s) in 0.10s
      Running `target/debug/torrust-tracker`
-Loading configuration from config file ./config.toml
-2023-07-11T11:35:30.413903013+01:00 [torrust_tracker::bootstrap::logging][INFO] logging initialized.
-2023-07-11T11:35:30.414496649+01:00 [torrust_tracker::bootstrap::jobs::tracker_apis][INFO] Starting Torrust APIs server on: http://127.0.0.1:1212
-2023-07-11T11:35:30.414590999+01:00 [torrust_tracker::bootstrap::jobs::tracker_apis][INFO] Torrust APIs server started
-```
-
-</CodeBlock>
-
-By default, only the API is enabled, if you want to enable the HTTP or UDP trackers, you need to change the `enabled` value in the `./config.toml` file.
-
-<CodeBlock lang="toml">
-
-```toml
-[[udp_trackers]]
-enabled = true
-
-[[http_trackers]]
-enabled = true
+Loading default configuration file: `./share/default/config/tracker.development.sqlite3.toml` ...
+2024-04-22T16:24:23.241961292+01:00 [torrust_tracker::bootstrap::logging][INFO] logging initialized.
+2024-04-22T16:24:23.242613018+01:00 [UDP TRACKER][INFO] Starting on: udp://0.0.0.0:6969
+2024-04-22T16:24:23.242649758+01:00 [torrust_tracker::bootstrap::jobs][INFO] TLS not enabled
+2024-04-22T16:24:23.242670038+01:00 [HTTP TRACKER][INFO] Starting on: http://0.0.0.0:7070
+2024-04-22T16:24:23.242744307+01:00 [HTTP TRACKER][INFO] Started on: http://0.0.0.0:7070
+2024-04-22T16:24:23.242753177+01:00 [torrust_tracker::bootstrap::jobs][INFO] TLS not enabled
+2024-04-22T16:24:23.242834227+01:00 [API][INFO] Starting on http://127.0.0.1:1212
+2024-04-22T16:24:23.242848277+01:00 [API][INFO] Started on http://127.0.0.1:1212
+2024-04-22T16:24:23.242864747+01:00 [HEALTH CHECK API][INFO] Starting on: http://127.0.0.1:1313
+2024-04-22T16:24:23.242897537+01:00 [HEALTH CHECK API][INFO] Started on: http://127.0.0.1:1313
 ```
 
 </CodeBlock>
 
 <Callout type="info">
-  Every time you change the configuration you need to restart the service.
+  IMPORTANT: Every time you change the configuration you need to restart the service.
 </Callout>
 
-Once the Tracker is running, you can test it trying to load an URL from the API. For example, you can try to get the Tracker statistics from the following URL:
+By default, if you don't specify any `Config.toml` file, the application will use this:
 
-<http://127.0.0.1:1212/api/v1/stats?token=MyAccessToken>
+<CodeBlock lang="output">
 
-Notice we have used the default API token, which is <code>MyAccessToken</code>. You can change it in the <code>./config.toml</code> file.
+```s
+Loading default configuration file: `./share/default/config/tracker.development.sqlite3.toml` ...
+```
+
+</CodeBlock >
+
+You can't change that file because it's a template included in the repo. If you want to set your custom configuration, you can either:
+
+1. Use a different path for the config file.
+2. Inject the configuration with an environment variable.
+
+## Custom config file
+
+First, copy the template file to the storage folder:
+
+<CodeBlock lang="terminal">
+
+```bash
+cp share/default/config/tracker.development.sqlite3.toml storage/tracker/etc/tracker.toml
+```
+
+</CodeBlock>
+
+Then, you can change any value and finally run the tracker with:
+
+<CodeBlock lang="terminal">
+
+```bash
+TORRUST_TRACKER_PATH_CONFIG="./storage/tracker/etc/tracker.toml" cargo run
+```
+
+</CodeBlock>
+
+That would give you this output:
+
+<CodeBlock lang="output">
+
+```s
+TORRUST_TRACKER_PATH_CONFIG="./storage/tracker/etc/tracker.toml" cargo run
+    Finished `dev` profile [optimized + debuginfo] target(s) in 0.09s
+     Running `target/debug/torrust-tracker`
+Loading configuration file: `./storage/tracker/etc/tracker.toml` ...
+2024-04-22T16:32:57.035457075+01:00 [torrust_tracker::bootstrap::logging][INFO] logging initialized.
+2024-04-22T16:32:57.036048971+01:00 [UDP TRACKER][INFO] Starting on: udp://0.0.0.0:6969
+2024-04-22T16:32:57.036079671+01:00 [torrust_tracker::bootstrap::jobs][INFO] TLS not enabled
+2024-04-22T16:32:57.036117731+01:00 [HTTP TRACKER][INFO] Starting on: http://0.0.0.0:7070
+2024-04-22T16:32:57.036209310+01:00 [HTTP TRACKER][INFO] Started on: http://0.0.0.0:7070
+2024-04-22T16:32:57.036218550+01:00 [torrust_tracker::bootstrap::jobs][INFO] TLS not enabled
+2024-04-22T16:32:57.036280190+01:00 [API][INFO] Starting on http://127.0.0.1:1212
+2024-04-22T16:32:57.036283750+01:00 [API][INFO] Started on http://127.0.0.1:1212
+2024-04-22T16:32:57.036301960+01:00 [HEALTH CHECK API][INFO] Starting on: http://127.0.0.1:1313
+2024-04-22T16:32:57.036385919+01:00 [HEALTH CHECK API][INFO] Started on: http://127.0.0.1:1313
+
+```
+
+</CodeBlock>
+
+## Inject the configuration with an environment variable
+
+You can also inject the configuration with:
+
+<CodeBlock lang="terminal">
+
+```bash
+TORRUST_TRACKER_CONFIG=`cat share/default/config/tracker.development.sqlite3.toml` cargo run
+```
+
+</CodeBlock>
+
+<Callout type="info">
+  NOTICE: We load the whole file into the env var. This is not useful for development, but it's a different way to inject the configuration. It's used when running the tracker with docker.
+</Callout>
 
 The response should be like this:
 
@@ -158,22 +237,22 @@ The response should be like this:
 
 ```json
 {
-	"torrents": 0,
-	"seeders": 0,
-	"completed": 0,
-	"leechers": 0,
-	"tcp4_connections_handled": 0,
-	"tcp4_announces_handled": 0,
-	"tcp4_scrapes_handled": 0,
-	"tcp6_connections_handled": 0,
-	"tcp6_announces_handled": 0,
-	"tcp6_scrapes_handled": 0,
-	"udp4_connections_handled": 0,
-	"udp4_announces_handled": 0,
-	"udp4_scrapes_handled": 0,
-	"udp6_connections_handled": 0,
-	"udp6_announces_handled": 0,
-	"udp6_scrapes_handled": 0
+  "torrents": 0,
+  "seeders": 0,
+  "completed": 0,
+  "leechers": 0,
+  "tcp4_connections_handled": 0,
+  "tcp4_announces_handled": 0,
+  "tcp4_scrapes_handled": 0,
+  "tcp6_connections_handled": 0,
+  "tcp6_announces_handled": 0,
+  "tcp6_scrapes_handled": 0,
+  "udp4_connections_handled": 0,
+  "udp4_announces_handled": 0,
+  "udp4_scrapes_handled": 0,
+  "udp6_connections_handled": 0,
+  "udp6_announces_handled": 0,
+  "udp6_scrapes_handled": 0
 }
 ```
 
@@ -181,11 +260,11 @@ The response should be like this:
 
 For more details about the Torrust Tracker, check the [Tracker documentation](https://docs.rs/torrust-tracker/).
 
-## Set Up the Torrust Backend
+## Set Up the Torrust Index
 
-At the time of writing, the Backend requires:
+This tutorial has been tested with this Rust version:
 
-- rustc 1.72.0-nightly (839e9a6e1 2023-07-02)
+- rustc 1.77.1-nightly (839e9a6e1 2024-03-26)
 
 To run the tests you will also need to install a command line tool to handle torrent files called [imdl](https://github.com/casey/intermodal). You can install it with the following command:
 
@@ -207,41 +286,39 @@ cargo install sqlx-cli
 
 </CodeBlock>
 
-If you are using SQLite3 as database driver, you will need to install the following dependency:
+We will now clone the `torrust-index` repository:
 
 <CodeBlock lang="terminal">
 
-```bash
-sudo apt-get install libsqlite3-dev
+```terminal
+  git clone https://github.com/torrust/torrust-index.git \\
+  cd torrust-index \\
+  && cargo build --release \\
+  && mkdir -p ./storage/index/lib/database \\
+  && mkdir -p ./storage/index/lib/tls
 ```
 
 </CodeBlock>
 
-You can run the Tracker Backend with the following commands:
+You can run the Torrust Index with the following commands:
 
 <CodeBlock lang="terminal">
 
 ```bash
-cd torrust-index-backend/
-./bin/install.sh
-TORRUST_IDX_BACK_CORS_PERMISSIVE=true cargo run
+TORRUST_INDEX_API_CORS_PERMISSIVE=true cargo run
 ```
 
 </CodeBlock>
 
 As you can see we are using the environment variable `TORRUST_IDX_BACK_CORS_PERMISSIVE` to enable a permissive CORS policy. The default port for the Backend is `3001` and for the web server serving the frontend application is `3000`. Since they are different ports, we need to tell the backend to allow request from a different port so that the frontend can make request to the API. To know more about CORS, check the [Mozilla CORS documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
 
-<Callout type="info">
-  The <code>install.sh</code> script will generate a SQLite database for the Tracker, but we are not going to use it. That one is only used if you want to run the tracker with docker. For example when you are working on features that only involves the Index and do not require changes in the Tracker. In this case, we are running the Tracker directly on its own folder. That could be useful if you want to debug requests to the Tracker.
-</Callout>
-
 After running the Backend with `cargo run` you should see the following output:
 
 <CodeBlock lang="output">
 
 ```s
-2023-07-11T11:54:17.553899587+01:00 [torrust_index_backend::web::api::server][INFO] Starting API server with net config: 0.0.0.0:3001 ...
-2023-07-11T11:54:17.553946897+01:00 [torrust_index_backend::web::api::server][INFO] API server listening on http://0.0.0.0:3001
+2023-07-11T11:54:17.553899587+01:00 [torrust_index::web::api::server][INFO] Starting API server with net config: 0.0.0.0:3001 ...
+2023-07-11T11:54:17.553946897+01:00 [torrust_index::web::api::server][INFO] API server listening on http://0.0.0.0:3001
 ```
 
 </CodeBlock>
@@ -250,38 +327,38 @@ You should be able to load the API entrypoint on <http://0.0.0.0:3001/>
 
 <Image src="/images/posts/torrust-backend-api-entrypoint-response-screenshot.png" alt="Screenshot of Torrust Backend API entrypoint response" />
 
-For more details about the Torrust Index Backend, check the [Index Backend documentation](https://docs.rs/torrust-index-backend/).
+For more details about the Torrust Index Backend, check the [Index Backend documentation](https://docs.rs/torrust-index/).
 
-## Set Up the Torrust Frontend
+## Set Up the Torrust Index GUI
 
-At the time of writing, the Frontend requires:
+At the time of writing, the Index GUI requires:
 
-- Node: `^19.0.0`
+- Node: `^v20.12.2`
 
 The frontend is a [Nuxt](https://nuxt.com/) application.
 
-You can run the Tracker Frontend with the following commands:
+The last repository we need to clone is the `torrust-index-gui` repository . Remember to install Node.js and we need to be in the torrust folder to clone the repository.
 
 <CodeBlock lang="terminal">
 
-```bash
-cd torrust-index-frontend/
-./bin/install.sh
-npm run dev
+```terminal
+git clone https://github.com/torrust/torrust-index-gui.git \\
+  && cd torrust-index-gui.git \\
+  && npm install \\
+  && npm run dev
 ```
 
 </CodeBlock>
 
 You should see the following output:
 
-<Image src="/images/posts/
-running-torrust-frontend-in-dev-mode.png" alt="Screenshot of Torrust Index Frontend running from the terminal" />
+<Image src="/images/posts/running-torrust-frontend-in-dev-mode.png" alt="Screenshot of Torrust Index Frontend running from the terminal" />
 
 Go to <http://localhost:3000/torrents> and you should see the torrent list page page:
 
 <Image src="/images/posts/index-screenshot-torrent-list-page.png" alt="Screenshot of torrent list page on the browser" />
 
-For more details about the Torrust Index Frontend, check the Index [Frontend documentation](https://github.com/torrust/torrust-index-frontend).
+For more details about the Torrust Index GUI, check the [Index GUI documentation](https://github.com/torrust/torrust-index-gui).
 
 ## Application Setup
 
@@ -314,8 +391,8 @@ As you can see, the Torrust Tracker and Index are very easy to set up. We hope y
 If you have any questions or issues please open an issue on the corresponding repository:
 
 - Torrust Tracker: <https://github.com/torrust/torrust-tracker/issues>
-- Torrust Index Backend: <https://github.com/torrust/torrust-index-backend/issues>
-- Torrust Index Frontend: <https://github.com/torrust/torrust-index-frontend/issues>
+- Torrust Index: <https://github.com/torrust/torrust-index/issues>
+- Torrust Index GUI: <https://github.com/torrust/torrust-index-gui/issues>
 
 We very welcome any contributions to the project!
 

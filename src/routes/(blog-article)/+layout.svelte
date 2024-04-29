@@ -111,6 +111,10 @@
 		padding-right: 15px;
 		padding-left: 15px;
 
+		.cover-image {
+			padding-top: 1.5rem;
+		}
+
 		@include for-iphone-se {
 			padding-left: 0;
 			padding-right: 0;

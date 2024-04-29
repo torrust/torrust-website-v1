@@ -3,6 +3,7 @@ title: Containerizing Rust Applications
 slug: containerizing-rust-applications-best-practices
 coverImage: /images/posts/rust-crab-carrying-a-shipping-container.jpeg
 date: 2023-11-09T12:08:04.295Z
+updated:
 excerpt: Torrust services (Tracker and Index) support docker, we want to ensure that contributors understand our containerfile and we also want to share good practices for containerizing Rust applications.
 contributor: Jose Celano
 contributorSlug: jose-celano
