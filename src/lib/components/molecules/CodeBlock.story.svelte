@@ -14,7 +14,7 @@
 	};
 </script>
 
-<Hst.Story title="Molecules/Code Block">
+<svelte:component this={Hst.Story} title="Molecules/Code Block">
 	<svelte:fragment slot="controls">
 		<svelte:component this={Hst.Text} bind:value={props.filename} title="File Name" />
 		<svelte:component this={Hst.Text} bind:value={props.lang} title="Language" />
@@ -23,34 +23,56 @@
 	<div style="padding: 12px;">
 		<svelte:component this={Hst.Variant} title="Default">
 			<CodeBlock {...props}>
-				<pre class="language-svelte"><code class="language-svelte">
-                    <span class="token tag">
-                        <span class="token punctuation">&lt;</span>Header<span
-								class="token punctuation">/&gt;</span
-							>
-                    </span>
-                    <span class="token tag">
-                        <span class="token punctuation">&lt;</span>main<span
-								class="token punctuation">&gt;</span
-							>
-                    </span>
-                    <span class="token tag">
-                        <span class="token punctuation">&lt;</span>slot<span
-								class="token punctuation">/&gt;</span
-							>
-                    </span>
-                    <span class="token tag">
-                        <span class="token punctuation">&lt;/</span>main<span
-								class="token punctuation">&gt;</span
-							>
-                    </span>
-                    <span class="token tag">
-                        <span class="token punctuation">&lt;</span>Footer<span
-								class="token punctuation">/&gt;</span
-							>
-                    </span>
-                </code></pre>
+				<pre class="language-svelte">
+					<code class="language-svelte">
+						<span class="token tag">
+							<span class="token punctuation">
+								&lt;
+							</span>
+							Header
+							<span class="token punctuation">
+								&gt;
+							</span>
+						</span>
+						<span class="token tag">
+							<span class="token punctuation">
+								&lt;
+							</span>
+							main
+							<span class="token punctuation">
+								&gt;
+							</span>
+						</span>
+						<span class="token tag">
+							<span class="token punctuation">
+								&lt;
+							</span>
+							slot
+							<span class="token punctuation">
+								&gt;
+							</span>
+						</span>
+						<span class="token tag">
+							<span class="token punctuation">
+								&lt;/
+							</span>
+							main
+							<span class="token punctuation">
+								&gt;
+							</span>
+						</span>
+						<span class="token tag">
+							<span class="token punctuation">
+								&lt;
+							</span>
+							Footer
+							<span class="token punctuation">
+								&gt;
+							</span>
+						</span>
+                	</code>
+				</pre>
 			</CodeBlock>
 		</svelte:component>
 	</div>
-</Hst.Story>
+</svelte:component>
