@@ -5,4 +5,3 @@ export async function load() {
 		posts: filteredPosts
 	};
 }
-

@@ -105,7 +105,7 @@ Now, we will build the tracker and create the storage folders where persistent d
 <CodeBlock lang="terminal">
 
 ```terminal
-git clone https://github.com/torrust/torrust-tracker.git \\ 
+git clone https://github.com/torrust/torrust-tracker.git \\
   && cd torrust-tracker \\
   && cargo build --release \\
   && mkdir -p ./storage/tracker/lib/database \\
@@ -237,22 +237,22 @@ The response should be like this:
 
 ```json
 {
-  "torrents": 0,
-  "seeders": 0,
-  "completed": 0,
-  "leechers": 0,
-  "tcp4_connections_handled": 0,
-  "tcp4_announces_handled": 0,
-  "tcp4_scrapes_handled": 0,
-  "tcp6_connections_handled": 0,
-  "tcp6_announces_handled": 0,
-  "tcp6_scrapes_handled": 0,
-  "udp4_connections_handled": 0,
-  "udp4_announces_handled": 0,
-  "udp4_scrapes_handled": 0,
-  "udp6_connections_handled": 0,
-  "udp6_announces_handled": 0,
-  "udp6_scrapes_handled": 0
+	"torrents": 0,
+	"seeders": 0,
+	"completed": 0,
+	"leechers": 0,
+	"tcp4_connections_handled": 0,
+	"tcp4_announces_handled": 0,
+	"tcp4_scrapes_handled": 0,
+	"tcp6_connections_handled": 0,
+	"tcp6_announces_handled": 0,
+	"tcp6_scrapes_handled": 0,
+	"udp4_connections_handled": 0,
+	"udp4_announces_handled": 0,
+	"udp4_scrapes_handled": 0,
+	"udp6_connections_handled": 0,
+	"udp6_announces_handled": 0,
+	"udp6_scrapes_handled": 0
 }
 ```
 
