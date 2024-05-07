@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Sparkle from '$lib/components/atoms/SingleSparkle.svelte';
+	import Sparkle from '$lib/components/singletons/SingleSparkle.svelte';
 	import type { SparkleType } from '$lib/utils/types';
 	import { onDestroy, onMount } from 'svelte';
 	const random = (min: number, max: number) => Math.floor(Math.random() * (max - min)) + min;

@@ -1,5 +1,5 @@
 <script>
-	import Waves from '$lib/components/organisms/Waves.svelte';
+	import Waves from '$lib/components/singletons/Waves.svelte';
 	import Header from '$lib/components/organisms/Header.svelte';
 	import Footer from '$lib/components/organisms/Footer.svelte';
 

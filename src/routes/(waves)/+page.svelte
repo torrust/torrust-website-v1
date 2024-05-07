@@ -1,10 +1,10 @@
 <script lang="ts">
 	import Hero from '$lib/components/organisms/Hero.svelte';
-	import RecentPosts from '$lib/components/organisms/RecentPosts.svelte';
+	import RecentPosts from '$lib/components/singletons/RecentPosts.svelte';
 	import Features from '$lib/components/organisms/Features.svelte';
 	import type { Feature, BlogPost } from '$lib/utils/types';
 	import AboutTorrust from '$lib/components/organisms/AboutTorrust.svelte';
-	import HowToContribute from '$lib/components/organisms/HowToContribute.svelte';
+	import HowToContribute from '$lib/components/singletons/HowToContribute.svelte';
 
 	export let data: {
 		features: Feature[];
