@@ -1,10 +1,10 @@
 <script lang="ts">
-	import Logo from '$lib/components/atoms/Logo.svelte';
+	import Logo from '$lib/components/singletons/Logo.svelte';
 	import ThemeToggle from '$lib/components/molecules/ThemeToggle.svelte';
 	import RssLink from '$lib/components/atoms/RssLink.svelte';
 	import Socials from '$lib/components/molecules/Socials.svelte';
-	import AnimatedHamburger from '$lib/components/atoms/AnimatedHamburger.svelte';
-	import Strap from '../atoms/Strap.svelte';
+	import AnimatedHamburger from '$lib/components/singletons/AnimatedHamburger.svelte';
+	import Strap from '../singletons/Strap.svelte';
 
 	export let showBackground = false;
 

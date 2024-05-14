@@ -1,6 +1,6 @@
 <script lang="ts">
 	import ContentSection from '$lib/components/organisms/ContentSection.svelte';
-	import ContributionCard from '../molecules/ContributionCard.svelte';
+	import ContributionCard from './ContributionCard.svelte';
 
 	let contributingDescription = `
 		We welcome contributions from the <a href="/contributors">community</a>!

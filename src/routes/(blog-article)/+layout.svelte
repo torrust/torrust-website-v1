@@ -3,7 +3,7 @@
 	import Footer from '$lib/components/organisms/Footer.svelte';
 	import Tag from '$lib/components/atoms/Tag.svelte';
 	import { formatDate } from '$lib/utils/date';
-	import ShareButton from '$lib/components/atoms/ShareButton.svelte';
+	import ShareButton from '$lib/components/singletons/ShareButton.svelte';
 
 	import { keywords, siteBaseUrl, title } from '$lib/data/meta';
 	import type { BlogPost } from '$lib/utils/types';

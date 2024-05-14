@@ -1,7 +1,7 @@
 <script>
 	import Image from '$lib/components/atoms/Image.svelte';
 	import ContentSection from './ContentSection.svelte';
-	import ImageContentSection from './ImageContentSection.svelte';
+	import ImageContentSection from '../singletons/ImageContentSection.svelte';
 	import GitHubIcon from '$lib/icons/socials/github.svelte';
 	import Button from '$lib/components/atoms/Button.svelte';
 	import ProjectCard from '../molecules/ProjectCard.svelte';
