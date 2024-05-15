@@ -69,7 +69,11 @@
 					{#if post.tags?.length}
 						<div class="tags">
 							{#each post.tags as tag}
-								<Tag>{tag}</Tag>
+								<Tag>
+									<a href="/tags/{tag}">
+										{tag}
+									</a>
+								</Tag>
 							{/each}
 						</div>
 					{/if}

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Icon from '@iconify/svelte';
 	import { siteBaseUrl } from '$lib/data/meta';
+	import ShareUrl from './ShareUrl.svelte';
 
 	export let slug: string;
 	export let title: string;
@@ -43,6 +44,7 @@
 			<Icon {icon} width="30" height="30" {color} />
 		</a>
 	{/each}
+	<ShareUrl />
 </div>
 
 <style lang="scss">
