@@ -63,7 +63,7 @@
 		{#if tags?.length}
 			<div class="tags">
 				{#each tags as tag}
-					<Tag>{tag}</Tag>
+					<Tag {tag}>{tag}</Tag>
 				{/each}
 			</div>
 		{/if}

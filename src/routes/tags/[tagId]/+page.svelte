@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { page } from '$app/stores';
 	import type { BlogPost } from '$lib/utils/types';
 	import BlogPostCard from '$lib/components/molecules/BlogPostCard.svelte';
 	import ContentSection from '$lib/components/organisms/ContentSection.svelte';
@@ -8,13 +9,13 @@
 	let splitUrl: string = '';
 
 	export let data: {
-		posts?: BlogPost[]; // Marking as optional to allow for async initialization
+		posts?: BlogPost[];
 	};
 
-	let posts: BlogPost[] = data.posts || []; // Initialize posts with an empty array as a fallback
+	let posts: BlogPost[] = data.posts || [];
 
 	onMount(() => {
-		currentUrl = window.location.href;
+		currentUrl = $page.url.pathname;
 		splitUrl = decodeURIComponent(currentUrl.split('/').pop()! || '');
 		console.log(splitUrl);
 	});

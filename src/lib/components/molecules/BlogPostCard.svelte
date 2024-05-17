@@ -47,7 +47,7 @@
 		{#if tags?.length}
 			<div class="tags">
 				{#each tags.slice(0, 2) as tag}
-					<Tag>{tag}</Tag>
+					<Tag {tag}><a href="/tags/{tag}">{tag}</a></Tag>
 				{/each}
 			</div>
 		{/if}

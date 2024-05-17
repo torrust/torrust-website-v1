@@ -26,7 +26,7 @@
 		{#if tags && tags.length > 0}
 			<div class="tags">
 				{#each tags as tag}
-					<Tag color={tag.color}>{tag.label}</Tag>
+					<Tag tag={tag.label} color={tag.color}>{tag.label}</Tag>
 				{/each}
 			</div>
 		{/if}

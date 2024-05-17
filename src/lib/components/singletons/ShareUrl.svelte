@@ -1,32 +1,28 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
+	import { page } from '$app/stores';
 	import Icon from '@iconify/svelte';
 
 	let currentUrl: string = '';
 	let isCopied = writable(false);
 
 	onMount(() => {
-		currentUrl = window.location.href;
+		currentUrl = $page.url.origin + $page.url.pathname;
 	});
 
 	function copyUrlToClipboard() {
-		const textarea = document.createElement('textarea');
-		textarea.value = currentUrl;
-		document.body.appendChild(textarea);
-
-		textarea.select();
-		textarea.setSelectionRange(0, 99999);
-
-		document.execCommand('copy');
-
-		document.body.removeChild(textarea);
-
-		isCopied.set(true);
-
-		setTimeout(() => {
-			isCopied.set(false);
-		}, 3000);
+		navigator.clipboard
+			.writeText(currentUrl)
+			.then(() => {
+				isCopied.set(true);
+				setTimeout(() => {
+					isCopied.set(false);
+				}, 3000);
+			})
+			.catch((error) => {
+				console.error('Error copying to clipboard:', error);
+			});
 	}
 </script>
 
