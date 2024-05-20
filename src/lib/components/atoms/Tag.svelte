@@ -5,11 +5,12 @@
 	export let color: 'primary' | 'secondary' = 'primary';
 
 	export let href: string | undefined = undefined;
+	export let tag: string;
 	const isExternalLink = !!href && HttpRegex.test(href);
 	export let target: '_self' | '_blank' = isExternalLink ? '_blank' : '_self';
 	export let rel = isExternalLink ? 'noopener noreferrer' : undefined;
 
-	$: tag = href ? 'a' : 'div';
+	$: tagElement = href ? 'a' : 'div';
 	$: linkProps = {
 		href,
 		target,
@@ -17,12 +18,16 @@
 	};
 </script>
 
-<svelte:element this={tag} class="tag {color}" {...linkProps}>
-	<slot />
+<svelte:element this={tagElement} class="tag {color}" {...linkProps}>
 	{#if isExternalLink}
 		<div class="icon">
+			{tag}
 			<ExternalLinkIcon />
 		</div>
+	{:else}
+		<a data-sveltekit-reload href="/tags/{tag}">
+			<slot />
+		</a>
 	{/if}
 </svelte:element>
 
@@ -50,8 +55,10 @@
 	}
 
 	.icon {
-		width: 16px;
-		height: 16px;
+		display: flex;
+		gap: 15px;
+		width: 100%;
+		height: 20px;
 	}
 
 	a.tag {

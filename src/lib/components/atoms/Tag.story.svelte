@@ -8,10 +8,10 @@
 
 <svelte:component this={Hst.Story} title="Atoms/Tag" layout={{ type: 'grid', width: 200 }}>
 	<svelte:component this={Hst.Variant} title="Primary">
-		<Tag>This is a Tag</Tag>
+		<Tag tag="example-tag">This is a Tag</Tag>
 	</svelte:component>
 
 	<svelte:component this={Hst.Variant} title="Secondary">
-		<Tag color="secondary">This is a Tag</Tag>
+		<Tag color="secondary" tag="example-tag">This is a Tag</Tag>
 	</svelte:component>
 </svelte:component>
