@@ -6,6 +6,7 @@ export async function load({ url }: { url: { pathname: string } }) {
 	const post = filteredPosts.find((post) => post.slug === slug);
 
 	return {
-		post
+		post,
+		allPosts: filteredPosts
 	};
 }
