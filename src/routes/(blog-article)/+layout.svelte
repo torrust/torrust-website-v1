@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import Header from '$lib/components/organisms/Header.svelte';
 	import Footer from '$lib/components/organisms/Footer.svelte';
 	import Tag from '$lib/components/atoms/Tag.svelte';
@@ -9,9 +10,18 @@
 	import type { BlogPost } from '$lib/utils/types';
 	import RelatedPosts from '$lib/components/organisms/RelatedPosts.svelte';
 	import Image from '$lib/components/atoms/Image.svelte';
+	import PrevNextPost from '$lib/components/singletons/PrevNextPost.svelte';
+	import { allPosts } from '$lib/data/blog-posts';
 
-	export let data: { post: BlogPost };
+	export let data: { post: BlogPost; allPosts: BlogPost[] };
+	let post: BlogPost;
+
 	$: ({ post } = data);
+
+	onMount(() => {
+		console.log('Current post:', post);
+		console.log('All posts:', allPosts[0]);
+	});
 
 	let metaKeywords = keywords;
 
@@ -86,6 +96,8 @@
 				<slot />
 			</div>
 		</article>
+
+		<PrevNextPost currentPost={post} {allPosts} />
 
 		{#if post.relatedPosts && post.relatedPosts.length > 0}
 			<div class="container">

@@ -1,0 +1,90 @@
+<script lang="ts">
+	import type { BlogPost } from '$lib/utils/types';
+	import Icon from '@iconify/svelte';
+
+	export let currentPost: BlogPost;
+	export let allPosts: BlogPost[];
+
+	let prevPost: BlogPost | null = null;
+	let nextPost: BlogPost | null = null;
+
+	$: {
+		if (currentPost && allPosts.length) {
+			allPosts.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+			const currentIndex = allPosts.findIndex((post) => post.slug === currentPost.slug);
+
+			if (currentIndex !== -1) {
+				prevPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+				nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+			}
+		}
+	}
+</script>
+
+<div class="container">
+	<div class="nextPost">
+		{#if nextPost}
+			<a href="/{nextPost.slug}">{nextPost.title}</a>
+			<div class="arrow arrowNext">
+				<Icon icon="material-symbols:arrow-left" width="44" height="44" style="color: #650000" />
+				<p>Next Post</p>
+			</div>
+		{:else}
+			<h3 class="inactive">You're up to date. More to come soon!</h3>
+		{/if}
+	</div>
+
+	<div class="previousPost">
+		{#if prevPost}
+			<a href="/{prevPost.slug}">{prevPost.title}</a>
+			<div class="arrow arrowPrevious">
+				<p>Previous Post</p>
+				<Icon icon="material-symbols:arrow-right" width="44" height="44" style="color: #650000" />
+			</div>
+		{:else}
+			<h3 class="inactive">You are reading our first post.</h3>
+		{/if}
+	</div>
+</div>
+
+<style lang="scss">
+	.container {
+		display: flex;
+		justify-content: space-between;
+		border-top: 1px solid #979797;
+		border-bottom: 1px solid #979797;
+	}
+
+	.nextPost,
+	.previousPost {
+		flex: 1;
+		padding-top: 1.5rem;
+		padding-bottom: 1.5rem;
+	}
+
+	.nextPost {
+		border-right: 1px solid #979797;
+	}
+
+	.previousPost {
+		text-align: right;
+	}
+
+	.arrow {
+		display: flex;
+		align-items: center;
+	}
+
+	.arrowNext {
+		justify-content: flex-start;
+	}
+
+	.arrowPrevious {
+		justify-content: flex-end;
+	}
+
+	.inactive {
+		color: gray;
+	}
+</style>
