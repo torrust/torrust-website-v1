@@ -62,14 +62,15 @@ First, we need to create the folder (in this example, a temp folder) where we wi
 <CodeBlock lang="terminal">
 
 ```bash
-mkdir -p ~/Tmp/torrust
-cd ~/Tmp/torrust
+cd /tmp/
+mkdir -p torrust
+cd torrust
 ```
 
 </CodeBlock>
 
 <Callout type="info">
-  This guide used bash commands and it has been tested on Ubuntu Ubuntu 23.04. You should not encounter any problem if you are using a different Linux distribution, but there are some reported issues with Windows compilation for the Tracker. The installation scripts are very simple, so you can easily adapt them to your system or run the commands manually.
+  This guide uses bash commands and it has been tested on Ubuntu Ubuntu 23.04. You should not encounter any problem if you are using a different Linux distribution, but there are some reported issues with Windows compilation for the Tracker. The installation scripts are very simple, so you can easily adapt them to your system or run the commands manually.
 </Callout>
 
 ## Common Dependencies
@@ -88,7 +89,7 @@ sudo apt-get install libsqlite3-dev
 
 This tutorial is tested with this Rust version:
 
-- rustc 1.72.0-nightly (839e9a6e1 2023-07-02)
+- rustc 1.80.0-nightly (9cdfe285c 2024-05-22)
 
 Since we are using the openssl crate with the [vendored](https://docs.rs/openssl/latest/openssl/#vendored) feature, enabled, you will need to install the following dependencies:
 
@@ -107,9 +108,10 @@ Now, we will build the tracker and create the storage folders where persistent d
 ```terminal
 git clone https://github.com/torrust/torrust-tracker.git \\
   && cd torrust-tracker \\
-  && cargo build --release \\
+  && cargo build \\
   && mkdir -p ./storage/tracker/lib/database \\
-  && mkdir -p ./storage/tracker/lib/tls
+  && mkdir -p ./storage/tracker/lib/tls \\
+  && mkdir -p ./storage/tracker/etc
 ```
 
 </CodeBlock>
@@ -133,19 +135,19 @@ After running the Tracker with `cargo run` you should see the following output:
 <CodeBlock lang="output">
 
 ```s
-       Finished `dev` profile [optimized + debuginfo] target(s) in 0.10s
+Finished `dev` profile [optimized + debuginfo] target(s) in 0.09s
      Running `target/debug/torrust-tracker`
-Loading default configuration file: `./share/default/config/tracker.development.sqlite3.toml` ...
-2024-04-22T16:24:23.241961292+01:00 [torrust_tracker::bootstrap::logging][INFO] logging initialized.
-2024-04-22T16:24:23.242613018+01:00 [UDP TRACKER][INFO] Starting on: udp://0.0.0.0:6969
-2024-04-22T16:24:23.242649758+01:00 [torrust_tracker::bootstrap::jobs][INFO] TLS not enabled
-2024-04-22T16:24:23.242670038+01:00 [HTTP TRACKER][INFO] Starting on: http://0.0.0.0:7070
-2024-04-22T16:24:23.242744307+01:00 [HTTP TRACKER][INFO] Started on: http://0.0.0.0:7070
-2024-04-22T16:24:23.242753177+01:00 [torrust_tracker::bootstrap::jobs][INFO] TLS not enabled
-2024-04-22T16:24:23.242834227+01:00 [API][INFO] Starting on http://127.0.0.1:1212
-2024-04-22T16:24:23.242848277+01:00 [API][INFO] Started on http://127.0.0.1:1212
-2024-04-22T16:24:23.242864747+01:00 [HEALTH CHECK API][INFO] Starting on: http://127.0.0.1:1313
-2024-04-22T16:24:23.242897537+01:00 [HEALTH CHECK API][INFO] Started on: http://127.0.0.1:1313
+Loading configuration from default configuration file: `./share/default/config/tracker.development.sqlite3.toml` ...
+2024-05-27T11:39:21.332802857+01:00 [torrust_tracker::bootstrap::logging][INFO] logging initialized.
+2024-05-27T11:39:21.333426924+01:00 [UDP TRACKER][INFO] Starting on: udp://0.0.0.0:6969
+2024-05-27T11:39:21.333462384+01:00 [torrust_tracker::bootstrap::jobs][INFO] TLS not enabled
+2024-05-27T11:39:21.333491694+01:00 [HTTP TRACKER][INFO] Starting on: http://0.0.0.0:7070
+2024-05-27T11:39:21.333599174+01:00 [HTTP TRACKER][INFO] Started on: http://0.0.0.0:7070
+2024-05-27T11:39:21.333615604+01:00 [torrust_tracker::bootstrap::jobs][INFO] TLS not enabled
+2024-05-27T11:39:21.333814923+01:00 [API][INFO] Starting on http://127.0.0.1:1212
+2024-05-27T11:39:21.333839143+01:00 [API][INFO] Started on http://127.0.0.1:1212
+2024-05-27T11:39:21.333883712+01:00 [HEALTH CHECK API][INFO] Starting on: http://127.0.0.1:1313
+2024-05-27T11:39:21.333948472+01:00 [HEALTH CHECK API][INFO] Started on: http://127.0.0.1:1313
 ```
 
 </CodeBlock>
@@ -186,7 +188,7 @@ Then, you can change any value and finally run the tracker with:
 <CodeBlock lang="terminal">
 
 ```bash
-TORRUST_TRACKER_PATH_CONFIG="./storage/tracker/etc/tracker.toml" cargo run
+TORRUST_TRACKER_CONFIG_TOML_PATH="./storage/tracker/etc/tracker.toml" cargo run
 ```
 
 </CodeBlock>
@@ -196,21 +198,20 @@ That would give you this output:
 <CodeBlock lang="output">
 
 ```s
-TORRUST_TRACKER_PATH_CONFIG="./storage/tracker/etc/tracker.toml" cargo run
+TORRUST_TRACKER_CONFIG_TOML_PATH="./storage/tracker/etc/tracker.toml" cargo run
     Finished `dev` profile [optimized + debuginfo] target(s) in 0.09s
      Running `target/debug/torrust-tracker`
-Loading configuration file: `./storage/tracker/etc/tracker.toml` ...
-2024-04-22T16:32:57.035457075+01:00 [torrust_tracker::bootstrap::logging][INFO] logging initialized.
-2024-04-22T16:32:57.036048971+01:00 [UDP TRACKER][INFO] Starting on: udp://0.0.0.0:6969
-2024-04-22T16:32:57.036079671+01:00 [torrust_tracker::bootstrap::jobs][INFO] TLS not enabled
-2024-04-22T16:32:57.036117731+01:00 [HTTP TRACKER][INFO] Starting on: http://0.0.0.0:7070
-2024-04-22T16:32:57.036209310+01:00 [HTTP TRACKER][INFO] Started on: http://0.0.0.0:7070
-2024-04-22T16:32:57.036218550+01:00 [torrust_tracker::bootstrap::jobs][INFO] TLS not enabled
-2024-04-22T16:32:57.036280190+01:00 [API][INFO] Starting on http://127.0.0.1:1212
-2024-04-22T16:32:57.036283750+01:00 [API][INFO] Started on http://127.0.0.1:1212
-2024-04-22T16:32:57.036301960+01:00 [HEALTH CHECK API][INFO] Starting on: http://127.0.0.1:1313
-2024-04-22T16:32:57.036385919+01:00 [HEALTH CHECK API][INFO] Started on: http://127.0.0.1:1313
-
+Loading configuration from file: `./storage/tracker/etc/tracker.toml` ...
+2024-05-27T12:52:00.364641064+01:00 [torrust_tracker::bootstrap::logging][INFO] logging initialized.
+2024-05-27T12:52:00.365277963+01:00 [UDP TRACKER][INFO] Starting on: udp://0.0.0.0:6969
+2024-05-27T12:52:00.365309093+01:00 [torrust_tracker::bootstrap::jobs][INFO] TLS not enabled
+2024-05-27T12:52:00.365355473+01:00 [HTTP TRACKER][INFO] Starting on: http://0.0.0.0:7070
+2024-05-27T12:52:00.365496743+01:00 [HTTP TRACKER][INFO] Started on: http://0.0.0.0:7070
+2024-05-27T12:52:00.365504943+01:00 [torrust_tracker::bootstrap::jobs][INFO] TLS not enabled
+2024-05-27T12:52:00.365596502+01:00 [API][INFO] Starting on http://127.0.0.1:1212
+2024-05-27T12:52:00.365599702+01:00 [API][INFO] Started on http://127.0.0.1:1212
+2024-05-27T12:52:00.365616862+01:00 [HEALTH CHECK API][INFO] Starting on: http://127.0.0.1:1313
+2024-05-27T12:52:00.365711472+01:00 [HEALTH CHECK API][INFO] Started on: http://127.0.0.1:1313
 ```
 
 </CodeBlock>
@@ -222,7 +223,7 @@ You can also inject the configuration with:
 <CodeBlock lang="terminal">
 
 ```bash
-TORRUST_TRACKER_CONFIG=`cat share/default/config/tracker.development.sqlite3.toml` cargo run
+TORRUST_TRACKER_CONFIG_TOML=`cat share/default/config/tracker.development.sqlite3.toml` cargo run
 ```
 
 </CodeBlock>
@@ -264,7 +265,7 @@ For more details about the Torrust Tracker, check the [Tracker documentation](ht
 
 This tutorial has been tested with this Rust version:
 
-- rustc 1.77.1-nightly (839e9a6e1 2024-03-26)
+- rustc 1.80.0-nightly (9cdfe285c 2024-05-22)
 
 To run the tests you will also need to install a command line tool to handle torrent files called [imdl](https://github.com/casey/intermodal). You can install it with the following command:
 
@@ -292,8 +293,8 @@ We will now clone the `torrust-index` repository:
 
 ```terminal
   git clone https://github.com/torrust/torrust-index.git \\
-  cd torrust-index \\
-  && cargo build --release \\
+  && cd torrust-index \\
+  && cargo build \\
   && mkdir -p ./storage/index/lib/database \\
   && mkdir -p ./storage/index/lib/tls
 ```
@@ -310,15 +311,22 @@ TORRUST_INDEX_API_CORS_PERMISSIVE=true cargo run
 
 </CodeBlock>
 
-As you can see we are using the environment variable `TORRUST_IDX_BACK_CORS_PERMISSIVE` to enable a permissive CORS policy. The default port for the Backend is `3001` and for the web server serving the frontend application is `3000`. Since they are different ports, we need to tell the backend to allow request from a different port so that the frontend can make request to the API. To know more about CORS, check the [Mozilla CORS documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
+As you can see we are using the environment variable `TORRUST_IDX_BACK_CORS_PERMISSIVE` to enable a permissive CORS policy. The default port for the Backend is `3001` and for the web server serving the frontend application is `3000`. Since they are different ports, we need to tell the backend to allow requests from a different port so that the frontend can make request to the API. To know more about CORS, check the [Mozilla CORS documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
 
-After running the Backend with `cargo run` you should see the following output:
+After running the Index with `TORRUST_INDEX_API_CORS_PERMISSIVE=true cargo run` you should see the following output:
 
 <CodeBlock lang="output">
 
 ```s
-2023-07-11T11:54:17.553899587+01:00 [torrust_index::web::api::server][INFO] Starting API server with net config: 0.0.0.0:3001 ...
-2023-07-11T11:54:17.553946897+01:00 [torrust_index::web::api::server][INFO] API server listening on http://0.0.0.0:3001
+Loading configuration from default configuration file: `./share/default/config/index.development.sqlite3.toml` ...
+2024-05-27T12:56:25.300980998+01:00 [torrust_index::bootstrap::logging][INFO] logging initialized.
+2024-05-27T12:56:25.425949219+01:00 [torrust_index::web::api::server][INFO] TLS not enabled
+2024-05-27T12:56:25.425976429+01:00 [torrust_index::console::cronjobs::tracker_statistics_importer][INFO] Tracker statistics importer launcher started
+2024-05-27T12:56:25.426077258+01:00 [torrust_index::console::cronjobs::tracker_statistics_importer][INFO] Tracker statistics importer cronjob starting ...
+2024-05-27T12:56:25.426233288+01:00 [torrust_index::web::api::server][INFO] Starting API server with net config: 0.0.0.0:3001 ...
+2024-05-27T12:56:25.426290848+01:00 [torrust_index::console::cronjobs::tracker_statistics_importer][INFO] Tracker statistics importer API server listening on http://127.0.0.1:3002
+2024-05-27T12:56:25.426250898+01:00 [torrust_index::console::cronjobs::tracker_statistics_importer][INFO] Running tracker statistics importer every 2000 milliseconds ...
+2024-05-27T12:56:25.427603675+01:00 [torrust_index::web::api::server][INFO] API server listening on http://0.0.0.0:3001
 ```
 
 </CodeBlock>
@@ -343,8 +351,9 @@ The last repository we need to clone is the `torrust-index-gui` repository . Rem
 
 ```terminal
 git clone https://github.com/torrust/torrust-index-gui.git \\
-  && cd torrust-index-gui.git \\
+  && cd torrust-index-gui \\
   && npm install \\
+  && cp .env.local .env \\
   && npm run dev
 ```
 
@@ -352,11 +361,11 @@ git clone https://github.com/torrust/torrust-index-gui.git \\
 
 You should see the following output:
 
-<Image src="/images/posts/running-torrust-frontend-in-dev-mode.png" alt="Screenshot of Torrust Index Frontend running from the terminal" />
+<Image src="/images/posts/how-to-setup-the-development-environment/npm-run-dev-output.png" alt="Screenshot of Torrust Index GUI running from the terminal" />
 
 Go to <http://localhost:3000/torrents> and you should see the torrent list page page:
 
-<Image src="/images/posts/index-screenshot-torrent-list-page.png" alt="Screenshot of torrent list page on the browser" />
+<Image src="/images/posts/how-to-setup-the-development-environment/index-gui-after-fresh-install.png" alt="Screenshot of torrent list page on the browser" />
 
 For more details about the Torrust Index GUI, check the [Index GUI documentation](https://github.com/torrust/torrust-index-gui).
 
