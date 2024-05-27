@@ -51,7 +51,7 @@ In our quest to elevate the Torrust BitTorrent Tracker's performance, we've embr
 
 In the previous article we introduced to the community the benchmarking tools we are using at the moment to know whether the Tracker performs at the same level as other applications on the market.
 
-With those benchmarking tools we ensure that the Tracker has a good performance and we don't have regressions. If you are curious about how we do benchmarking you can read the "[Benchmarking the Torrust BitTorrent Tracker]about(benchmarking-the-torrust-bittorrent-tracker)" article.
+With those benchmarking tools we ensure that the Tracker has a good performance and we don't have regressions. If you are curious about how we do benchmarking you can read the "[Benchmarking the Torrust BitTorrent Tracker](benchmarking-the-torrust-bittorrent-tracker)" article.
 
 In this article we will explain how we are collecting metrics to know which parts of the code we should improve.
 
@@ -107,21 +107,30 @@ The `announce` request is the most important request a tracker needs to handle. 
 
 Every request is a write/read request. The system is intensive in writes. All requests eventually try to acquire a write lock to include themselves in the peer list. That's why we think that's the main bottleneck in our implementation, at the moment. For that reason we have been trying different implementations of the torrents repository:
 
-- `tokio::sync::RwLock<std::collections::BTreeMap<InfoHash, Entry>>`
-- `std::sync::RwLock<std::collections::BTreeMap<InfoHash, Entry>>`
-- `std::sync::RwLock<std::collections::BTreeMap<InfoHash, Arc<std::sync::Mutex<Entry>>>>`
-- `tokio::sync::RwLock<std::collections::BTreeMap<InfoHash, Arc<std::sync::Mutex<Entry>>>>`
-- `tokio::sync::RwLock<std::collections::BTreeMap<InfoHash, Arc<tokio::sync::Mutex<Entry>>>>`
+<CodeBlock lang="rust">
 
-The first one it's the default one when you run the tracker. We are benchmarking all the implementations.
+```rust
+pub type TorrentsRwLockStd = RwLockStd<EntrySingle>;
+pub type TorrentsRwLockStdMutexStd = RwLockStd<EntryMutexStd>;
+pub type TorrentsRwLockStdMutexTokio = RwLockStd<EntryMutexTokio>;
+pub type TorrentsRwLockTokio = RwLockTokio<EntrySingle>;
+pub type TorrentsRwLockTokioMutexStd = RwLockTokio<EntryMutexStd>;
+pub type TorrentsRwLockTokioMutexTokio = RwLockTokio<EntryMutexTokio>;
+pub type TorrentsSkipMapMutexStd = CrossbeamSkipList<EntryMutexStd>; // Default
+pub type TorrentsSkipMapMutexParkingLot = CrossbeamSkipList<EntryMutexParkingLot>;
+pub type TorrentsSkipMapRwLockParkingLot = CrossbeamSkipList<EntryRwLockParkingLot>;
+pub type TorrentsDashMapMutexStd = XacrimonDashMap<EntryMutexStd>;
+```
+
+</CodeBlock>
+
+The default implementation used in production is `TorrentsSkipMapMutexStd`.
 
 <Callout type="info">
 
-NOTICE: All implementations are based on the `BTreeMap`. The reason we use a `BTreeMap` is because the tracker API has an endpoint where you can get the ordered list of all torrents in the tracker repository.
+**NOTICE**: All implementations are based on types that support ordering like `BTreeMap` or `SkipMap`. The reason we use those types is because the tracker API has an endpoint where you can get the ordered list of all torrents in the tracker repository.
 
 </Callout>
-
-We are implementing a new repository using a different data structure that allows concurrent writes called [DashMap](https://docs.rs/dashmap/latest/dashmap/).
 
 ## Internal Repository Benchmarking
 
@@ -130,45 +139,46 @@ As we explained in a previous article ("[Benchmarking the Torrust BitTorrent Tra
 <CodeBlock lang="terminal">
 
 ```terminal
-cargo run --release -p torrust-torrent-repository-benchmarks -- --threads 4 --sleep 0 --compare true
+cargo bench -p torrust-tracker-torrent-repository
 ```
 
 </CodeBlock>
 
-The output at the time of writing this post is:
+The output at the time of writing this post is similar to:
 
 <CodeBlock lang="terminal">
 
 ```terminal
-tokio::sync::RwLock<std::collections::BTreeMap<InfoHash, Entry>>
-add_one_torrent: Avg/AdjAvg: (60ns, 59ns)
-update_one_torrent_in_parallel: Avg/AdjAvg: (10.909457ms, 0ns)
-add_multiple_torrents_in_parallel: Avg/AdjAvg: (13.88879ms, 0ns)
-update_multiple_torrents_in_parallel: Avg/AdjAvg: (7.772484ms, 7.782535ms)
-
-std::sync::RwLock<std::collections::BTreeMap<InfoHash, Entry>>
-add_one_torrent: Avg/AdjAvg: (43ns, 39ns)
-update_one_torrent_in_parallel: Avg/AdjAvg: (4.020937ms, 4.020937ms)
-add_multiple_torrents_in_parallel: Avg/AdjAvg: (5.896177ms, 5.768448ms)
-update_multiple_torrents_in_parallel: Avg/AdjAvg: (3.883823ms, 3.883823ms)
-
-std::sync::RwLock<std::collections::BTreeMap<InfoHash, Arc<std::sync::Mutex<Entry>>>>
-add_one_torrent: Avg/AdjAvg: (51ns, 49ns)
-update_one_torrent_in_parallel: Avg/AdjAvg: (3.252314ms, 3.149109ms)
-add_multiple_torrents_in_parallel: Avg/AdjAvg: (8.411094ms, 8.411094ms)
-update_multiple_torrents_in_parallel: Avg/AdjAvg: (4.106086ms, 4.106086ms)
-
-tokio::sync::RwLock<std::collections::BTreeMap<InfoHash, Arc<std::sync::Mutex<Entry>>>>
-add_one_torrent: Avg/AdjAvg: (91ns, 90ns)
-update_one_torrent_in_parallel: Avg/AdjAvg: (3.542378ms, 3.435695ms)
-add_multiple_torrents_in_parallel: Avg/AdjAvg: (15.651172ms, 15.651172ms)
-update_multiple_torrents_in_parallel: Avg/AdjAvg: (4.368189ms, 4.257572ms)
-
-tokio::sync::RwLock<std::collections::BTreeMap<InfoHash, Arc<tokio::sync::Mutex<Entry>>>>
-add_one_torrent: Avg/AdjAvg: (111ns, 109ns)
-update_one_torrent_in_parallel: Avg/AdjAvg: (6.590677ms, 6.808535ms)
-add_multiple_torrents_in_parallel: Avg/AdjAvg: (16.572217ms, 16.30488ms)
-update_multiple_torrents_in_parallel: Avg/AdjAvg: (4.073221ms, 4.000122ms)
+     Running benches/repository_benchmark.rs (target/release/deps/repository_benchmark-a9b0013c8d09c3c3)
+add_one_torrent/RwLockStd
+                        time:   [63.057 ns 63.242 ns 63.506 ns]
+Found 12 outliers among 100 measurements (12.00%)
+  2 (2.00%) low severe
+  2 (2.00%) low mild
+  2 (2.00%) high mild
+  6 (6.00%) high severe
+add_one_torrent/RwLockStdMutexStd
+                        time:   [62.505 ns 63.077 ns 63.817 ns]
+Found 11 outliers among 100 measurements (11.00%)
+  4 (4.00%) high mild
+  7 (7.00%) high severe
+Benchmarking add_one_torrent/RwLockStdMutexTokio: Collecting 100 samples in estimated 1.0004 s (10M iterationsadd_one_torrent/RwLockStdMutexTokio
+                        time:   [98.440 ns 98.551 ns 98.660 ns]
+Found 4 outliers among 100 measurements (4.00%)
+  3 (3.00%) low mild
+  1 (1.00%) high severe
+add_one_torrent/RwLockTokio
+                        time:   [107.84 ns 108.18 ns 108.54 ns]
+Found 3 outliers among 100 measurements (3.00%)
+  2 (2.00%) low mild
+  1 (1.00%) high mild
+Benchmarking add_one_torrent/RwLockTokioMutexStd: Collecting 100 samples in estimated 1.0001 s (8.7M iterationadd_one_torrent/RwLockTokioMutexStd
+                        time:   [116.34 ns 116.48 ns 116.63 ns]
+Found 2 outliers among 100 measurements (2.00%)
+  1 (1.00%) high mild
+  1 (1.00%) high severe
+Benchmarking add_one_torrent/RwLockTokioMutexTokio: Collecting 100 samples in estimated 1.0005 s (6.9M iteratiadd_one_torrent/RwLockTokioMutexTokio
+                        time:   [143.39 ns 143.51 ns 143.63 ns]
 ```
 
 </CodeBlock>
@@ -186,16 +196,16 @@ In order to profile the UDP tracker you need to:
 
 Build and run the binary for profiling with:
 
-<CodeBlock lang="terminal">
+<CodeBlock lang="console">
 
-```terminal
-RUSTFLAGS='-g' cargo build --release --bin profiling \
-   && export TORRUST_TRACKER_PATH_CONFIG="./share/default/config/tracker.udp.benchmarking.toml" \
-   && valgrind \
-     --tool=callgrind \
-     --callgrind-out-file=callgrind.out \
-     --collect-jumps=yes \
-     --simulate-cache=yes \
+```console
+RUSTFLAGS='-g' cargo build --release --bin profiling \\
+   && export TORRUST_TRACKER_CONFIG_TOML_PATH="./share/default/config/tracker.udp.benchmarking.toml" \\
+   && valgrind \\
+     --tool=callgrind \\
+     --callgrind-out-file=callgrind.out \\
+     --collect-jumps=yes \\
+     --simulate-cache=yes \\
      ./target/release/profiling 60
 ```
 
@@ -248,7 +258,7 @@ After installing the `cargo flamegraph` package you can generate the flamegraph 
 <CodeBlock lang="terminal">
 
 ```terminal
-TORRUST_TRACKER_PATH_CONFIG="./share/default/config/tracker.udp.benchmarking.toml" cargo flamegraph --bin=profiling -- 60
+TORRUST_TRACKER_CONFIG_TOML_PATH="./share/default/config/tracker.udp.benchmarking.toml" cargo flamegraph --bin=profiling -- 60
 ```
 
 </CodeBlock>
