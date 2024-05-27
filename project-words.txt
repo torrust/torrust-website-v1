@@ -89,4 +89,5 @@ webp
 webroot
 Werror
 WORKDIR
+Xacrimon
 Xdebug
