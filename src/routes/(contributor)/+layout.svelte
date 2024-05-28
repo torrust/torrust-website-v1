@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import Header from '$lib/components/organisms/Header.svelte';
-	import Footer from '$lib/components/organisms/Footer.svelte';
 
 	import Button from '$lib/components/atoms/Button.svelte';
 	import BlogPostCard from '$lib/components/molecules/BlogPostCard.svelte';
@@ -25,8 +23,6 @@
 		numberOfPosts = posts.filter((post) => post.contributorSlug === splitUrl).length;
 	});
 </script>
-
-<Header />
 
 <slot />
 
@@ -63,8 +59,6 @@
 		{/if}
 	</div>
 </div>
-
-<Footer />
 
 <style lang="scss">
 	@import '$lib/scss/_mixins.scss';

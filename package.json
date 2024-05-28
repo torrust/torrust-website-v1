@@ -48,9 +48,13 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@fontsource-variable/roboto-mono": "^5.0.9",
-		"@fontsource-variable/roboto-slab": "^5.0.12",
-		"shiki": "^1.5.2"
+		"@fontsource-variable/roboto-mono": "^5.0.19",
+		"@fontsource-variable/roboto-slab": "^5.0.20",
+		"flexsearch": "^0.7.43",
+		"shiki": "^1.6.1",
+		"shiki-es": "^0.14.0",
+		"vscode-oniguruma": "^2.0.1",
+		"vscode-textmate": "^9.0.0"
 	},
 	"packageManager": "yarn@4.1.0"
 }

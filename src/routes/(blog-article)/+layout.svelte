@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import Header from '$lib/components/organisms/Header.svelte';
-	import Footer from '$lib/components/organisms/Footer.svelte';
 	import Tag from '$lib/components/atoms/Tag.svelte';
 	import { formatDate } from '$lib/utils/date';
 	import ShareButton from '$lib/components/singletons/ShareButton.svelte';
@@ -56,8 +54,6 @@
 </svelte:head>
 
 <div class="article-layout">
-	<Header showBackground />
-
 	<main>
 		<article id="article-content">
 			<div class="header">
@@ -105,8 +101,6 @@
 			</div>
 		{/if}
 	</main>
-
-	<Footer />
 </div>
 
 <style lang="scss">

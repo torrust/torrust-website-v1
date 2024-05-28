@@ -60,7 +60,7 @@ You can create a torrent file in many different ways. Probably the most common w
 
 For example, if you are using [qBittorrent](https://www.qbittorrent.org/), this is the torrent creation form:
 
-![Create ](./images/posts/create-a-torrent-file-with-qbittorrent-and-source-field.png)
+<Image src="/images/posts/create-a-torrent-file-with-qbittorrent-and-source-field.png" alt="Create" />
 
 As you can see there is a "source" field in the "Fields" group of inputs.
 

@@ -47,7 +47,7 @@ hidden: false
 - [Decomposing the Torrust Tracker Containerfile](#decomposing-the-torrust-tracker-containerfile)
 - [Other Good Practices](#other-good-practices)
 - [Other Considerations](#other-considerations)
-- [Links](links)
+- [Links](#links)
 - [Conclusion](#conclusion)
 
 </PostTable>
