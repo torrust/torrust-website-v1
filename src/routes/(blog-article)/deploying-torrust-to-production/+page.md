@@ -67,7 +67,7 @@ You can find the docker compose configuration used in this guide on the followin
 
 <https://github.com/torrust/torrust-compose/tree/main/droplet>
 
-Although we are using a droplet this tutorial is intended to be so generic that
+Although we are using a droplet, this tutorial is intended to be so generic that
 you should be able to setup the services in any virtual machine with docker and docker compose.
 
 This tutorial is based on the Digital Ocean tutorial:
@@ -336,7 +336,7 @@ That record implements the [BEP 34 DNS Tracker Preferences](https://www.bittorre
 
 That allows administrators to declare the port and the service priorities for a tracker domain. In our case, we have two different trackers running on ports `6969` and `443` and we prioritize the UDP tracker.
 
-Some services related to tracker (for instance <https://newtrackon.com>) use this DNS record to verify tracker URls.
+Some services related to tracker (for instance <https://newtrackon.com>) use this DNS record to verify tracker URLs.
 
 ## Install The Application
 
@@ -347,18 +347,18 @@ Let's Encrypt. Once we generate the certificates we can change the configuration
 
 We'll start by launching your app in a basic, non-secure mode. Initial deployment steps will be covered, focusing on functionality before implementing SSL/TLS certificates. We need to run the application in order to generate certificates with Let's Encrypt.
 
-First, we need to get the docker compose configuration. You can download it directly from the [GitHub repo](https://github.com/torrust/torrust-compose) or you can use Git:
+First, we need to get the docker compose configuration. You can download it directly from the [Torrust Compose GitHub repo](https://github.com/torrust/torrust-compose) or you can use Git:
 
 <CodeBlock lang="bash">
 
 ```bash
-cd
-mkdir -p github/torrust
-cd torrust/
-git clone --single-branch --branch main https://github.com/torrust/torrust-compose.git
-cd torrust-compose/
-git status
-cd droplet/
+cd \\
+  && mkdir -p github/torrust \\
+  && cd torrust/  \\
+  && git clone --single-branch --branch main https://github.com/torrust/torrust-compose.git  \\
+  && cd torrust-compose/  \\
+  && git status  \\
+  && cd droplet/
 ```
 
 </CodeBlock>
@@ -422,8 +422,9 @@ or leave the default values. But at least you must change the domain and the sec
 First open the `.env` file and find these environment variables:
 
 - `TORRUST_INDEX_GUI_API_BASE_URL`
-- `TORRUST_INDEX_TRACKER_API_TOKEN`
-- `TORRUST_TRACKER_API_ADMIN_TOKEN`
+- `TORRUST_INDEX_CONFIG_OVERRIDE_TRACKER__TOKEN`
+- `TORRUST_INDEX_CONFIG_OVERRIDE_AUTH__SECRET_KEY`
+- `TORRUST_TRACKER_CONFIG_OVERRIDE_HTTP_API__ACCESS_TOKENS__ADMIN`
 
 Replace the value for `TORRUST_INDEX_GUI_API_BASE_URL` with your domain:
 
@@ -431,9 +432,7 @@ Replace the value for `TORRUST_INDEX_GUI_API_BASE_URL` with your domain:
 TORRUST_INDEX_GUI_API_BASE_URL='http://index.your-domain.com/api/v1'
 ```
 
-And replace the value `MyAccessToken` with you new token.
-
-You can generate the secret token with:
+You can generate the Tracker API token and the Auth Secret Key with:
 
 <CodeBlock lang="bash">
 
@@ -444,35 +443,8 @@ jcrmbzlGyeP7z53TUQtXmtltMb5TubsIE9e0DPLnS4Ih29JddQw5JA==
 
 </CodeBlock>
 
-You also need to change the domain, change the Tracker API token and generate a secret token for the authentication in the Index configuration `storage/index/etc/index.toml`:
-
-```toml
-...
-
-[tracker]
-url = "udp://tracker.torrust-demo.com:6969"
-...
-token = "MyAccessToken"
-...
-
-[auth]
-...
-secret_key = "MaxVerstappenWC2021"
-
-[mail]
-email_verification_enabled = false
-from = "example@email.com"
-reply_to = "noreply@email.com"
-username = ""
-password = ""
-server = "mailcatcher"
-port = 1025
-
-...
-```
-
 <Callout type="info">
-  Notice we are not sending emails from the application because user's email validation is disabled on registration for the demo. If you want to enable email validation you will need to provide the SMTP configuration including the password.
+  NOTICE: We are not sending emails from the application because user's email validation is disabled on registration for the demo. If you want to enable email validation you will need to provide the SMTP configuration including the password in the `storage/index/etc/index.toml` config file.
 </Callout>
 
 Now, you should be able to run the application with the following command:
