@@ -50,7 +50,7 @@ hidden: false
   - [Monitoring](#monitoring)
 - [Cost](#cost)
 - [Other Considerations](#other-considerations)
-- [Links](links)
+- [Links](#links)
 - [Conclusion](#conclusion)
 
 </PostTable>
@@ -322,7 +322,7 @@ Then you need to create two `A` records to point the domains to the droplet IP (
 
 Here is how the DNS configuration looks like for our demo:
 
-![Create ](./images/posts/deploying-torrust-to-production/dns-configuration.png)
+<Image src="/images/posts/deploying-torrust-to-production/dns-configuration.png" alt="Create" />
 
 ### BEP 34
 
@@ -1070,11 +1070,11 @@ We have set up both.
 
 With the "resource alerts" you can be notified when the droplet is having trouble with the resources (memory, CPU, disk or bandwidth).
 
-![Create ](./images/posts/deploying-torrust-to-production/digital-ocean-monitoring-resource-alerts.png)
+<Image src="/images/posts/deploying-torrust-to-production/digital-ocean-monitoring-resource-alerts.png" alt="Create" />
 
 And "uptime checks" can be used to monitor the state of the services.
 
-![Create ](./images/posts/deploying-torrust-to-production/digital-ocean-monitoring-uptime.png)
+<Image src="/images/posts/deploying-torrust-to-production/digital-ocean-monitoring-uptime.png" alt="Create" />
 
 We used the health check endpoints for some services like APIs and the HTTP tracker.
 

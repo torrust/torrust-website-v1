@@ -4,9 +4,12 @@
 	import RssLink from '$lib/components/atoms/RssLink.svelte';
 	import Socials from '$lib/components/molecules/Socials.svelte';
 	import AnimatedHamburger from '$lib/components/singletons/AnimatedHamburger.svelte';
-	import Strap from '../singletons/Strap.svelte';
+	import Strap from '$lib/components/singletons/Strap.svelte';
+	import SearchBar from '$lib/components/singletons/SearchBar.svelte';
+	import type { BlogPost } from '$lib/utils/types';
 
 	export let showBackground = false;
+	export let posts: BlogPost[];
 
 	let isMenuOpen = false;
 
@@ -17,6 +20,12 @@
 	function closeMenu() {
 		isMenuOpen = false;
 	}
+
+	function handleLinkClick() {
+		isMenuOpen = false;
+	}
+
+	let searchTerm = '';
 </script>
 
 <Strap />
@@ -28,6 +37,9 @@
 		<AnimatedHamburger {isMenuOpen} {toggleMenu}>
 			<div class="links-wrapper">
 				<ul class="links">
+					<li>
+						<SearchBar {searchTerm} on:linkClick={handleLinkClick} {posts} />
+					</li>
 					<li>
 						<a href="/blog">Blog</a>
 					</li>

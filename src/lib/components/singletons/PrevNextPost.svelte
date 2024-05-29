@@ -23,27 +23,27 @@
 </script>
 
 <div class="container">
-	<div class="nextPost">
-		{#if nextPost}
-			<a href="/{nextPost.slug}">{nextPost.title}</a>
-			<div class="arrow arrowNext">
-				<Icon icon="material-symbols:arrow-left" width="44" height="44" style="color: #650000" />
-				<p>Next Post</p>
-			</div>
-		{:else}
-			<h3 class="inactive">You're up to date. More to come soon!</h3>
-		{/if}
-	</div>
-
 	<div class="previousPost">
 		{#if prevPost}
 			<a href="/{prevPost.slug}">{prevPost.title}</a>
 			<div class="arrow arrowPrevious">
+				<Icon icon="material-symbols:arrow-left" width="44" height="44" style="color: #650000" />
 				<p>Previous Post</p>
-				<Icon icon="material-symbols:arrow-right" width="44" height="44" style="color: #650000" />
 			</div>
 		{:else}
 			<h3 class="inactive">You are reading our first post.</h3>
+		{/if}
+	</div>
+
+	<div class="nextPost">
+		{#if nextPost}
+			<a href="/{nextPost.slug}">{nextPost.title}</a>
+			<div class="arrow arrowNext">
+				<p>Next Post</p>
+				<Icon icon="material-symbols:arrow-right" width="44" height="44" style="color: #650000" />
+			</div>
+		{:else}
+			<h3 class="inactive">You're up to date. More to come soon!</h3>
 		{/if}
 	</div>
 </div>
@@ -64,11 +64,12 @@
 	}
 
 	.nextPost {
-		border-right: 1px solid #979797;
+		border-left: 1px solid #979797;
+		text-align: right;
 	}
 
 	.previousPost {
-		text-align: right;
+		text-align: left;
 	}
 
 	.arrow {
@@ -77,11 +78,11 @@
 	}
 
 	.arrowNext {
-		justify-content: flex-start;
+		justify-content: flex-end;
 	}
 
 	.arrowPrevious {
-		justify-content: flex-end;
+		justify-content: flex-start;
 	}
 
 	.inactive {
