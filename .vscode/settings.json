@@ -7,7 +7,5 @@
 	"frontMatter.content.autoUpdateDate": false,
 	"frontMatter.content.fmHighlight": true,
 	"frontMatter.content.publicFolder": "static",
-	"cSpell.words": [
-		"adduser"
-	]
+	"cSpell.words": ["adduser"]
 }
