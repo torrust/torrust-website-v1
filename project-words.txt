@@ -6,6 +6,7 @@ bencoded
 Bencoding
 binstall
 Bragilevsky
+Bram
 buildtime
 callgrind
 Callout
@@ -17,6 +18,7 @@ Containerfiles
 corepack
 cpus
 Datacenter
+datacenters
 dearmor
 debuginfo
 Dibert
@@ -25,6 +27,7 @@ distroless
 Dockerfiles
 Dockerizing
 Dsve
+Fidonet
 flamegraph
 flamegraphs
 fontsource
@@ -38,6 +41,7 @@ iconify
 imdl
 indistinctively
 infohash
+IPFS
 johnthagen
 Juggery
 kcachegrind
@@ -51,6 +55,7 @@ libz
 mailcatcher
 mdsvex
 Metainfo
+mickvandijke
 nojekyll
 nologin
 Nuxt
