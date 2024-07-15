@@ -30,13 +30,13 @@
 						</li>
 					</ul>
 					<li>
-						<a href="#howContribute">How to contribute?</a>
+						<a href="howContribute">How to contribute?</a>
 					</li>
 					<li>
-						<a href="#knowledgeBase">Knowledge base</a>
+						<a href="knowledgeBase">Knowledge base</a>
 					</li>
 					<li>
-						<a href="#resources">Resources</a>
+						<a href="resources">Resources</a>
 					</li>
 				</ul>
 			</div>

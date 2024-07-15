@@ -74,10 +74,10 @@
 						</li>
 					</ul>
 					<li>
-						<a href="#licenses">Licenses</a>
+						<a href="licenses">Licenses</a>
 					</li>
 					<li>
-						<a href="#roadmap">Roadmap</a>
+						<a href="roadmap">Roadmap</a>
 					</li>
 				</ul>
 			</div>

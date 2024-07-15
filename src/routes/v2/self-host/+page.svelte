@@ -24,7 +24,7 @@
 						</li>
 					</ul>
 					<li>
-						<a href="#torrustTracker">Torrust tracker</a>
+						<a href="torrustTracker">Torrust tracker</a>
 					</li>
 				</ul>
 			</div>

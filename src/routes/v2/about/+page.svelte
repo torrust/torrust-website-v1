@@ -55,15 +55,15 @@
 						</ul>
 					{/if}
 					<li>
-						<a href="#torrust">Why Torrust?</a>
+						<a href="torrust">Why Torrust?</a>
 					</li>
 					<li>
-						<a href="#team">The team?</a>
+						<a href="team">The team?</a>
 					</li>
 					<li>
-						<a href="#collaborators">Collaborators?</a>
+						<a href="collaborators">Collaborators?</a>
 					</li>
-					<li><a href="#sponsors">Sponsors?</a></li>
+					<li><a href="sponsors">Sponsors?</a></li>
 				</ul>
 			</div>
 		</PostTable>
