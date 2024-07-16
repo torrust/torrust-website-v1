@@ -13,7 +13,7 @@
 
 <div class="container">
 	<div class="contribute-container">
-		<h2>Why Contribute</h2>
+		<h2>Why Contribute to Our Project?</h2>
 		<p>
 			Sapien malesuada massa quam gravida ipsum iaculis nisl massa id. Sit tortor morbi in aenean
 			lectus vel nulla dolor. Facilisis rhoncus viverra consequat dictum. Lobortis venenatis morbi
