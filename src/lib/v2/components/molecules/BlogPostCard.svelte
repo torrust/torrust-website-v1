@@ -1,6 +1,7 @@
 <script lang="ts">
 	export let title: string;
-	export let description: string;
+	export let description: string = '';
+	export let date: string;
 </script>
 
 <div class="container">
@@ -15,7 +16,7 @@
 		<p>
 			{description}
 		</p>
-		<p>Author – May 13, 2024</p>
+		<p>{date}</p>
 	</div>
 </div>
 

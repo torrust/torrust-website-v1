@@ -2,6 +2,7 @@
 	import PostContainer from '$lib/v2/components/molecules/PostContainer.svelte';
 	import PostTable from '$lib/v2/components/molecules/PostTable.svelte';
 	import PostBody from '$lib/v2/components/molecules/PostBody.svelte';
+	import Accordion from '$lib/v2/components/molecules/Accordion.svelte';
 </script>
 
 <div class="container">
@@ -11,27 +12,27 @@
 				<ul>
 					<li>
 						<a href="#torrustSolution">Torrent solution (Index + Tracker)</a>
+						<Accordion>
+							<ul>
+								<li>
+									<a href="#buildSources">Build from sources (Rust)</a>
+								</li>
+								<li>
+									<a href="#docker">Docker</a>
+								</li>
+								<li>
+									<a href="#tutorials">Tutorials</a>
+								</li>
+							</ul>
+						</Accordion>
 					</li>
-					<ul>
-						<li>
-							<a href="#buildSources">Build from sources (Rust)</a>
-						</li>
-						<li>
-							<a href="#docker">Docker</a>
-						</li>
-						<li>
-							<a href="#tutorials">Tutorials</a>
-						</li>
-					</ul>
-					<li>
-						<a href="torrustTracker">Torrust tracker</a>
-					</li>
+					<li>Torrust tracker</li>
 				</ul>
 			</div>
 		</PostTable>
 
 		<PostBody>
-			<div>
+			<div class="article">
 				<h2 id="torrustSolution">Torrent solution (Index + Tracker)</h2>
 				<p>
 					The Torrust Solution is a complete installation of bot a BitTorrent Index which is
@@ -85,3 +86,18 @@
 		</PostBody>
 	</PostContainer>
 </div>
+
+<style lang="scss">
+	@import '$lib/scss/breakpoints.scss';
+
+	.article {
+		h2,
+		h3 {
+			margin-top: 1rem;
+		}
+
+		p {
+			margin-top: 1rem;
+		}
+	}
+</style>

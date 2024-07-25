@@ -8,14 +8,17 @@
 		<BlogPostCard
 			title="Luctus enim et risus pulvinar consectetur adipiscing diam amet"
 			description="Pellentesque gravida sed id arcu tempor sed donec. Tortor praesent justo egestas vitae vestibulum consequat convallis dia..."
+			date={'May 13, 2024'}
 		/>
 		<BlogPostCard
 			title="Luctus enim et risus pulvinar consectetur adipiscing diam amet"
 			description="Pellentesque gravida sed id arcu tempor sed donec. Tortor praesent justo egestas vitae vestibulum consequat convallis dia..."
+			date={'May 13, 2024'}
 		/>
 		<BlogPostCard
 			title="Luctus enim et risus pulvinar consectetur adipiscing diam amet"
 			description="Pellentesque gravida sed id arcu tempor sed donec. Tortor praesent justo egestas vitae vestibulum consequat convallis dia..."
+			date={'May 13, 2024'}
 		/>
 	</div>
 	<a href="/">All Articles</a>
