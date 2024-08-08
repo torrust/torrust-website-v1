@@ -1,5 +1,4 @@
 <script lang="ts">
-	import BlogPostCard from '$lib/v2/components/molecules/BlogPostCard.svelte';
 	import BlogPostCardRecent from '$lib/v2/components/molecules/BlogPostCardRecent.svelte';
 </script>
 
@@ -36,34 +35,6 @@
 				date={'May 13, 2024'}
 			/>
 		</div>
-	</div>
-
-	<div>
-		<BlogPostCard
-			title={'Aenean et et nisl nullam: In dignissim tellus cursus sagittis vestibulum massa lacinia est'}
-			description={'Viverra dignissim eget pellentesque elementum pharetra accumsan laoreet volutpat. Gravida lectus feugiat cursus ipsum ut id cursus arcu ultricies. Enim dictumst nec consectetur euismod amet nibh donec. Felis tincidunt posuere libero enim porta nibh pretium neque. Elit sagittis volutpat tincidunt neque adipiscing maecenas tellus sit.'}
-			date={'May 13, 2024'}
-		/>
-		<BlogPostCard
-			title={'Aenean et et nisl nullam: In dignissim tellus cursus sagittis vestibulum massa lacinia est'}
-			description={'Viverra dignissim eget pellentesque elementum pharetra accumsan laoreet volutpat. Gravida lectus feugiat cursus ipsum ut id cursus arcu ultricies. Enim dictumst nec consectetur euismod amet nibh donec. Felis tincidunt posuere libero enim porta nibh pretium neque. Elit sagittis volutpat tincidunt neque adipiscing maecenas tellus sit.'}
-			date={'May 13, 2024'}
-		/>
-		<BlogPostCard
-			title={'Aenean et et nisl nullam: In dignissim tellus cursus sagittis vestibulum massa lacinia est'}
-			description={'Viverra dignissim eget pellentesque elementum pharetra accumsan laoreet volutpat. Gravida lectus feugiat cursus ipsum ut id cursus arcu ultricies. Enim dictumst nec consectetur euismod amet nibh donec. Felis tincidunt posuere libero enim porta nibh pretium neque. Elit sagittis volutpat tincidunt neque adipiscing maecenas tellus sit.'}
-			date={'May 13, 2024'}
-		/>
-		<BlogPostCard
-			title={'Aenean et et nisl nullam: In dignissim tellus cursus sagittis vestibulum massa lacinia est'}
-			description={'Viverra dignissim eget pellentesque elementum pharetra accumsan laoreet volutpat. Gravida lectus feugiat cursus ipsum ut id cursus arcu ultricies. Enim dictumst nec consectetur euismod amet nibh donec. Felis tincidunt posuere libero enim porta nibh pretium neque. Elit sagittis volutpat tincidunt neque adipiscing maecenas tellus sit.'}
-			date={'May 13, 2024'}
-		/>
-		<BlogPostCard
-			title={'Aenean et et nisl nullam: In dignissim tellus cursus sagittis vestibulum massa lacinia est'}
-			description={'Viverra dignissim eget pellentesque elementum pharetra accumsan laoreet volutpat. Gravida lectus feugiat cursus ipsum ut id cursus arcu ultricies. Enim dictumst nec consectetur euismod amet nibh donec. Felis tincidunt posuere libero enim porta nibh pretium neque. Elit sagittis volutpat tincidunt neque adipiscing maecenas tellus sit.'}
-			date={'May 13, 2024'}
-		/>
 	</div>
 </div>
 
