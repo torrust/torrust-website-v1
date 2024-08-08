@@ -1,82 +1,55 @@
 <script lang="ts">
+	import Cards from '$lib/v2/components/atoms/Cards.svelte';
+	import Tag from '$lib/components/atoms/Tag.svelte';
+	import Image from '$lib/components/atoms/Image.svelte';
+	import { formatDate } from '$lib/utils/date';
+
 	export let title: string;
-	export let description: string = '';
+	export let coverImage: string | undefined = undefined;
+	export let excerpt: string;
+	export let slug: string;
+	export let tags: string[] | undefined;
+	export let readingTime: string | undefined = undefined;
 	export let date: string;
+
+	export let showImage = true;
+
+	const formattedDate = formatDate(date);
 </script>
 
-<div class="container">
-	<div class="image-container">
-		<img
-			src="https://images.unsplash.com/photo-1548504769-900b70ed122e?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-			alt=""
-		/>
+<Cards
+	href="/{slug}"
+	target="_self"
+	additionalClass="blog-post-card {!showImage || !coverImage ? 'no-image' : ''}"
+>
+	<div class="image" slot="image">
+		{#if coverImage}
+			<Image src={coverImage} alt="Cover image of this blog post" />
+		{/if}
 	</div>
-	<div class="details-container">
-		<h3>{title}</h3>
-		<p>
-			{description}
+	<div class="content" slot="content">
+		<p class="title">
+			{title}
 		</p>
-		<p>{date}</p>
+		{#if date}
+			<div class="date">Published on {formattedDate}</div>
+		{/if}
+		{#if readingTime}
+			<div class="note">{readingTime}</div>
+		{/if}
+		{#if excerpt}
+			<p class="text">
+				{excerpt}
+			</p>
+		{/if}
 	</div>
-</div>
-
-<style lang="scss">
-	@import '$lib/scss/breakpoints.scss';
-
-	.container {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		margin-top: 3rem;
-
-		.image-container {
-			object-fit: cover;
-		}
-
-		img {
-			height: 140px;
-		}
-
-		.details-container {
-			margin-top: 1.5rem;
-			gap: 0.5rem;
-		}
-
-		h3 {
-			font-size: 1rem;
-		}
-	}
-
-	@include for-tablet-portrait-up {
-		.container {
-			flex-direction: row;
-			justify-content: center;
-			gap: 1.5rem;
-		}
-
-		.image-container {
-			flex: 1;
-			width: 100%;
-			height: auto;
-			object-fit: cover;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
-
-		.details-container {
-			flex: 3;
-			margin-bottom: 1.5rem;
-			display: flex;
-			flex-direction: column;
-			align-items: flex-start;
-			justify-content: center;
-		}
-
-		img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-		}
-	}
-</style>
+	<div class="footer" slot="footer">
+		{#if tags?.length}
+			<div class="tags">
+				{#each tags.slice(0, 2) as tag}
+					<Tag {tag}><a href="/tags/{tag}">{tag}</a></Tag>
+				{/each}
+			</div>
+		{/if}
+	</div>
+</Cards>

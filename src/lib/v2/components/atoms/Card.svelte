@@ -3,7 +3,8 @@
 </script>
 
 <div class="container">
-	<p>{title}</p>
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
+	<p>{@html title}</p>
 </div>
 
 <style lang="scss">

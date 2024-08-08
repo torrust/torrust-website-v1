@@ -6,7 +6,12 @@
 	import PostBody from '$lib/v2/components/molecules/PostBody.svelte';
 	import Accordion from '$lib/v2/components/molecules/Accordion.svelte';
 
-	import { indexTitleArr1, indexTitleArr2 } from '$lib/v2/constants/constants';
+	import {
+		indexTitleArr1,
+		indexTitleArr2,
+		indexTableHeadings,
+		indexTableData
+	} from '$lib/v2/constants/constants';
 </script>
 
 <div class="container">
@@ -39,7 +44,7 @@
 			lectus vel nulla dolor. Facilisis rhoncus viverra consequat dictum. Lobortis venenatis morbi
 			et tortor feugiat.
 		</p>
-		<Table />
+		<Table tableHeading={indexTableHeadings} tableData={indexTableData} />
 	</div>
 
 	<PostContainer>

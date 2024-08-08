@@ -12,15 +12,16 @@
 			<h2>Torrust Index</h2>
 			<p>The Index is a feature-rich torrent indexing site.</p>
 			<p>
-				It is split between an API (backend) built with Rust, and our reference web app that
-				consumes the API, built with Vue 3.
+				It is split between an API (backend) built with <a href="https://www.rust-lang.org/">Rust</a
+				>, and our reference web app that consumes the API, built with
+				<a href="https://vuejs.org/">Vue 3</a>.
 			</p>
 		</div>
 		<div>
 			<h2>Torrust Tracker</h2>
 			<p>
 				The Tracker is a lightweight but incredible high-performance and feature-rich BitTorrent
-				tracker written in Rust.
+				tracker written in <a href="https://www.rust-lang.org/">Rust</a>.
 			</p>
 			<p>
 				It aims to provide a reliable and efficient solution for serving torrents to a vast number

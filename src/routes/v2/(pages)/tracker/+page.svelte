@@ -6,7 +6,12 @@
 	import PostBody from '$lib/v2/components/molecules/PostBody.svelte';
 	import Accordion from '$lib/v2/components/molecules/Accordion.svelte';
 
-	import { trackerTitleArr1, trackerTitleArr2 } from '$lib/v2/constants/constants';
+	import {
+		trackerTitleArr1,
+		trackerTitleArr2,
+		trackerTableHeadings,
+		indexTableData
+	} from '$lib/v2/constants/constants';
 </script>
 
 <div class="container">
@@ -39,16 +44,41 @@
 			lectus vel nulla dolor. Facilisis rhoncus viverra consequat dictum. Lobortis venenatis morbi
 			et tortor feugiat.
 		</p>
-		<Table />
+		<Table tableHeading={trackerTableHeadings} tableData={indexTableData} />
+	</div>
+
+	<div class="inner-container">
+		<h2>Performance</h2>
+		<p>
+			It's important to outline the compromises made during the Torrust Tracker's development. Our
+			aim was to create a tracker that is not only quick and reliable but also feature-rich and
+			maintainable. Often, these two sets of goals conflict with each other. We acknowledge that
+			achieving the highest speed comes with certain limitations.
+		</p>
+		<p>Generally, our approach has been:</p>
+		<p>
+			<em>
+				“Accepting a minor reduction in speed for significant gains highlights our dedication to
+				offering a tracker that excels in features and user-friendliness, not just in speed.”
+			</em>
+		</p>
+		<p>
+			We are using the aquatic <a
+				href="https://github.com/greatest-ape/aquatic/tree/master/crates/bencher">"bencher"</a
+			> tool for benchmarking.
+		</p>
+		<p>
+			You can also read our blog article about <a
+				href="https://torrust.com/benchmarking-the-torrust-bittorrent-tracker"
+				>"benchmarking for the tracker"</a
+			>.
+		</p>
 	</div>
 
 	<PostContainer>
 		<PostTable>
 			<div>
 				<ul>
-					<li>
-						<a href="#performance">Performance</a>
-					</li>
 					<li>
 						<a href="#installation">Installation</a>
 						<Accordion>
@@ -112,32 +142,6 @@
 
 		<PostBody>
 			<div class="article">
-				<h2 id="performance">Performance</h2>
-				<p>
-					It's important to outline the compromises made during the Torrust Tracker's development.
-					Our aim was to create a tracker that is not only quick and reliable but also feature-rich
-					and maintainable. Often, these two sets of goals conflict with each other. We acknowledge
-					that achieving the highest speed comes with certain limitations.
-				</p>
-				<p>Generally, our approach has been:</p>
-				<p>
-					<em>
-						“Accepting a minor reduction in speed for significant gains highlights our dedication to
-						offering a tracker that excels in features and user-friendliness, not just in speed.”
-					</em>
-				</p>
-				<p>
-					We are using the aquatic <a
-						href="https://github.com/greatest-ape/aquatic/tree/master/crates/bencher">"bencher"</a
-					> tool for benchmarking.
-				</p>
-				<p>
-					You can also read our blog article about <a
-						href="https://torrust.com/benchmarking-the-torrust-bittorrent-tracker"
-						>"benchmarking for the tracker"</a
-					>.
-				</p>
-
 				<h2 id="installation">Installation</h2>
 				<p>
 					Massa sit tempor massa blandit suscipit. Vestibulum in faucibus suspendisse enim at sit.
