@@ -3,7 +3,7 @@
 </script>
 
 <div class="container">
-	<p>{title}</p>
+	<p>{@html title}</p>
 </div>
 
 <style lang="scss">
