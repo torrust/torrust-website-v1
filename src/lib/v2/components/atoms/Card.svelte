@@ -3,6 +3,7 @@
 </script>
 
 <div class="container">
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 	<p>{@html title}</p>
 </div>
 
