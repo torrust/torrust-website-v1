@@ -25,6 +25,7 @@ export const importPosts = (render = false) => {
 
 	const posts: BlogPost[] = [];
 	for (const path in imports) {
+		if (path.startsWith('/src/routes/v2')) continue;
 		const post = imports[path] as ImportedModule;
 		if (post) {
 			posts.push({
