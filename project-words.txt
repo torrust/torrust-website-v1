@@ -12,6 +12,7 @@ callgrind
 Callout
 certbot
 certonly
+Chatrooms
 Chihaya
 containerfile
 Containerfiles
@@ -35,6 +36,7 @@ fullchain
 HEALTHCHECK
 heaptrack
 Heiko
+Helpdesk
 Histoire
 hotspots
 iconify
@@ -47,6 +49,7 @@ Juggery
 kcachegrind
 keyrings
 Kimbatt
+Laravel
 letsencrypt
 libhwloc
 libsqlite
@@ -63,6 +66,7 @@ opentracker
 passcode
 pexels
 postbuild
+postmarkapp
 println
 privkey
 problably
@@ -82,9 +86,12 @@ signup
 Stackoverflow
 striptags
 struct
+themoviedb
 tlsv
+TMDB
 torrenting
 Torrust
+Troubleshoting
 Tzou
 usermod
 valgrind
