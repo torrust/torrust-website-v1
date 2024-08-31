@@ -6,5 +6,6 @@
 	"frontMatter.framework.startCommand": "npm run dev",
 	"frontMatter.content.autoUpdateDate": false,
 	"frontMatter.content.fmHighlight": true,
-	"frontMatter.content.publicFolder": "static"
+	"frontMatter.content.publicFolder": "static",
+	"cSpell.words": ["adduser"]
 }

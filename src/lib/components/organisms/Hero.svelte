@@ -9,7 +9,7 @@
 </script>
 
 <section id="hero">
-	<h1 class="hello">Modern and Private BitTorrent Index and Tracker</h1>
+	<h1 class="hello">Modern BitTorrent Index and Tracker</h1>
 	<p class="intro">
 		<!-- Built with Rust -->
 		<!-- <span class="left">Open Source</span>
