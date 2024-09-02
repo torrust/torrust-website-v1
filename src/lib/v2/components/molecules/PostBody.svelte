@@ -9,6 +9,7 @@
 		<h2 id={item.link}>{item.heading}</h2>
 		{#if item.body.length > 0}
 			{#each item.body as para}
+				<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 				<p>{@html para}</p>
 			{/each}
 		{/if}
@@ -16,6 +17,7 @@
 			<h3 id={subheading.link}>{subheading.heading}</h3>
 			{#if subheading.body.length > 0}
 				{#each subheading.body as body}
+					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 					{@html body}
 				{/each}
 			{/if}

@@ -252,7 +252,7 @@ export const trackerTable: TableItem[] = [
 			{
 				heading: 'Build from sources (Rust)',
 				link: '#buildSources'
-			},
+			}
 		]
 	},
 	{
@@ -341,7 +341,7 @@ export const communityTable: TableItem[] = [
 			{
 				heading: 'Join us today',
 				link: '#joinUs'
-			},
+			}
 		]
 	},
 	{
@@ -375,7 +375,7 @@ export const communityTable: TableItem[] = [
 		heading: 'Resources',
 		link: '#resources',
 		subheadings: []
-	},
+	}
 ];
 
 export const aboutTable: TableItem[] = [
@@ -410,7 +410,7 @@ export const aboutTable: TableItem[] = [
 			{
 				heading: 'Conclusion',
 				link: '#conclusion'
-			},
+			}
 		]
 	},
 	{
@@ -436,7 +436,7 @@ export const aboutTable: TableItem[] = [
 			{
 				heading: 'Integration & Interoperability',
 				link: '#integration'
-			},
+			}
 		]
 	},
 	{
@@ -453,5 +453,5 @@ export const aboutTable: TableItem[] = [
 		heading: 'Sponsors',
 		link: '#sponsors',
 		subheadings: []
-	},
+	}
 ];

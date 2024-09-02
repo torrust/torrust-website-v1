@@ -9,13 +9,7 @@
 		posts: BlogPost[];
 	};
 
-	let isMenuOpen = false;
-
 	let { posts } = data;
-
-	function handleLinkClick() {
-		isMenuOpen = false;
-	}
 
 	let searchTerm = '';
 </script>
@@ -24,7 +18,7 @@
 <div class="container">
 	<div class="header">
 		<h1>Blog</h1>
-		<SearchBar {searchTerm} on:linkClick={handleLinkClick} {posts} />
+		<SearchBar {searchTerm} {posts} />
 	</div>
 	{#if posts && posts.length}
 		<RecentPosts {posts} />

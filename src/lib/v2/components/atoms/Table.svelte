@@ -10,13 +10,11 @@
 				<th>{heading}</th>
 			{/each}
 		</tr>
-		{#each Array(10) as _, index}
-			<tr>
-				{#each tableData as data}
-					<td>{data}</td>
-				{/each}
-			</tr>
-		{/each}
+		<tr>
+			{#each tableData as data}
+				<td>{data}</td>
+			{/each}
+		</tr>
 	</table>
 </div>
 

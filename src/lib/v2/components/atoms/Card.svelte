@@ -3,11 +3,13 @@
 </script>
 
 <div class="container">
-	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 	<span>
+		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 		{@html title.icon}
 	</span>
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 	<h2>{@html title.title}</h2>
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 	<p>{@html title.para}</p>
 </div>
 
