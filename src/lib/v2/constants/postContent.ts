@@ -12,14 +12,14 @@ export interface postContentItem {
 export const indexContent: postContentItem[] = [
     {
 		heading: 'Installation',
-		link: '#installation',
+		link: 'installation',
         body: [
             '<p>Massa sit tempor massa blandit suscipit. Vestibulum in faucibus suspendisse enim at sit. Velit eget at cursus vel adipiscing. Tristique feugiat aliquam risus etiam. Auctor scelerisque dignissim facilisi faucibus.</p>'
         ],
 		subheadings: [
 			{
 				heading: 'Software requirements',
-				link: '#softwareRequirements',
+				link: 'softwareRequirements',
                 body: [
                     `<ul>
                     <li>SQLite 3 or MySQL 8.0.</li>
@@ -33,7 +33,7 @@ export const indexContent: postContentItem[] = [
 			},
 			{
 				heading: 'Build from sources (Rust)',
-				link: '#buildSources',
+				link: 'buildSources',
                 body: [
                     '<p>Commodo ullamcorper blandit massa odio mauris odio ornare. Adipiscing imperdiet neque convallis nisl quisque quisque. Fringilla bibendum sit lectus tellus ut urna condimentum tristique. Nisi lectus malesuada consectetur morbi id fringilla et. Blandit mus senectus a elit nisl.</p>',
                     '<p>Mauris ut dolor dolor nam. Dolor viverra tincidunt egestas ac vulputate. Phasellus sed massa facilisis rhoncus in. Ipsum fermentum est diam justo nibh quis. Libero rutrum quam donec tellus at et.</p>',
@@ -42,7 +42,7 @@ export const indexContent: postContentItem[] = [
 			},
             {
 				heading: 'Docker',
-				link: '#Docker',
+				link: 'docker',
                 body: [
                     '<p>Interdum augue mattis tortor ornare in. Feugiat phasellus integer massa mauris. Leo sit tempus leo eu tellus feugiat malesuada purus. Metus erat eleifend ante sed sem gravida nunc lobortis et. Arcu elit faucibus eget egestas aliquet vivamus consectetur.</p>',
                     '<p>Laoreet id nisl pharetra sed ut massa dis interdum. Eget eu lacus fringilla sem dignissim cras ridiculus. Potenti cras diam nunc ultricies. Ut metus amet faucibus quam nibh mattis at. Cras in rhoncus ipsum ut id sit id.</p>'
@@ -52,12 +52,12 @@ export const indexContent: postContentItem[] = [
 	},
     {
         heading: 'Licenses',
-        link: '#licenses',
+        link: 'licenses',
         body: [],
         subheadings: [
             {
                 heading: 'Copyright (c) 2023 The Torrust Developers.',
-                link: '#copyright',
+                link: 'copyright',
                 body: [
                     '<p>This program is free software: you can redistribute it and/or modify it under the terms ofthe <a href="https://github.com/torrust/torrust-index/blob/develop/docs/licenses/LICENSE-AGPL_3_0">GNU Affero General Public License</a> as published by the <a href="https://www.fsf.org/">Free Software Foundation</a>, version 3.</p>',
                     '<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the <a href="https://github.com/torrust/torrust-index/blob/develop/docs/licenses/LICENSE-AGPL_3_0">GNU Affero General Public License</a> for more details.</p>',
@@ -66,7 +66,7 @@ export const indexContent: postContentItem[] = [
             },
             {
                 heading: 'Legacy Exception',
-                link: '#legacyException',
+                link: 'legacyException',
                 body: [
                     '<p>For prosperity, versions of Torrust Tracker that are older than five years are automatically granted the <a href="https://github.com/torrust/torrust-index/blob/develop/docs/licenses/LICENSE-MIT_0">MIT-0</a> license in addition to the existing <a href="https://github.com/torrust/torrust-index/blob/develop/docs/licenses/LICENSE-AGPL_3_0">AGPL-3.0-only</a> license.</p>',
                 ]
@@ -75,12 +75,12 @@ export const indexContent: postContentItem[] = [
     },
     {
         heading: 'Roadmap',
-        link: '#roadmap',
+        link: 'roadmap',
         body: [],
         subheadings: [
             {
                 heading: 'Future Features:',
-                link: '#futureFeatures',
+                link: 'futureFeatures',
                 body: [
                     `<ul>
                     <li>Persistence:</li>
@@ -132,12 +132,12 @@ export const indexContent: postContentItem[] = [
 export const trackerContent: postContentItem[] = [
     {
         heading: 'Installation',
-        link: '#installation',
+        link: 'installation',
         body: [],
         subheadings: [
             {
                 heading: 'Software requirements',
-                link: '#softwareRequirements',
+                link: 'softwareRequirements',
                 body: [
                     `
                     <ul>
@@ -154,12 +154,29 @@ export const trackerContent: postContentItem[] = [
                     <p>The setup should be very similar in any hosting providing VMs. If you need help or find a problem trying to install the tracker you can open a question on the GitHub <a href='https://github.com/torrust/torrust-tracker/discussions/categories/q-a'>discussions</a>.</p>
                     `
                 ],
-            }
+            },
+            {
+				heading: 'Build from sources (Rust)',
+				link: 'buildSources',
+                body: [
+                    '<p>Commodo ullamcorper blandit massa odio mauris odio ornare. Adipiscing imperdiet neque convallis nisl quisque quisque. Fringilla bibendum sit lectus tellus ut urna condimentum tristique. Nisi lectus malesuada consectetur morbi id fringilla et. Blandit mus senectus a elit nisl.</p>',
+                    '<p>Mauris ut dolor dolor nam. Dolor viverra tincidunt egestas ac vulputate. Phasellus sed massa facilisis rhoncus in. Ipsum fermentum est diam justo nibh quis. Libero rutrum quam donec tellus at et.</p>',
+                    '<p>Sed quis enim amet tempor aliquet eget. Phasellus sem vel tincidunt pellentesque non hendrerit cras magna. Volutpat convallis aliquet non lectus quam enim. Nunc ut augue urna vitae venenatis. Pellentesque congue blandit facilisi lectus ac libero.</p>'
+                ]
+			},
+            {
+				heading: 'Docker',
+				link: 'docker',
+                body: [
+                    '<p>Interdum augue mattis tortor ornare in. Feugiat phasellus integer massa mauris. Leo sit tempus leo eu tellus feugiat malesuada purus. Metus erat eleifend ante sed sem gravida nunc lobortis et. Arcu elit faucibus eget egestas aliquet vivamus consectetur.</p>',
+                    '<p>Laoreet id nisl pharetra sed ut massa dis interdum. Eget eu lacus fringilla sem dignissim cras ridiculus. Potenti cras diam nunc ultricies. Ut metus amet faucibus quam nibh mattis at. Cras in rhoncus ipsum ut id sit id.</p>'
+                ]
+			},
         ]
     },
     {
         heading: 'Licenses',
-        link: '#licenses',
+        link: 'licenses',
         body: [
             `
             <p>Copyright (c) 2023 The Torrust Developers.</p>
@@ -172,7 +189,7 @@ export const trackerContent: postContentItem[] = [
         subheadings: [
             {
                 heading: 'Copyright (c) 2023 The Torrust Developers.',
-                link: '#copyright',
+                link: 'copyright',
                 body: [
                     `
                     <p>This program is free software: you can redistribute it and/or modify it under the terms of the <a href='https://github.com/torrust/torrust-index/blob/develop/docs/licenses/LICENSE-AGPL_3_0'>GNU Affero General Public License</a> as published by the <a href='https://www.fsf.org/'>Free Software Foundation</a>, version 3.</p>
@@ -184,7 +201,7 @@ export const trackerContent: postContentItem[] = [
             },
             {
                 heading: 'Legacy Exception',
-                link: '#legacyException',
+                link: 'legacyException',
                 body: [
                     `
                     <p>For prosperity, versions of Torrust Tracker that are older than five years are automatically granted the <a href='https://github.com/torrust/torrust-index/blob/develop/docs/licenses/LICENSE-MIT_0'>MIT-0</a> license in addition to the existing <a href='https://github.com/torrust/torrust-index/blob/develop/docs/licenses/LICENSE-AGPL_3_0'>AGPL-3.0-only</a> license.</p>
@@ -195,12 +212,12 @@ export const trackerContent: postContentItem[] = [
     },
     {
         heading: 'Roadmap',
-        link: '#roadmap',
+        link: 'roadmap',
         body: ['<p>Future features:</p>'],
         subheadings: [
             {
                 heading: 'Core',
-                link: '#core',
+                link: 'core',
                 body: [
                     `
                     <ul>
@@ -213,7 +230,7 @@ export const trackerContent: postContentItem[] = [
             },
             {
                 heading: 'Persistence',
-                link: '#persistence',
+                link: 'persistence',
                 body: [
                     `
                     <ul>
@@ -225,7 +242,7 @@ export const trackerContent: postContentItem[] = [
             },
             {
                 heading: 'Performance',
-                link: '#performance',
+                link: 'performance',
                 body: [
                     `
                     <ul>
@@ -236,7 +253,7 @@ export const trackerContent: postContentItem[] = [
             },
             {
                 heading: 'Protocols',
-                link: '#protocols',
+                link: 'protocols',
                 body: [
                     `
                     <ul>
@@ -247,7 +264,7 @@ export const trackerContent: postContentItem[] = [
             },
             {
                 heading: 'Integrations',
-                link: '#integrations',
+                link: 'integrations',
                 body: [
                     `
                     <ul>
@@ -258,7 +275,7 @@ export const trackerContent: postContentItem[] = [
             },
             {
                 heading: 'Utils',
-                link: '#utils',
+                link: 'utils',
                 body: [
                     `
                     <ul>
@@ -270,7 +287,7 @@ export const trackerContent: postContentItem[] = [
             },
             {
                 heading: 'Others',
-                link: '#others',
+                link: 'others',
                 body: [
                     `
                     <ul>
@@ -287,7 +304,7 @@ export const trackerContent: postContentItem[] = [
 export const selfHostContent: postContentItem[] = [
     {
         heading: 'Torrent solution (Index + Tracker)',
-        link: '#torrustSolution',
+        link: 'torrustSolution',
         body: [
             `
             <p>The Torrust Solution is a complete installation of bot a BitTorrent Index which is associated to one Torrust Tracker. Downloaded torrents will include the the associated tracker in the list of trackers.</p>
@@ -297,7 +314,7 @@ export const selfHostContent: postContentItem[] = [
         subheadings: [
             {
                 heading: 'Build from sources (Rust)',
-                link: '#buildSources',
+                link: 'buildSources',
                 body: [
                     `
                     <p>Commodo ullamcorper blandit massa odio mauris odio ornare. Adipiscing imperdiet neque convallis nisl quisque quisque. Fringilla bibendum sit lectus tellus ut urna condimentum tristique. Nisi lectus malesuada consectetur morbi id fringilla et. Blandit mus senectus a elit nisl.</p>
@@ -308,7 +325,7 @@ export const selfHostContent: postContentItem[] = [
             },
             {
                 heading: 'Docker',
-                link: '#docker',
+                link: 'docker',
                 body: [
                     `
                     <p>Interdum augue mattis tortor ornare in. Feugiat phasellus integer massa mauris. Leo sit tempus leo eu tellus feugiat malesuada purus. Metus erat eleifend ante sed sem gravida nunc lobortis et. Arcu elit faucibus eget egestas aliquet vivamus consectetur.</p>
@@ -318,7 +335,7 @@ export const selfHostContent: postContentItem[] = [
             },
             {
                 heading: 'Tutorials',
-                link: '#tutorials',
+                link: 'tutorials',
                 body: [
                     `
                     <p>Nisi interdum iaculis cursus tellus tincidunt pharetra turpis arcu eget. Nibh in pellentesque risus vestibulum. Dolor interdum dictum ac feugiat nulla gravida scelerisque tellus. Sit diam vestibulum eu quis. Curabitur lectus porta nisi convallis.</p>
@@ -329,7 +346,7 @@ export const selfHostContent: postContentItem[] = [
     },
     {
         heading: 'Torrust tracker',
-        link: '#torrustTracker',
+        link: 'torrustTracker',
         body: [],
         subheadings: [
             {
@@ -344,7 +361,7 @@ export const selfHostContent: postContentItem[] = [
 export const communityContent: postContentItem[] = [
     {
         heading: 'Why Contribute to our Project?',
-        link: '#whyContribute',
+        link: 'whyContribute',
         body: [
             `
             <p>Short intro. Eu proin ultricies nunc turpis purus dui ultrices mattis. Amet platea fames orci adipiscing pharetra auctor eget arcu adipiscing. Aliquam ipsum mattis ipsum malesuada aliquet ipsum. Convallis tortor rhoncus cursus porttitor tellus sed.</p>
@@ -363,7 +380,7 @@ export const communityContent: postContentItem[] = [
         subheadings: [
             {
                 heading: 'Embrace Rust: a language of choice',
-                link: '#embraceRust',
+                link: 'embraceRust',
                 body: [
                     `
                     <p>Why Rust? We've chosen Rust for its unparalleled safety, performance, and reliability. If you share our enthusiasm for writing code in Rust, you'll find a like-minded community here. Our project offers a playground for Rust aficionados to push the boundaries of what's possible.</p>
@@ -372,7 +389,7 @@ export const communityContent: postContentItem[] = [
             },
             {
                 heading: 'Code quality above all',
-                link: '#codeQuality',
+                link: 'codeQuality',
                 body: [
                     `
                     <p>Our Commitment to Excellence: For us, quality trumps quantity every time. We're dedicated to building on a robust foundation, preferring to perfect our existing features over piling on new ones. Every change undergoes meticulous review, and we're perpetually refining and refactoring to elevate our code.</p>
@@ -382,7 +399,7 @@ export const communityContent: postContentItem[] = [
             },
             {
                 heading: 'A welcoming community for newcomers',
-				link: '#welcomingCommunity',
+				link: 'welcomingCommunity',
                 body: [
                     `
                     <p>Kickstart Your Contribution: Never contributed to an open-source project before? No worries! We pride ourselves on being exceptionally welcoming to newcomers. You'll find comprehensive documentation, thorough explanations of complex concepts, and a supportive community ready to guide you.</p>
@@ -392,7 +409,7 @@ export const communityContent: postContentItem[] = [
             },
             {
                 heading: 'Influence the project’s direction',
-				link: '#influenceDirection',
+				link: 'influenceDirection',
                 body: [
                     `
                     <p>Your Voice Matters: Have ideas or specific needs for an index or tracker? As a community-driven project, we're all ears. Your contributions and insights can significantly influence the project's roadmap, ensuring it evolves in ways that benefit everyone involved.</p>
@@ -402,7 +419,7 @@ export const communityContent: postContentItem[] = [
             },
             {
                 heading: 'Join us today',
-				link: '#joinUs',
+				link: 'joinUs',
                 body: [
                     `
                     <p>By contributing to our project, you're not just writing code; you're joining a movement dedicated to creating something truly outstanding with Rust. Together, we can build software that's not only powerful and efficient but also accessible and enjoyable for everyone in the open-source community.</p>
@@ -413,13 +430,25 @@ export const communityContent: postContentItem[] = [
         ]
     },
     {
+        heading: 'How to contribute?',
+        link: 'howContribute',
+        body: [],
+        subheadings: [
+            {
+                heading: '',
+                link: '',
+                body: []
+            }
+        ]
+    },
+    {
         heading: 'Knowledge Base',
-        link: '#knowledgeBase',
+        link: 'knowledgeBase',
         body: [],
         subheadings: [
             {
                 heading: 'What Are Torrents',
-                link: '#whatAreTorrents',
+                link: 'whatAreTorrents',
                 body: [
                     `
                     <p>A <strong>torrent</strong> is a small file that contains metadata about the files and folders
@@ -435,7 +464,7 @@ export const communityContent: postContentItem[] = [
             },
             {
                 heading: 'What Is a Tracker',
-                link: '#whatIsTracker',
+                link: 'whatIsTracker',
                 body: [
                     `
                     <p>A <strong>BitTorrent tracker</strong> is a server that facilitates communication between peers
@@ -452,7 +481,7 @@ export const communityContent: postContentItem[] = [
             },
             {
                 heading: 'What Is a Torrent Index',
-                link: '#whatIsTorrentIndex',
+                link: 'whatIsTorrentIndex',
                 body: [
                     `
                     <p>A <strong>BitTorrent index</strong> site is a website that lists torrent files for download.
@@ -473,7 +502,7 @@ export const communityContent: postContentItem[] = [
     },
     {
         heading: 'List of projects using BitTorrent',
-        link: '#listOfProjects',
+        link: 'listOfProjects',
         body: [
             `
             <ul>
@@ -510,7 +539,7 @@ export const communityContent: postContentItem[] = [
     },
     {
         heading: 'Resources',
-        link: '#resources',
+        link: 'resources',
         body: [],
         subheadings: [
             {
@@ -524,7 +553,7 @@ export const communityContent: postContentItem[] = [
 
 export const aboutContent: postContentItem[] = [{
         heading: 'Why BitTorrent?',
-        link: '#bitTorrent',
+        link: 'bitTorrent',
         body: [
             `
             <p>Short intro. Eu proin ultricies nunc turpis purus dui ultrices mattis. Amet platea fames orci adipiscing pharetra auctor eget arcu adipiscing. Aliquam ipsum mattis ipsum malesuada aliquet ipsum. Convallis tortor rhoncus cursus porttitor tellus sed.</p>
@@ -533,7 +562,7 @@ export const aboutContent: postContentItem[] = [{
         subheadings: [
             {
                 heading: 'Why does the BitTorrent protocol still matter?',
-                link: '#bitTorrentProtocol',
+                link: 'bitTorrentProtocol',
                 body: [
                     `
                     <p>In the rapidly evolving landscape of digital technology, the BitTorrent protocol remains a
@@ -546,7 +575,7 @@ export const aboutContent: postContentItem[] = [{
             },
             {
                 heading: 'Efficiency and scalability',
-                link: '#efficiency',
+                link: 'efficiency',
                 body: [
                     `
                     <p>BitTorrent excels in efficiently distributing large files across the internet. By allowing
@@ -559,7 +588,7 @@ export const aboutContent: postContentItem[] = [{
             },
             {
                 heading: 'Current use cases',
-                link: '#currentUses',
+                link: 'currentUses',
                 body: [
                     `
                     <p>Media Distribution: Independent creators and open-source projects often use BitTorrent to
@@ -573,7 +602,7 @@ export const aboutContent: postContentItem[] = [{
             },
             {
                 heading: 'Future use cases',
-                link: '#futureUses',
+                link: 'futureUses',
                 body: [
                     `
                     <p>Decentralized Internet: BitTorrent can play a crucial role in the development of a
@@ -587,7 +616,7 @@ export const aboutContent: postContentItem[] = [{
             },
             {
                 heading: 'BT vs. IPFS',
-                link: '#btIpfs',
+                link: 'btIpfs',
                 body: [
                     `
                     <p>While both BitTorrent and IPFS facilitate decentralized file sharing, they operate
@@ -600,7 +629,7 @@ export const aboutContent: postContentItem[] = [{
             },
             {
                 heading: 'BT vs. centralized solutions',
-                link: '#btCs',
+                link: 'btCs',
                 body: [
                     `
                     <p>Centralized cloud storage services like Dropbox, Google Drive, and Amazon S3 offer
@@ -613,7 +642,7 @@ export const aboutContent: postContentItem[] = [{
             },
             {
                 heading: 'Conclusion',
-                link: '#conclusion',
+                link: 'conclusion',
                 body: [
                     `
                     <p>The continued relevance of BitTorrent lies in its unparalleled efficiency, scalability,
@@ -631,7 +660,7 @@ export const aboutContent: postContentItem[] = [{
     },
     {
         heading: 'Why Torrust',
-        link: '#whyTorrust',
+        link: 'whyTorrust',
         body: [
             `
             <p>Developing new tools for BitTorrent in modern programming languages like Rust, along with
@@ -644,7 +673,7 @@ export const aboutContent: postContentItem[] = [{
         subheadings: [
             {
                 heading: 'Performance & Efficiency',
-                link: '#performanceEfficiency',
+                link: 'performanceEfficiency',
                 body: [
                     `
                     <ul>
@@ -665,7 +694,7 @@ export const aboutContent: postContentItem[] = [{
             },
             {
                 heading: 'Security & Reliability',
-                link: '#securityReliability',
+                link: 'securityReliability',
                 body: [
                     `
                     <ul>
@@ -686,7 +715,7 @@ export const aboutContent: postContentItem[] = [{
             },
             {
                 heading: 'User Experience & Accessibility',
-                link: '#userExperience',
+                link: 'userExperience',
                 body: [
                     `
                     <ul>
@@ -707,7 +736,7 @@ export const aboutContent: postContentItem[] = [{
             },
             {
                 heading: 'Future-Proofing & Innovation',
-                link: '#futureProofing',
+                link: 'futureProofing',
                 body: [
                     `
                     <ul>
@@ -728,7 +757,7 @@ export const aboutContent: postContentItem[] = [{
             },
             {
                 heading: 'Integration & Interoperability',
-                link: '#integration',
+                link: 'integration',
                 body: [
                     `
                     <ul>
@@ -756,7 +785,7 @@ export const aboutContent: postContentItem[] = [{
     },
     {
         heading: 'The Team',
-        link: '#team',
+        link: 'team',
         body: [],
         subheadings: [
             {
@@ -768,7 +797,7 @@ export const aboutContent: postContentItem[] = [{
     },
     {
         heading: 'Collaborators',
-        link: '#collaborators',
+        link: 'collaborators',
         body: [],
         subheadings: [
             {
@@ -780,7 +809,7 @@ export const aboutContent: postContentItem[] = [{
     },
     {
         heading: 'Sponsors',
-        link: '#sponsors',
+        link: 'sponsors',
         body: [
             `
             <p>Nautilus Cyberneering is dedicated to creating new Open Source Ecosystems. They define

@@ -229,7 +229,7 @@ export const trackerTable: TableItem[] = [
 		subheadings: [
 			{
 				heading: 'Software requirements',
-				link: '#softwarerequirements'
+				link: '#softwareRequirements'
 			},
 			{
 				heading: 'Build from sources (Rust)',

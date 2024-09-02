@@ -173,7 +173,6 @@
 			padding-top: 3rem;
 		}
 
-		.inner-container h1,
 		.inner-container h2,
 		.inner-container p {
 			width: 640px;
