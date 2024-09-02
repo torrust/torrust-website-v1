@@ -1,32 +1,65 @@
 <script lang="ts">
 	import BlogPostCard from '$lib/v2/components/molecules/BlogPostCard.svelte';
-	import ContentSection from '$lib/v2/components/organisms/ContentSection.svelte';
 	import type { BlogPost } from '$lib/utils/types';
-	import Button from '$lib/components/atoms/Button.svelte';
 
 	export let posts: BlogPost[];
 </script>
 
-<ContentSection
-	id="recent-posts"
-	title="Torrust Blog"
-	description="Tips on how to get started and use Torrust."
-	align="left"
->
-	<div slot="button">
-		<Button href="/blog">View More</Button>
-	</div>
+<div class="container">
+	<h2>Latest articles</h2>
 	<div class="grid">
 		{#each posts as post}
 			<BlogPostCard
 				slug={post.slug}
 				title={post.title}
-				excerpt={post.excerpt}
-				tags={post.tags}
-				readingTime={post.readingTime}
-				showImage={false}
+				showImage={true}
 				date={post.date}
+				contributor={post.contributor}
 			/>
 		{/each}
 	</div>
-</ContentSection>
+	<div class="link-container">
+		<a href="/blog">All articles</a>
+	</div>
+</div>
+
+<style lang="scss">
+	@import '$lib/scss/breakpoints.scss';
+
+	.container {
+		color: rgba(245, 245, 245, 0.8);
+		background: rgba(26, 26, 26, 1);
+
+		h2 {
+			padding-top: 4rem;
+			text-align: center;
+		}
+
+		.link-container {
+			text-align: center;
+			padding-top: 3rem;
+		}
+
+		a {
+			color: white;
+			text-decoration: none;
+		}
+	}
+
+	.grid {
+		padding-top: 3rem;
+		width: 100%;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 20px;
+		padding-inline: 1.5rem;
+
+		@include for-phone-only {
+			grid-template-columns: 1fr;
+		}
+
+		@include for-tablet-landscape-up {
+			grid-template-columns: 1fr 1fr 1fr;
+		}
+	}
+</style>
