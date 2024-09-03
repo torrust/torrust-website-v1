@@ -23,3 +23,9 @@
 <main>
 	<slot />
 </main>
+
+<style lang="scss">
+	main {
+		background-color: rgba(26, 26, 26, 1);
+	}
+</style>

@@ -12,5 +12,5 @@
 </script>
 
 <Header showBackground={true} {posts} />
-<slot />
+<slot></slot>
 <Footer />

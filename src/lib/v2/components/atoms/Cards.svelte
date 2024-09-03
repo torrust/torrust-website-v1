@@ -39,3 +39,14 @@
 		{/if}
 	</div>
 </svelte:element>
+
+<style lang="scss">
+	.body {
+		display: flex;
+		align-items: flex-end;
+		background-color: pink;
+		height: 312px;
+		padding: 1.5rem;
+		border-radius: 1.5rem;
+	}
+</style>
