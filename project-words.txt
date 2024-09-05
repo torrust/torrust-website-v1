@@ -46,6 +46,7 @@ infohash
 IPFS
 johnthagen
 Juggery
+Katson
 kcachegrind
 keyrings
 Kimbatt
@@ -77,6 +78,7 @@ realpath
 regr
 rehype
 roboto
+rqbit
 runtimes
 rustc
 RUSTFLAGS
