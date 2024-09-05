@@ -18,9 +18,6 @@
 			/>
 		{/each}
 	</div>
-	<div class="link-container">
-		<a href="/blog">All articles</a>
-	</div>
 </div>
 
 <style lang="scss">
@@ -33,16 +30,6 @@
 		h2 {
 			padding-top: 4rem;
 			text-align: center;
-		}
-
-		.link-container {
-			text-align: center;
-			padding-top: 3rem;
-		}
-
-		a {
-			color: white;
-			text-decoration: none;
 		}
 	}
 
@@ -59,7 +46,7 @@
 		}
 
 		@include for-tablet-landscape-up {
-			grid-template-columns: 1fr 1fr 1fr;
+			grid-template-columns: 1fr 1fr;
 		}
 	}
 </style>

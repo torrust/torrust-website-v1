@@ -18,5 +18,15 @@
 <WhyContribute />
 {#if posts && posts.length}
 	<RecentPosts {posts} />
+	<div class="link-container">
+		<a href="/v2/blog">All articles</a>
+	</div>
 {/if}
 <Footer />
+
+<style lang="scss">
+	.link-container {
+		text-align: center;
+		padding-top: 3rem;
+	}
+</style>
