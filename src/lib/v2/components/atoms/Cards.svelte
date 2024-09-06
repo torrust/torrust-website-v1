@@ -41,6 +41,8 @@
 </svelte:element>
 
 <style lang="scss">
+	@import '$lib/scss/breakpoints.scss';
+
 	.body {
 		display: flex;
 		align-items: flex-end;

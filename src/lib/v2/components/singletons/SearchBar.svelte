@@ -91,7 +91,7 @@
 				<ul>
 					{#each results as result}
 						<li>
-							<a href="/{result.slug}" on:click={clearSearch}>
+							<a href="/v2/{result.slug}" on:click={clearSearch}>
 								<div>
 									<div>
 										<!-- eslint-disable-next-line svelte/no-at-html-tags -->
