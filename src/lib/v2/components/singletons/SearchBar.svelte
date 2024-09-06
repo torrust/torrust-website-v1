@@ -56,7 +56,7 @@
 				icon="heroicons:magnifying-glass-16-solid"
 				width="28"
 				height="28"
-				style="color: #000000"
+				style="color: rgba(255, 49, 0, 1);"
 			/>
 		{/if}
 	</button>
@@ -66,7 +66,7 @@
 				icon="heroicons:magnifying-glass-16-solid"
 				width="28"
 				height="28"
-				style="color: #000000"
+				style="color: #000000;"
 			/>
 			<input
 				type="text"

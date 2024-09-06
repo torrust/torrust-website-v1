@@ -17,7 +17,7 @@
 							<MiniLogo />
 							<p>index</p>
 						</div>
-						<p>v 3.0.0</p>
+						<p class="version">v 3.0.0</p>
 					</div>
 					<p>
 						The Index is a feature-rich torrent indexing site split between an API (backend) built
@@ -34,7 +34,7 @@
 							<MiniLogo />
 							<p>tracker</p>
 						</div>
-						<p>v 3.0.0</p>
+						<p class="version">v 3.0.0</p>
 					</div>
 					<p>
 						A lightweight Rust-based BitTorrent tracker for efficient torrent serving to many peers
@@ -148,6 +148,12 @@
 
 		div p {
 			font-size: 32px;
+		}
+
+		.version {
+			border: 1px solid rgba(245, 245, 245, 0.96);
+			padding: 4px 12px;
+			border-radius: 1.5rem;
 		}
 
 		button {
