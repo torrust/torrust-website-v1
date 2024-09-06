@@ -32,5 +32,4 @@
 			<p class="date">{contributor ? contributor + ' - ' : ''}{formattedDate}</p>
 		{/if}
 	</div>
-	<div class="footer" slot="footer"></div>
 </Cards>

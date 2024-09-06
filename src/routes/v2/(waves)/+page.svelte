@@ -17,6 +17,7 @@
 <Hero />
 <WhyContribute />
 {#if posts && posts.length}
+	<h2>Latest articles</h2>
 	<RecentPosts {posts} />
 	<div class="link-container">
 		<a href="/v2/blog">All articles</a>
@@ -25,6 +26,12 @@
 <Footer />
 
 <style lang="scss">
+	h2 {
+		text-align: center;
+		color: rgba(245, 245, 245, 0.96);
+		padding-top: 4rem;
+	}
+
 	.link-container {
 		text-align: center;
 		padding-top: 3rem;

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import AnimatedHamburger from '$lib/v2/components/singletons/AnimatedHamburger.svelte';
 	import Header from '$lib/v2/icons/header.svelte';
 
@@ -7,6 +8,8 @@
 	function toggleMenu() {
 		isMenuOpen = !isMenuOpen;
 	}
+
+	$: currentPath = $page.url.pathname;
 </script>
 
 <header>
@@ -17,22 +20,46 @@
 		<div class="links-wrapper">
 			<ul class="links">
 				<li>
-					<a href="/v2/index" on:click={toggleMenu}>Index</a>
+					<a
+						href="/v2/index"
+						class={currentPath === '/v2/index' ? 'active' : ''}
+						on:click={toggleMenu}>Index</a
+					>
 				</li>
 				<li>
-					<a href="/v2/tracker" on:click={toggleMenu}>Tracker</a>
+					<a
+						href="/v2/tracker"
+						class={currentPath === '/v2/tracker' ? 'active' : ''}
+						on:click={toggleMenu}>Tracker</a
+					>
 				</li>
 				<li>
-					<a href="/v2/self-host" on:click={toggleMenu}>Self-host</a>
+					<a
+						href="/v2/self-host"
+						class={currentPath === '/v2/self-host' ? 'active' : ''}
+						on:click={toggleMenu}>Self-host</a
+					>
 				</li>
 				<li>
-					<a href="/v2/community" on:click={toggleMenu}>Community</a>
+					<a
+						href="/v2/community"
+						class={currentPath === '/v2/community' ? 'active' : ''}
+						on:click={toggleMenu}>Community</a
+					>
 				</li>
 				<li>
-					<a href="/v2/blog" on:click={toggleMenu}>Blog</a>
+					<a
+						href="/v2/blog"
+						class={currentPath === '/v2/blog' ? 'active' : ''}
+						on:click={toggleMenu}>Blog</a
+					>
 				</li>
 				<li>
-					<a href="/v2/about" on:click={toggleMenu}>About</a>
+					<a
+						href="/v2/about"
+						class={currentPath === '/v2/about' ? 'active' : ''}
+						on:click={toggleMenu}>About</a
+					>
 				</li>
 			</ul>
 		</div>
@@ -71,12 +98,8 @@
 			color: rgba(245, 245, 245, 0.96);
 		}
 
-		li > a:hover {
-			transform: scale(0.9);
-		}
-
 		li > a:active {
-			transform: scale(0.9);
+			border-bottom: 2px solid white;
 		}
 
 		@include for-phone-only {
@@ -105,7 +128,6 @@
 				text-align: center;
 
 				&:hover {
-					color: var(--color--primary);
 					filter: drop-shadow(0px 0px 3px var(--color--primary));
 				}
 			}

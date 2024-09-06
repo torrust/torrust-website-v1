@@ -6,7 +6,6 @@
 </script>
 
 <div class="container">
-	<h2>Latest articles</h2>
 	<div class="grid">
 		{#each posts as post}
 			<BlogPostCard
@@ -15,6 +14,7 @@
 				showImage={true}
 				date={post.date}
 				contributor={post.contributor}
+				coverImage={post.coverImage}
 			/>
 		{/each}
 	</div>
@@ -47,6 +47,10 @@
 
 		@include for-tablet-landscape-up {
 			grid-template-columns: 1fr 1fr;
+		}
+
+		@include for-desktop-up {
+			grid-template-columns: 1fr 1fr 1fr;
 		}
 	}
 </style>
