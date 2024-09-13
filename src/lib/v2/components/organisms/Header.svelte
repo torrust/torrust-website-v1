@@ -132,5 +132,9 @@
 				}
 			}
 		}
+
+		@include for-desktop-up {
+			padding-inline: 9rem;
+		}
 	}
 </style>

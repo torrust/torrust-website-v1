@@ -38,8 +38,11 @@
 			{#each table as item}
 				<li>
 					<a
-						href={item.link}
-						on:click|preventDefault={() => scrollToSection(item.link.substring(0))}
+						href="#{item.link}"
+						on:click|preventDefault={() => {
+							scrollToSection(item.link.substring(0));
+							console.log(item.link);
+						}}
 					>
 						{item.heading}
 					</a>
@@ -49,8 +52,11 @@
 						<ul>
 							<li>
 								<a
-									href={subheading.link}
-									on:click|preventDefault={() => scrollToSection(item.link.substring(0))}
+									href="#{subheading.link}"
+									on:click|preventDefault={() => {
+										scrollToSection(item.link.substring(0));
+										console.log(subheading.link);
+									}}
 								>
 									{subheading.heading}
 								</a>

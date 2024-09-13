@@ -1,9 +1,7 @@
 <script lang="ts">
 	import RecentPosts from '$lib/v2/components/singletons/RecentPosts.svelte';
-	import Footer from '$lib/v2/components/organisms/Footer.svelte';
 	import type { BlogPost } from '$lib/utils/types';
 	import SearchBar from '$lib/v2/components/singletons/SearchBar.svelte';
-	import Header from '$lib/v2/components/organisms/Header.svelte';
 
 	export let data: {
 		posts: BlogPost[];
@@ -14,7 +12,6 @@
 	let searchTerm = '';
 </script>
 
-<Header />
 <div class="container">
 	<div class="header">
 		<h1>Blog</h1>
@@ -24,7 +21,6 @@
 		<RecentPosts {posts} />
 	{/if}
 </div>
-<Footer />
 
 <style lang="scss">
 	@import '$lib/scss/breakpoints.scss';
