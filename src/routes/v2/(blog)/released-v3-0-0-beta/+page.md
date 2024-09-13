@@ -31,6 +31,7 @@ hidden: false
   --toc-li-hover-color="rgba(255, 49, 0, 0.96)"
   --toc-active-bg="transparent"
 >
+
 ## Table of contents
 
 - [Greetings, Torrust Fans!](#greetings-torrust-fans)
