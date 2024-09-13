@@ -180,43 +180,43 @@ export interface TableItem {
 export const indexTable: TableItem[] = [
 	{
 		heading: 'Installation',
-		link: '#installation',
+		link: 'installation',
 		subheadings: [
 			{
 				heading: 'Software requirements',
-				link: '#softwareRequirements'
+				link: 'softwareRequirements'
 			},
 			{
 				heading: 'Build from sources (Rust)',
-				link: '#buildSources'
+				link: 'buildSources'
 			},
 			{
 				heading: 'Docker',
-				link: '#docker'
+				link: 'docker'
 			}
 		]
 	},
 	{
 		heading: 'Licenses',
-		link: '#licenses',
+		link: 'licenses',
 		subheadings: [
 			{
 				heading: 'Copyright (c) 2023 The Torrust Developers',
-				link: '#copyright'
+				link: 'copyright'
 			},
 			{
 				heading: 'Legacy Exception',
-				link: '#legacyException'
+				link: 'legacyException'
 			}
 		]
 	},
 	{
 		heading: 'Roadmap',
-		link: '#roadmap',
+		link: 'roadmap',
 		subheadings: [
 			{
 				heading: 'Future Features',
-				link: '#futureFeatures'
+				link: 'futureFeatures'
 			}
 		]
 	}
@@ -225,67 +225,67 @@ export const indexTable: TableItem[] = [
 export const trackerTable: TableItem[] = [
 	{
 		heading: 'Installation',
-		link: '#installation',
+		link: 'installation',
 		subheadings: [
 			{
 				heading: 'Software requirements',
-				link: '#softwareRequirements'
+				link: 'softwareRequirements'
 			},
 			{
 				heading: 'Build from sources (Rust)',
-				link: '#buildSources'
+				link: 'buildSources'
 			},
 			{
 				heading: 'Docker',
-				link: '#docker'
+				link: 'docker'
 			}
 		]
 	},
 	{
 		heading: 'Licenses',
-		link: '#licenses',
+		link: 'licenses',
 		subheadings: [
 			{
 				heading: 'Copyright (c) 2023 The Torrust Developers',
-				link: '#copyright'
+				link: 'copyright'
 			},
 			{
 				heading: 'Build from sources (Rust)',
-				link: '#buildSources'
+				link: 'buildSources'
 			}
 		]
 	},
 	{
 		heading: 'Roadmap',
-		link: '#roadmap',
+		link: 'roadmap',
 		subheadings: [
 			{
 				heading: 'Core',
-				link: '#core'
+				link: 'core'
 			},
 			{
 				heading: 'Persistence',
-				link: '#persistence'
+				link: 'persistence'
 			},
 			{
 				heading: 'Performance',
-				link: '#performance'
+				link: 'performance'
 			},
 			{
 				heading: 'Protocols',
-				link: '#protocols'
+				link: 'protocols'
 			},
 			{
 				heading: 'Integrations',
-				link: '#integrations'
+				link: 'integrations'
 			},
 			{
 				heading: 'Utils',
-				link: '#utils'
+				link: 'utils'
 			},
 			{
 				heading: 'Others',
-				link: '#others'
+				link: 'others'
 			}
 		]
 	}
@@ -312,7 +312,7 @@ export const selfHostTable: TableItem[] = [
 	},
 	{
 		heading: 'Torrust tracker',
-		link: '#torrustTracker',
+		link: 'torrustTracker',
 		subheadings: []
 	}
 ];
@@ -320,60 +320,60 @@ export const selfHostTable: TableItem[] = [
 export const communityTable: TableItem[] = [
 	{
 		heading: 'Why Contribute?',
-		link: '#whyContribute',
+		link: 'whyContribute',
 		subheadings: [
 			{
 				heading: 'Embrace Rust: a language of choice',
-				link: '#embraceRust'
+				link: 'embraceRust'
 			},
 			{
 				heading: 'Code quality above all',
-				link: '#codeQuality'
+				link: 'codeQuality'
 			},
 			{
 				heading: 'A welcoming community for newcomers',
-				link: '#welcomingCommunity'
+				link: 'welcomingCommunity'
 			},
 			{
 				heading: 'Influence the project’s direction',
-				link: '#influenceDirection'
+				link: 'influenceDirection'
 			},
 			{
 				heading: 'Join us today',
-				link: '#joinUs'
+				link: 'joinUs'
 			}
 		]
 	},
 	{
 		heading: 'How to contribute?',
-		link: '#howContribute',
+		link: 'howContribute',
 		subheadings: []
 	},
 	{
 		heading: 'Knowledge Base',
-		link: '#knowledgeBase',
+		link: 'knowledgeBase',
 		subheadings: [
 			{
 				heading: 'What are Torrents?',
-				link: '#whatAreTorrents'
+				link: 'whatAreTorrents'
 			},
 			{
 				heading: 'What Is a Tracker?',
-				link: '#whatIsTracker'
+				link: 'whatIsTracker'
 			},
 			{
 				heading: 'What Is a Torrent Index',
-				link: '#whatIsTorrentIndex'
+				link: 'whatIsTorrentIndex'
 			},
 			{
 				heading: 'List of projects using BitTorrent',
-				link: '#listOfProjects'
+				link: 'listOfProjects'
 			}
 		]
 	},
 	{
 		heading: 'Resources',
-		link: '#resources',
+		link: 'resources',
 		subheadings: []
 	}
 ];
@@ -381,77 +381,77 @@ export const communityTable: TableItem[] = [
 export const aboutTable: TableItem[] = [
 	{
 		heading: 'Why BitTorrent?',
-		link: '#bitTorrent',
+		link: 'bitTorrent',
 		subheadings: [
 			{
 				heading: 'Why does the BitTorrent protocol still matter?',
-				link: '#bitTorrentProtocol'
+				link: 'bitTorrentProtocol'
 			},
 			{
 				heading: 'Efficiency and scalability',
-				link: '#efficiency'
+				link: 'efficiency'
 			},
 			{
 				heading: 'Current use cases',
-				link: '#currentUses'
+				link: 'currentUses'
 			},
 			{
 				heading: 'Future use cases',
-				link: '#futureUses'
+				link: 'futureUses'
 			},
 			{
 				heading: 'BT vs. IPFS',
-				link: '#btIpfs'
+				link: 'btIpfs'
 			},
 			{
 				heading: 'BT vs. centralized solutions',
-				link: '#btCs'
+				link: 'btCs'
 			},
 			{
 				heading: 'Conclusion',
-				link: '#conclusion'
+				link: 'conclusion'
 			}
 		]
 	},
 	{
 		heading: 'Why Torrust?',
-		link: '#whyTorrust',
+		link: 'whyTorrust',
 		subheadings: [
 			{
 				heading: 'Performance & Efficiency',
-				link: '#performanceEfficiency'
+				link: 'performanceEfficiency'
 			},
 			{
 				heading: 'Security & Reliability',
-				link: '#securityReliability'
+				link: 'securityReliability'
 			},
 			{
 				heading: 'User Experience & Accessibility',
-				link: '#userExperience'
+				link: 'userExperience'
 			},
 			{
 				heading: 'Future-Proofing and Innovation',
-				link: '#futureProofing'
+				link: 'futureProofing'
 			},
 			{
 				heading: 'Integration & Interoperability',
-				link: '#integration'
+				link: 'integration'
 			}
 		]
 	},
 	{
 		heading: 'The Team',
-		link: '#team',
+		link: 'team',
 		subheadings: []
 	},
 	{
 		heading: 'Collaborators',
-		link: '#collaborators',
+		link: 'collaborators',
 		subheadings: []
 	},
 	{
 		heading: 'Sponsors',
-		link: '#sponsors',
+		link: 'sponsors',
 		subheadings: []
 	}
 ];

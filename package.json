@@ -55,6 +55,7 @@
 		"flexsearch": "^0.7.43",
 		"shiki": "^1.6.1",
 		"shiki-es": "^0.14.0",
+		"svelte-toc": "^0.5.9",
 		"vscode-oniguruma": "^2.0.1",
 		"vscode-textmate": "^9.0.0"
 	},

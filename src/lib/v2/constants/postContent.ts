@@ -304,7 +304,7 @@ export const trackerContent: postContentItem[] = [
 export const selfHostContent: postContentItem[] = [
 	{
 		heading: 'Torrent solution (Index + Tracker)',
-		link: 'torrustSolution',
+		link: '#torrustSolution',
 		body: [
 			`
             <p>The Torrust Solution is a complete installation of bot a BitTorrent Index which is associated to one Torrust Tracker. Downloaded torrents will include the the associated tracker in the list of trackers.</p>

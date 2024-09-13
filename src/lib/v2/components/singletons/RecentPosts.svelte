@@ -1,6 +1,6 @@
 <script lang="ts">
 	import BlogPostCard from '$lib/v2/components/molecules/BlogPostCard.svelte';
-	import type { BlogPost } from '$lib/utils/types';
+	import type { BlogPost } from '$lib/v2/utils/types';
 
 	export let posts: BlogPost[];
 </script>
@@ -26,11 +26,6 @@
 	.container {
 		color: rgba(245, 245, 245, 0.8);
 		background: rgba(26, 26, 26, 1);
-
-		h2 {
-			padding-top: 4rem;
-			text-align: center;
-		}
 	}
 
 	.grid {

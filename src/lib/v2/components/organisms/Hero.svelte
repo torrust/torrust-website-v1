@@ -2,48 +2,46 @@
 	import MiniLogo from '$lib/v2/icons/miniLogo.svelte';
 </script>
 
-<div class="container">
-	<div class="svg-container">
-		<div class="svg-content">
-			<h1 class="hero-heading">Modern BitTorrent index and tracker</h1>
-			<p class="hero-para">
-				Torrust is an open source project that aims to provide you with the tools you need to host
-				your own torrent indexes with ease.
-			</p>
-			<div class="details">
-				<div class="details-card">
-					<div class="details-info">
-						<div>
-							<MiniLogo />
-							<p>index</p>
-						</div>
-						<p class="version">v 3.0.0</p>
+<div class="svg-container">
+	<div class="svg-content">
+		<h1 class="hero-heading">Modern BitTorrent index and tracker</h1>
+		<p class="hero-para">
+			Torrust is an open source project that aims to provide you with the tools you need to host
+			your own torrent indexes with ease.
+		</p>
+		<div class="details">
+			<div class="details-card">
+				<div class="details-info">
+					<div>
+						<MiniLogo />
+						<p>index</p>
 					</div>
-					<p>
-						The Index is a feature-rich torrent indexing site split between an API (backend) built
-						with Rust, and our reference web app that consumes the API, built with Vue 3.
-					</p>
-					<div class="details-info">
-						<button>Live demo</button>
-						<button class="learn-btn">Learn more</button>
-					</div>
+					<p class="version">v 3.0.0</p>
 				</div>
-				<div class="details-card">
-					<div class="details-info">
-						<div>
-							<MiniLogo />
-							<p>tracker</p>
-						</div>
-						<p class="version">v 3.0.0</p>
+				<p>
+					The Index is a feature-rich torrent indexing site split between an API (backend) built
+					with Rust, and our reference web app that consumes the API, built with Vue 3.
+				</p>
+				<div class="details-info">
+					<button>Live demo</button>
+					<button class="learn-btn">Learn more</button>
+				</div>
+			</div>
+			<div class="details-card">
+				<div class="details-info">
+					<div>
+						<MiniLogo />
+						<p>tracker</p>
 					</div>
-					<p>
-						A lightweight Rust-based BitTorrent tracker for efficient torrent serving to many peers
-						with high performance, robustness, security, and community support.
-					</p>
-					<div class="details-info">
-						<button>Live demo</button>
-						<button class="learn-btn">Learn more</button>
-					</div>
+					<p class="version">v 3.0.0</p>
+				</div>
+				<p>
+					A lightweight Rust-based BitTorrent tracker for efficient torrent serving to many peers
+					with high performance, robustness, security, and community support.
+				</p>
+				<div class="details-info">
+					<button>Live demo</button>
+					<button class="learn-btn">Learn more</button>
 				</div>
 			</div>
 		</div>
@@ -53,7 +51,7 @@
 <style lang="scss">
 	@import '$lib/scss/breakpoints.scss';
 
-	.container {
+	.svg-container {
 		display: flex;
 		flex-direction: column;
 		text-align: center;
@@ -121,6 +119,13 @@
 
 		@include for-tablet-portrait-up {
 			flex-direction: row;
+			max-width: 1050px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		@include for-desktop-up {
+			margin-inline: auto;
 		}
 	}
 

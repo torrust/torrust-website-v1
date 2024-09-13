@@ -5,7 +5,7 @@
 @import '$lib/scss/_functions.scss';
 @import '$lib/scss/_mixins.scss';
 @import '$lib/scss/_base.scss';
-@import '$lib/scss/_typography.scss';
+@import '$lib/v2/scss/_typography.scss';
 @import '$lib/scss/_markdown.scss';
 @import '$lib/scss/_code-highlights.scss';
 @import '$lib/scss/animations.scss';
@@ -16,10 +16,10 @@
 body {
 	--body-background-color: var(--color--page-background);
 	background-color: var(--body-background-color);
-	color: var(--color--text);
+	color: rgba(245, 245, 245, 0.96);
 	fill: var(--color--text);
 	transition: all 0.4s ease;
-	font-family: var(--font--default);
+	font-family: 'Poppins', sans-serif;
 	line-height: 1.3;
 	scroll-behavior: smooth;
 
@@ -30,6 +30,10 @@ body {
 
 	width: 100%;
 	overflow-x: hidden;
+}
+
+.active a {
+	color: rgba(255, 49, 0, 0.96);
 }
 
 html {

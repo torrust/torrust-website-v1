@@ -29,7 +29,9 @@
 	</div>
 </div>
 
-<style>
+<style lang="scss">
+	@import '$lib/scss/breakpoints.scss';
+
 	.scroll-container {
 		height: 100vh;
 		overflow-y: auto;

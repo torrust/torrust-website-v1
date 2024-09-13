@@ -29,6 +29,10 @@
 			font-size: 16px;
 			text-align: center;
 		}
+
+		@include for-desktop-up {
+			padding-inline: 9rem;
+		}
 	}
 
 	footer div:nth-of-type(2) p:first-of-type {

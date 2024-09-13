@@ -1,13 +1,17 @@
 a {
-	color: var(--color--text);
-	text-decoration-color: var(--color--primary);
+	color: rgba(255, 49, 0, 0.96);
+	text-decoration: none;
 	text-underline-offset: 0.1em;
 	text-decoration-thickness: 2px;
 	transition: all 0.2s ease-in-out;
 
 	&:hover {
-		text-underline-offset: 0.3em;
+		text-decoration: underline;
 	}
+}
+
+.active a {
+	color: rgba(255, 49, 0, 0.96);
 }
 
 ::selection {
@@ -23,6 +27,10 @@ b {
 em,
 i {
 	font-style: italic;
+}
+
+li {
+	list-style-type: none;
 }
 
 // #region Titles
