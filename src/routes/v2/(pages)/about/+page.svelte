@@ -294,12 +294,4 @@
 	a {
 		color: rgba(255, 49, 0, 0.96);
 	}
-
-	.toc li a {
-		color: white;
-	}
-
-	.toc li a:hover {
-		color: rgba(255, 49, 0, 0.96);
-	}
 </style>

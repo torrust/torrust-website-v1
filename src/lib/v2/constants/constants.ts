@@ -170,3 +170,288 @@ export const trackerTableData = [
 	'udp://tracker.torrust-demo.com:6969/announce',
 	'https://tracker.torrust-demo.com/announce'
 ];
+
+export interface TableItem {
+	heading: string;
+	link: string;
+	subheadings: { heading: string; link: string }[];
+}
+
+export const indexTable: TableItem[] = [
+	{
+		heading: 'Installation',
+		link: 'installation',
+		subheadings: [
+			{
+				heading: 'Software requirements',
+				link: 'softwareRequirements'
+			},
+			{
+				heading: 'Build from sources (Rust)',
+				link: 'buildSources'
+			},
+			{
+				heading: 'Docker',
+				link: 'docker'
+			}
+		]
+	},
+	{
+		heading: 'Licenses',
+		link: 'licenses',
+		subheadings: [
+			{
+				heading: 'Copyright (c) 2023 The Torrust Developers',
+				link: 'copyright'
+			},
+			{
+				heading: 'Legacy Exception',
+				link: 'legacyException'
+			}
+		]
+	},
+	{
+		heading: 'Roadmap',
+		link: 'roadmap',
+		subheadings: [
+			{
+				heading: 'Future Features',
+				link: 'futureFeatures'
+			}
+		]
+	}
+];
+
+export const trackerTable: TableItem[] = [
+	{
+		heading: 'Installation',
+		link: 'installation',
+		subheadings: [
+			{
+				heading: 'Software requirements',
+				link: 'softwareRequirements'
+			},
+			{
+				heading: 'Build from sources (Rust)',
+				link: 'buildSources'
+			},
+			{
+				heading: 'Docker',
+				link: 'docker'
+			}
+		]
+	},
+	{
+		heading: 'Licenses',
+		link: 'licenses',
+		subheadings: [
+			{
+				heading: 'Copyright (c) 2023 The Torrust Developers',
+				link: 'copyright'
+			},
+			{
+				heading: 'Build from sources (Rust)',
+				link: 'buildSources'
+			}
+		]
+	},
+	{
+		heading: 'Roadmap',
+		link: 'roadmap',
+		subheadings: [
+			{
+				heading: 'Core',
+				link: 'core'
+			},
+			{
+				heading: 'Persistence',
+				link: 'persistence'
+			},
+			{
+				heading: 'Performance',
+				link: 'performance'
+			},
+			{
+				heading: 'Protocols',
+				link: 'protocols'
+			},
+			{
+				heading: 'Integrations',
+				link: 'integrations'
+			},
+			{
+				heading: 'Utils',
+				link: 'utils'
+			},
+			{
+				heading: 'Others',
+				link: 'others'
+			}
+		]
+	}
+];
+
+export const selfHostTable: TableItem[] = [
+	{
+		heading: 'Torrent solution (Index + Tracker)',
+		link: '#torrustSolution',
+		subheadings: [
+			{
+				heading: 'Build from sources (Rust)',
+				link: '#buildSources'
+			},
+			{
+				heading: 'Docker',
+				link: '#docker'
+			},
+			{
+				heading: 'Tutorials',
+				link: '#tutorials'
+			}
+		]
+	},
+	{
+		heading: 'Torrust tracker',
+		link: 'torrustTracker',
+		subheadings: []
+	}
+];
+
+export const communityTable: TableItem[] = [
+	{
+		heading: 'Why Contribute?',
+		link: 'whyContribute',
+		subheadings: [
+			{
+				heading: 'Embrace Rust: a language of choice',
+				link: 'embraceRust'
+			},
+			{
+				heading: 'Code quality above all',
+				link: 'codeQuality'
+			},
+			{
+				heading: 'A welcoming community for newcomers',
+				link: 'welcomingCommunity'
+			},
+			{
+				heading: 'Influence the project’s direction',
+				link: 'influenceDirection'
+			},
+			{
+				heading: 'Join us today',
+				link: 'joinUs'
+			}
+		]
+	},
+	{
+		heading: 'How to contribute?',
+		link: 'howContribute',
+		subheadings: []
+	},
+	{
+		heading: 'Knowledge Base',
+		link: 'knowledgeBase',
+		subheadings: [
+			{
+				heading: 'What are Torrents?',
+				link: 'whatAreTorrents'
+			},
+			{
+				heading: 'What Is a Tracker?',
+				link: 'whatIsTracker'
+			},
+			{
+				heading: 'What Is a Torrent Index',
+				link: 'whatIsTorrentIndex'
+			},
+			{
+				heading: 'List of projects using BitTorrent',
+				link: 'listOfProjects'
+			}
+		]
+	},
+	{
+		heading: 'Resources',
+		link: 'resources',
+		subheadings: []
+	}
+];
+
+export const aboutTable: TableItem[] = [
+	{
+		heading: 'Why BitTorrent?',
+		link: 'bitTorrent',
+		subheadings: [
+			{
+				heading: 'Why does the BitTorrent protocol still matter?',
+				link: 'bitTorrentProtocol'
+			},
+			{
+				heading: 'Efficiency and scalability',
+				link: 'efficiency'
+			},
+			{
+				heading: 'Current use cases',
+				link: 'currentUses'
+			},
+			{
+				heading: 'Future use cases',
+				link: 'futureUses'
+			},
+			{
+				heading: 'BT vs. IPFS',
+				link: 'btIpfs'
+			},
+			{
+				heading: 'BT vs. centralized solutions',
+				link: 'btCs'
+			},
+			{
+				heading: 'Conclusion',
+				link: 'conclusion'
+			}
+		]
+	},
+	{
+		heading: 'Why Torrust?',
+		link: 'whyTorrust',
+		subheadings: [
+			{
+				heading: 'Performance & Efficiency',
+				link: 'performanceEfficiency'
+			},
+			{
+				heading: 'Security & Reliability',
+				link: 'securityReliability'
+			},
+			{
+				heading: 'User Experience & Accessibility',
+				link: 'userExperience'
+			},
+			{
+				heading: 'Future-Proofing and Innovation',
+				link: 'futureProofing'
+			},
+			{
+				heading: 'Integration & Interoperability',
+				link: 'integration'
+			}
+		]
+	},
+	{
+		heading: 'The Team',
+		link: 'team',
+		subheadings: []
+	},
+	{
+		heading: 'Collaborators',
+		link: 'collaborators',
+		subheadings: []
+	},
+	{
+		heading: 'Sponsors',
+		link: 'sponsors',
+		subheadings: []
+	}
+];
