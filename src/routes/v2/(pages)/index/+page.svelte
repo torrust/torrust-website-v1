@@ -17,7 +17,7 @@
 
 	onMount(() => {
 		const mediaQueryList = window.matchMedia('(min-width: 1000px)');
-		const updateScreenSize = (event: any) => {
+		const updateScreenSize = (event: MediaQueryListEvent) => {
 			isLargeScreen.set(event.matches);
 		};
 		mediaQueryList.addEventListener('change', updateScreenSize);
