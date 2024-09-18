@@ -6,7 +6,7 @@
 
 	import { keywords, siteBaseUrl, title } from '$lib/data/meta';
 	import type { BlogPost } from '$lib/utils/types';
-	import RelatedPosts from '$lib/components/organisms/RelatedPosts.svelte';
+	import RelatedPosts from '$lib/v2/components/organisms/RelatedPosts.svelte';
 	import Image from '$lib/components/atoms/Image.svelte';
 	import PrevNextPost from '$lib/v2/components/singletons/PrevNextPost.svelte';
 	import { allPosts } from '$lib/data/blog-posts';
@@ -68,7 +68,7 @@
 					{/if}
 					{#if post.contributor}
 						<div>
-							<span>By: </span><a href={'/v2/contributor/' + post.contributorSlug}
+							<span>By: </span><a class="author" href={'/v2/contributor/' + post.contributorSlug}
 								>{post.contributor}</a
 							>
 						</div>
@@ -159,6 +159,14 @@
 			.note {
 				font-size: 90%;
 				color: rgba(245, 245, 245, 0.96);
+			}
+
+			.author {
+				color: rgba(245, 245, 245, 0.96);
+			}
+
+			.author:hover {
+				color: rgba(255, 49, 0, 0.96);
 			}
 		}
 

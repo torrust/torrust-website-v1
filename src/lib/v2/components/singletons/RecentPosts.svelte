@@ -34,7 +34,6 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		grid-gap: 20px;
-		padding-inline: 1.5rem;
 
 		@include for-phone-only {
 			grid-template-columns: 1fr;
@@ -45,7 +44,7 @@
 		}
 
 		@include for-desktop-up {
-			grid-template-columns: 1fr 1fr 1fr;
+			grid-template-columns: 1fr 1fr;
 		}
 	}
 </style>

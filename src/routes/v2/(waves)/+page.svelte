@@ -32,4 +32,12 @@
 		text-align: center;
 		padding-top: 3rem;
 	}
+
+	a {
+		color: rgba(245, 245, 245, 0.96);
+	}
+
+	a:hover {
+		color: rgba(255, 49, 0, 0.96);
+	}
 </style>

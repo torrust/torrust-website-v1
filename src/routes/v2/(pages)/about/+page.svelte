@@ -1,22 +1,65 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import { writable } from 'svelte/store';
 	import Toc from 'svelte-toc';
 	import PostContainer from '$lib/v2/components/molecules/PostContainer.svelte';
 	import PostTable from '$lib/components/molecules/PostTable.svelte';
-	import PostBody from '$lib/components/molecules/PostBody.svelte';
+	import PostBody from '$lib/v2/components/molecules/PostBody.svelte';
+
+	let isLargeScreen = writable(window.matchMedia('(min-width: 1000px)').matches);
+
+	onMount(() => {
+		const mediaQueryList = window.matchMedia('(min-width: 1000px)');
+		const updateScreenSize = (event: any) => {
+			isLargeScreen.set(event.matches);
+		};
+		mediaQueryList.addEventListener('change', updateScreenSize);
+		return () => mediaQueryList.removeEventListener('change', updateScreenSize);
+	});
 </script>
 
 <div class="container">
 	<PostContainer>
-		<PostTable>
-			<Toc
-				title=""
-				--toc-active-color="rgba(255, 49, 0, 0.96)"
-				--toc-li-hover-color="rgba(255, 49, 0, 0.96)"
-				--toc-active-bg="transparent"
-			>
-				<ul>
-					<li><a href="#bitTorrent">Why BitTorrent?</a></li>
+		{#if $isLargeScreen}
+			<PostTable>
+				<Toc
+					title=""
+					--toc-active-color="rgba(255, 49, 0, 0.96)"
+					--toc-li-hover-color="rgba(255, 49, 0, 0.96)"
+					--toc-active-bg="transparent"
+				>
 					<ul>
+						<li><a href="#bitTorrent">Why BitTorrent?</a></li>
+						<ul>
+							<li>
+								<a href="#bitTorrentProtocol">Why does the BitTorrent protocol still matter?</a>
+							</li>
+							<li><a href="#efficiency">Efficiency and scalability</a></li>
+							<li><a href="#currentUses">Current use cases</a></li>
+							<li><a href="#futureUses">Future use cases</a></li>
+							<li><a href="#btIpfs">BT vs. IPFS</a></li>
+							<li><a href="#btCs">BT vs. centralized solutions</a></li>
+							<li><a href="#conclusion">Conclusion</a></li>
+						</ul>
+						<li><a href="#whyTorrust">Why Torrust?</a></li>
+						<ul>
+							<li><a href="#performanceEfficiency">Performance & Efficiency</a></li>
+							<li><a href="#securityReliability">Security & Reliability</a></li>
+							<li><a href="#userExperience">User Experience & Accessibility</a></li>
+							<li><a href="#futureProofing">Future-Proofing and Innovation</a></li>
+							<li><a href="#integration">Integration & Interoperability</a></li>
+						</ul>
+						<li><a href="#team">The Team</a></li>
+						<li><a href="#collaborators">Collaborators</a></li>
+						<li><a href="#sponsors">Sponsors</a></li>
+					</ul>
+				</Toc>
+			</PostTable>
+		{:else}
+			<PostTable>
+				<ul class="toc">
+					<li><a href="#bitTorrent">Why BitTorrent?</a></li>
+					<ul class="toc">
 						<li>
 							<a href="#bitTorrentProtocol">Why does the BitTorrent protocol still matter?</a>
 						</li>
@@ -28,7 +71,7 @@
 						<li><a href="#conclusion">Conclusion</a></li>
 					</ul>
 					<li><a href="#whyTorrust">Why Torrust?</a></li>
-					<ul>
+					<ul class="toc">
 						<li><a href="#performanceEfficiency">Performance & Efficiency</a></li>
 						<li><a href="#securityReliability">Security & Reliability</a></li>
 						<li><a href="#userExperience">User Experience & Accessibility</a></li>
@@ -39,8 +82,8 @@
 					<li><a href="#collaborators">Collaborators</a></li>
 					<li><a href="#sponsors">Sponsors</a></li>
 				</ul>
-			</Toc>
-		</PostTable>
+			</PostTable>
+		{/if}
 		<PostBody>
 			<h2 id="bitTorrent">Why BitTorrent?</h2>
 
@@ -243,10 +286,20 @@
 		color: rgba(245, 245, 245, 0.96);
 	}
 
-	@include for-tablet-portrait-up {
-		h2,
-		p {
-			padding-top: 1.2rem;
-		}
+	h2,
+	p {
+		padding-top: 1.2rem;
+	}
+
+	a {
+		color: rgba(255, 49, 0, 0.96);
+	}
+
+	.toc li a {
+		color: white;
+	}
+
+	.toc li a:hover {
+		color: rgba(255, 49, 0, 0.96);
 	}
 </style>

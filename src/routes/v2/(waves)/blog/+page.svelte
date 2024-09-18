@@ -14,7 +14,7 @@
 
 <div class="container">
 	<div class="header">
-		<h1>Blog</h1>
+		<h1>All Blog Posts</h1>
 		<SearchBar {searchTerm} {posts} />
 	</div>
 	{#if posts && posts.length}
@@ -34,7 +34,15 @@
 	}
 
 	.header {
-		padding-inline: 1.5rem;
+		padding-inline: 3.5rem;
+
+		h1 {
+			padding-bottom: 1rem;
+
+			@include for-tablet-portrait-up {
+				padding-bottom: 0px;
+			}
+		}
 
 		@include for-tablet-portrait-up {
 			display: flex;

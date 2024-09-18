@@ -4,7 +4,6 @@
 	export let additionalClass: string | undefined = undefined;
 
 	export let href: string | undefined = undefined;
-	export let backgroundImage: string | undefined = undefined;
 	const isExternalLink = !!href && HttpRegex.test(href);
 	export let target: '_self' | '_blank' = isExternalLink ? '_blank' : '_self';
 	export let rel = isExternalLink ? 'noopener noreferrer' : undefined;
@@ -24,8 +23,8 @@
 	data-sveltekit-preload-data
 	{...$$restProps}
 >
-	{#if $$slots.image || backgroundImage}
-		<div class="image" style="background-image: url({backgroundImage});">
+	{#if $$slots.image}
+		<div class="image">
 			<slot name="image" />
 		</div>
 	{/if}
@@ -33,59 +32,68 @@
 		<div class="content">
 			<slot name="content" />
 		</div>
+		{#if $$slots.footer}
+			<div class="footer">
+				<slot name="footer" />
+			</div>
+		{/if}
 	</div>
 </svelte:element>
 
 <style lang="scss">
-	@import '$lib/scss/breakpoints.scss';
-
 	.card {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-end;
-		height: 312px;
-		margin: 1.5rem;
+		background: var(--color--card-background);
+		box-shadow: var(--card-shadow);
+		color: var(--color--text);
+		border-radius: 10px;
+		transition: all 0.4s ease;
 		position: relative;
-		border-radius: 1.5rem;
 		overflow: hidden;
-		text-decoration: none;
-		color: inherit;
-		transition: box-shadow 0.3s ease;
-
-		&:hover {
-			background: rgba(0, 0, 0, 0.2);
-			box-shadow: 0 0 0 3px rgba(255, 49, 0, 1);
-		}
-	}
-
-	.image {
-		position: absolute;
-		top: 0;
-		left: 0;
 		width: 100%;
-		height: 100%;
-		background-size: cover;
-		background-position: center;
-		background-repeat: no-repeat;
+
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+
+		text-decoration: none;
+
+		&[href],
+		&[onclick] {
+			cursor: pointer;
+			&:hover {
+				box-shadow: var(--card-shadow-hover);
+				transform: scale(1.01);
+			}
+		}
 	}
 
 	.body {
 		display: flex;
 		flex-direction: column;
-		justify-content: flex-end;
-		padding: 1.5rem;
-		background: rgba(0, 0, 0, 0.5);
-		color: #fff;
-		height: 100%;
-		z-index: 1;
+		justify-content: space-between;
+		gap: 10px;
+		padding: 20px 20px;
+		flex: 1 0 50%;
 
-		&:hover {
-			background: rgba(0, 0, 0, 0.1);
+		.content {
+			display: flex;
+			flex-direction: column;
+			flex: 1;
 		}
 	}
 
-	.content {
-		padding: 1rem;
-		background: rgba(0, 0, 0, 0.5);
+	.image {
+		position: relative;
+		flex: 1 0 max(50%, 330px);
+		// height: min(100%, 300px);
+		min-height: 280px;
+		max-height: 350px;
+	}
+
+	:global(.card [slot='image']) {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		position: absolute;
 	}
 </style>

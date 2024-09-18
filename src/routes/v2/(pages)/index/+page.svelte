@@ -1,17 +1,30 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import { writable } from 'svelte/store';
 	import Toc from 'svelte-toc';
 	import Table from '$lib/v2/components/atoms/Table.svelte';
 	import PostContainer from '$lib/v2/components/molecules/PostContainer.svelte';
 	import PostTable from '$lib/components/molecules/PostTable.svelte';
-	import PostBody from '$lib/components/molecules/PostBody.svelte';
+	import PostBody from '$lib/v2/components/molecules/PostBody.svelte';
+	import Slider from '$lib/v2/components/atoms/Slider.svelte';
 
 	import Sqlite from '$lib/v2/icons/sqlite.svelte';
 	import Rust from '$lib/v2/icons/rust.svelte';
 	import Mysql from '$lib/v2/icons/mysql.svelte';
 	import Nuxt from '$lib/v2/icons/nuxt.svelte';
 
+	let isLargeScreen = writable(window.matchMedia('(min-width: 1000px)').matches);
+
+	onMount(() => {
+		const mediaQueryList = window.matchMedia('(min-width: 1000px)');
+		const updateScreenSize = (event: any) => {
+			isLargeScreen.set(event.matches);
+		};
+		mediaQueryList.addEventListener('change', updateScreenSize);
+		return () => mediaQueryList.removeEventListener('change', updateScreenSize);
+	});
+
 	import { indexTitleArr1, indexTableHeadings, indexTableData } from '$lib/v2/constants/constants';
-	import Slider from '$lib/v2/components/atoms/Slider.svelte';
 </script>
 
 <div class="svg-container">
@@ -76,32 +89,54 @@
 	</div>
 
 	<PostContainer>
-		<PostTable>
-			<Toc
-				title=""
-				--toc-active-color="rgba(255, 49, 0, 0.96)"
-				--toc-li-hover-color="rgba(255, 49, 0, 0.96)"
-				--toc-active-bg="transparent"
-			>
-				<ul>
-					<li><a href="#installation">Installation</a></li>
+		{#if $isLargeScreen}
+			<PostTable>
+				<Toc
+					title=""
+					--toc-active-color="rgba(255, 49, 0, 0.96)"
+					--toc-li-hover-color="rgba(255, 49, 0, 0.96)"
+					--toc-active-bg="transparent"
+				>
 					<ul>
+						<li><a href="#installation">Installation</a></li>
+						<ul>
+							<li><a href="#softwareRequirements">Software requirements</a></li>
+							<li><a href="#buildSources">Build from sources (Rust)</a></li>
+							<li><a href="#docker">Docker</a></li>
+						</ul>
+						<li><a href="#licenses">Licenses</a></li>
+						<ul>
+							<li><a href="#copyright">Copyright (c) 2023 The Torrust Developers</a></li>
+							<li><a href="#legacyException">Legacy Exception</a></li>
+						</ul>
+						<li><a href="#roadmap">Roadmap</a></li>
+						<ul>
+							<li><a href="#futureFeatures">Future Features</a></li>
+						</ul>
+					</ul>
+				</Toc>
+			</PostTable>
+		{:else}
+			<PostTable>
+				<ul class="toc">
+					<li><a href="#installation">Installation</a></li>
+					<ul class="toc">
 						<li><a href="#softwareRequirements">Software requirements</a></li>
 						<li><a href="#buildSources">Build from sources (Rust)</a></li>
 						<li><a href="#docker">Docker</a></li>
 					</ul>
 					<li><a href="#licenses">Licenses</a></li>
-					<ul>
+					<ul class="toc">
 						<li><a href="#copyright">Copyright (c) 2023 The Torrust Developers</a></li>
 						<li><a href="#legacyException">Legacy Exception</a></li>
 					</ul>
 					<li><a href="#roadmap">Roadmap</a></li>
-					<ul>
+					<ul class="toc">
 						<li><a href="#futureFeatures">Future Features</a></li>
 					</ul>
 				</ul>
-			</Toc>
-		</PostTable>
+			</PostTable>
+		{/if}
 		<PostBody>
 			<h2 id="installation">Installation</h2>
 			<p>
@@ -275,6 +310,11 @@
 		}
 	}
 
+	h2,
+	p {
+		padding-top: 1.2rem;
+	}
+
 	.stack-icons {
 		display: flex;
 		flex-direction: row;
@@ -290,6 +330,18 @@
 		align-items: center;
 		gap: 2rem;
 		margin-top: 3rem;
+	}
+
+	a {
+		color: rgba(255, 49, 0, 0.96);
+	}
+
+	.toc li a {
+		color: white;
+	}
+
+	.toc li a:hover {
+		color: rgba(255, 49, 0, 0.96);
 	}
 
 	@include for-tablet-portrait-up {
@@ -320,11 +372,6 @@
 		.inner-container p {
 			width: 640px;
 			margin: 0 auto;
-		}
-
-		h2,
-		p {
-			padding-top: 1.2rem;
 		}
 	}
 </style>

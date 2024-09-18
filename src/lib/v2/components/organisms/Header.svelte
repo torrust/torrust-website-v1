@@ -37,7 +37,7 @@
 					<a
 						href="/v2/self-host"
 						class={currentPath === '/v2/self-host' ? 'active' : ''}
-						on:click={toggleMenu}>Self-host</a
+						on:click={toggleMenu}>Self&#8209;host</a
 					>
 				</li>
 				<li>

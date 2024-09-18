@@ -75,7 +75,7 @@ https://hash2torrent.com/{info-hash}
 
 </Callout>
 
-For example: <https://hash2torrent.com/443c7602b4fde83d1154d6d9da48808418b181b6>.
+For example: <https://hash2torrent.com/443c7602b4fde83d1154d6d9da48808418b181b6>
 
 <Callout type="warning">
 

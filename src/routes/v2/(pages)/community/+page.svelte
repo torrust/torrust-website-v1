@@ -1,20 +1,53 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import { writable } from 'svelte/store';
 	import Toc from 'svelte-toc';
 	import PostContainer from '$lib/v2/components/molecules/PostContainer.svelte';
 	import PostTable from '$lib/components/molecules/PostTable.svelte';
-	import PostBody from '$lib/components/molecules/PostBody.svelte';
+	import PostBody from '$lib/v2/components/molecules/PostBody.svelte';
+
+	let isLargeScreen = writable(window.matchMedia('(min-width: 1000px)').matches);
+
+	onMount(() => {
+		const mediaQueryList = window.matchMedia('(min-width: 1000px)');
+		const updateScreenSize = (event: any) => {
+			isLargeScreen.set(event.matches);
+		};
+		mediaQueryList.addEventListener('change', updateScreenSize);
+		return () => mediaQueryList.removeEventListener('change', updateScreenSize);
+	});
 </script>
 
 <div class="container">
 	<PostContainer>
-		<PostTable>
-			<Toc
-				title=""
-				--toc-active-color="rgba(255, 49, 0, 0.96)"
-				--toc-li-hover-color="rgba(255, 49, 0, 0.96)"
-				--toc-active-bg="transparent"
-			/>
-		</PostTable>
+		{#if $isLargeScreen}
+			<PostTable>
+				<Toc
+					title=""
+					--toc-active-color="rgba(255, 49, 0, 0.96)"
+					--toc-li-hover-color="rgba(255, 49, 0, 0.96)"
+					--toc-active-bg="transparent"
+				/>
+			</PostTable>
+		{:else}
+			<PostTable>
+				<ul class="toc">
+					<li><a href="#whyContribute">Why Contribute to our Project?</a></li>
+					<li><a href="#embraceRust">Embrace Rust: a language of choice</a></li>
+					<li><a href="#codeQuality">Code quality above all</a></li>
+					<li><a href="#welcomingCommunity">A welcoming community for newcomers</a></li>
+					<li><a href="#influenceDirection">Influence the project’s direction</a></li>
+					<li><a href="#joinUs">Join us today</a></li>
+					<li><a href="#howContribute">How to contribute?</a></li>
+					<li><a href="#knowledgeBase">Knowledge Base</a></li>
+					<li><a href="#whatAreTorrents">What Are Torrents</a></li>
+					<li><a href="#whatIsTracker">What Is a Tracker</a></li>
+					<li><a href="#whatIsTorrentIndex">What Is a Torrent Index</a></li>
+					<li><a href="#listOfProjects">List of projects using BitTorrent</a></li>
+					<li><a href="#resources">Resources</a></li>
+				</ul>
+			</PostTable>
+		{/if}
 		<PostBody>
 			<h2 id="whyContribute">Why Contribute to our Project?</h2>
 
@@ -23,7 +56,7 @@
 				orci adipiscing pharetra auctor eget arcu adipiscing. Aliquam ipsum mattis ipsum malesuada
 				aliquet ipsum. Convallis tortor rhoncus cursus porttitor tellus sed.
 			</p>
-			<ul>
+			<ul class="list">
 				<li>Rust</li>
 				<li>Good documentation</li>
 				<li>Quality code</li>
@@ -173,10 +206,24 @@
 		color: rgba(245, 245, 245, 0.96);
 	}
 
-	@include for-tablet-portrait-up {
-		h2,
-		p {
-			padding-top: 1.2rem;
-		}
+	.list li {
+		list-style-type: disc;
+	}
+
+	.toc li a {
+		color: white;
+	}
+
+	.toc li a:hover {
+		color: rgba(255, 49, 0, 0.96);
+	}
+
+	a {
+		color: rgba(255, 49, 0, 0.96);
+	}
+
+	h2,
+	p {
+		padding-top: 1.2rem;
 	}
 </style>
